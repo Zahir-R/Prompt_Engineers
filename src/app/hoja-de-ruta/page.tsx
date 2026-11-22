@@ -7,6 +7,7 @@ import {
   Check,
   Compass,
   Flag,
+  Route,
   Sparkles,
   Star,
 } from "lucide-react";
@@ -21,11 +22,18 @@ import {
   getLevelProgress,
   getTodaySolvedCount,
 } from "@/lib/roadmap";
+import { getRouteProgress } from "@/lib/teacherRoutes";
 import { cn } from "@/lib/utils";
 
 export default function HojaDeRutaPage() {
-  const { ready, activeProfile, progress, units, getProfileProgress } =
-    useApp();
+  const {
+    ready,
+    activeProfile,
+    progress,
+    units,
+    teacherRoutes,
+    getProfileProgress,
+  } = useApp();
 
   if (!ready) {
     return (
@@ -42,6 +50,12 @@ export default function HojaDeRutaPage() {
   const todaySolved = getTodaySolvedCount(progress);
   const dailyGoal = 2;
   const guestProgress = getProfileProgress("guest");
+  const classRoutes = activeProfile
+    ? teacherRoutes.filter(
+        (route) =>
+          route.status === "published" && route.classId === activeProfile.classId,
+      )
+    : [];
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
@@ -228,6 +242,41 @@ export default function HojaDeRutaPage() {
           );
         })}
       </ol>
+
+      {classRoutes.length > 0 && (
+        <section className="mt-10">
+          <h2 className="flex items-center gap-2 font-display text-2xl font-semibold text-ink">
+            <Route className="size-5 text-teal" aria-hidden="true" />
+            Rutas de mi clase
+          </h2>
+          <p className="mt-1 font-hand text-xl font-bold text-ink-soft">
+            secuencias preparadas por tu docente
+          </p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            {classRoutes.map((route) => {
+              const routeProgress = getRouteProgress(route, progress);
+              return (
+                <Link key={route.id} href={`/ruta/${route.id}`}>
+                  <PaperCard className="h-full p-4 transition-transform hover:-translate-y-0.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <Sticker tone="teal">{route.levelId}</Sticker>
+                      <span className="text-xs font-black text-ink-soft">
+                        {routeProgress.solved}/{routeProgress.total}
+                      </span>
+                    </div>
+                    <p className="mt-2 font-display text-xl font-semibold text-ink">
+                      {route.title}
+                    </p>
+                    <p className="mt-1 line-clamp-2 text-sm font-semibold text-ink-soft">
+                      {route.description}
+                    </p>
+                  </PaperCard>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       <section className="mt-10">
         <h2 className="flex items-center gap-2 font-display text-2xl font-semibold text-ink">

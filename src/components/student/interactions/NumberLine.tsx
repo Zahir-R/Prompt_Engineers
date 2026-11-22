@@ -63,7 +63,20 @@ export function NumberLine({
           {current}
         </span>
       </div>
-      <p className="mt-2 text-sm font-black text-ink" aria-live="polite">
+      <label htmlFor="number-line-range" className="mt-2 block text-sm font-black text-ink">
+        Arrastra el marcador o usa las flechas
+      </label>
+      <input
+        id="number-line-range"
+        type="range"
+        min={min}
+        max={max}
+        step={safeStep}
+        value={current}
+        onChange={(event) => setValue(Number(event.target.value))}
+        className="mt-1 h-6 w-full accent-teal"
+      />
+      <p className="mt-1 text-sm font-black text-ink" aria-live="polite">
         Valor actual: {current}
       </p>
       <div className="mt-2 flex flex-wrap gap-2">

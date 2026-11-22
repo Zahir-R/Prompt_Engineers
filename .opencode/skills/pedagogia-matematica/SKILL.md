@@ -86,3 +86,9 @@ progresión.
 Todo ejercicio creado por docente debe usar cinco pasos: datos, estrategia,
 resolución, resultado y verificación. La respuesta se calcula automáticamente y
 el docente solo puede editar explicaciones, no romper la estructura.
+
+## Rutas docentes
+
+El docente crea una ruta de clase con actividades ordenadas. Las actividades
+docentes no se inyectan como ejercicios sueltos dentro de N0–N6: la ruta tiene
+progreso propio.

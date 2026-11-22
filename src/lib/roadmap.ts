@@ -73,3 +73,31 @@ export function getNextExerciseIdForLevel(
     (exerciseId) => !progress[exerciseId]?.solved,
   );
 }
+
+export function getNextExerciseId(
+  exerciseId: string,
+  units: Unit[],
+  levels: RoadmapLevel[],
+): string | undefined {
+  const currentUnit = units.find((unit) =>
+    unit.exerciseIds.includes(exerciseId),
+  );
+  if (!currentUnit) return undefined;
+
+  const ordered: string[] = [];
+  for (const level of [...levels].sort((a, b) => a.order - b.order)) {
+    const seen = new Set<string>();
+    for (const unit of units
+      .filter((item) => item.levelId === level.id)
+      .sort((a, b) => a.order - b.order)) {
+      for (const id of unit.exerciseIds) {
+        if (seen.has(id)) continue;
+        seen.add(id);
+        ordered.push(id);
+      }
+    }
+  }
+
+  const index = ordered.indexOf(exerciseId);
+  return index >= 0 ? ordered[index + 1] : undefined;
+}

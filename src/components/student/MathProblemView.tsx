@@ -31,6 +31,8 @@ interface MathProblemViewProps {
   onOpenAnatomy: () => void;
   backHref?: string;
   backLabel?: string;
+  nextHref?: string;
+  nextLabel?: string;
   detectiveBonusReady?: boolean;
 }
 
@@ -45,6 +47,8 @@ export function MathProblemView({
   onOpenAnatomy,
   backHref = "/unidades",
   backLabel = "Seguir explorando",
+  nextHref,
+  nextLabel = "Siguiente reto",
   detectiveBonusReady = false,
 }: MathProblemViewProps) {
   return (
@@ -157,13 +161,24 @@ export function MathProblemView({
         )}
 
         {solved && (
-        <Link
-          href={backHref}
-          className="mt-4 inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-teal px-4 py-2.5 text-sm font-black text-paper shadow-hard"
-        >
-          <Star className="size-4" aria-hidden="true" />
-          {backLabel}
-        </Link>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {nextHref && (
+              <Link
+                href={nextHref}
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-teal px-4 py-2.5 text-sm font-black text-paper shadow-hard"
+              >
+                {nextLabel}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            )}
+            <Link
+              href={backHref}
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-paper px-4 py-2.5 text-sm font-black text-ink shadow-hard"
+            >
+              <Star className="size-4" aria-hidden="true" />
+              {backLabel}
+            </Link>
+          </div>
         )}
 
         <div className="mt-6 flex flex-wrap items-center gap-3 border-t-2 border-dashed border-ink/25 pt-4">

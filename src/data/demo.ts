@@ -322,3 +322,25 @@ export function createSeedCosmetics(): CosmeticsByProfile {
     guest: { owned: [], equipped: null },
   };
 }
+
+export function createSeedTeacherRoutes(): import("@/types/teacherRoute").TeacherRoute[] {
+  return [
+    {
+      id: "ruta_clase_repaso",
+      ownerId: "profile_ana",
+      classId: "class_mates_3a",
+      levelId: "N1",
+      title: "Repaso de sumas y restas",
+      description:
+        "Una ruta corta para repasar lo que ya vimos en clase antes del siguiente nivel.",
+      exerciseIds: [
+        "ejercicio_math_001",
+        "ejercicio_math_002",
+        "ejercicio_math_005",
+      ],
+      status: "published",
+      createdAt: "2026-11-22T09:00:00.000Z",
+      updatedAt: "2026-11-22T09:00:00.000Z",
+    },
+  ];
+}

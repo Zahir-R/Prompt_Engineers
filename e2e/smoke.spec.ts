@@ -1,4 +1,27 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
+
+async function dragByMouse(page: Page, source: Locator, target: Locator) {
+  const sourceBox = await source.boundingBox();
+  const targetBox = await target.boundingBox();
+  if (!sourceBox || !targetBox) throw new Error("No se pudo medir el arrastre");
+  await page.mouse.move(
+    sourceBox.x + sourceBox.width / 2,
+    sourceBox.y + sourceBox.height / 2,
+  );
+  await page.mouse.down();
+  await page.mouse.move(
+    sourceBox.x + sourceBox.width / 2 + 16,
+    sourceBox.y + sourceBox.height / 2 + 12,
+    { steps: 5 },
+  );
+  await page.mouse.move(
+    targetBox.x + targetBox.width / 2,
+    targetBox.y + targetBox.height / 2,
+    { steps: 20 },
+  );
+  await page.mouse.up();
+  await page.waitForTimeout(200);
+}
 
 test("la portada invita a explorar sin cuenta", async ({ page }) => {
   await page.goto("/");
@@ -185,9 +208,26 @@ test("el panel docente crea retos y abre el resumen de un estudiante", async ({
 }) => {
   await page.goto("/panel");
   await page.getByRole("button", { name: /Entrar como Profe Ana/i }).click();
-  await page.getByRole("button", { name: "Crear reto" }).click();
-  await expect(page.getByRole("heading", { name: /Crear un reto/i })).toBeVisible();
-  await expect(page.getByLabel("Título")).toBeVisible();
+  await page.getByRole("button", { name: "Mis rutas" }).click();
+  await expect(
+    page.getByRole("heading", { name: /Crear una ruta para mi clase/i }),
+  ).toBeVisible();
+  await page.getByLabel("Título de la nueva ruta").fill("Ruta de prueba");
+  await page.getByRole("button", { name: "Crear ruta" }).click();
+  await expect(page.getByText(/Ruta creada como borrador/i)).toBeVisible();
+  await page.getByLabel("Actividad existente").selectOption({ index: 1 });
+  await page.getByRole("button", { name: "Agregar" }).click();
+  await expect(page.getByText(/Actividad agregada a la ruta/i)).toBeVisible();
+  await page.getByText(/Crear una actividad nueva/i).click();
+  await page.getByLabel("Título", { exact: true }).fill("Actividad nueva de prueba");
+  await page.getByLabel("Enunciado").fill("Ana tiene 10 manzanas y recibe 5 más.");
+  await page.getByLabel("Número 1").fill("10");
+  await page.getByLabel("Número 2").fill("5");
+  await page.getByRole("button", { name: /Guardar ejercicio/i }).click();
+  await expect(page.getByText(/Actividad nueva agregada a la ruta/i)).toBeVisible();
+  await expect(page.getByText("Actividad nueva de prueba").first()).toBeVisible();
+  await page.getByRole("button", { name: "Publicar ruta" }).click();
+  await expect(page.getByText(/Ruta publicada para la clase/i)).toBeVisible();
   await page.getByRole("button", { name: "Mi clase" }).click();
   await page.getByRole("button", { name: /Ver resumen/i }).first().click();
   const dialog = page.getByRole("dialog", { name: /Resumen/i });
@@ -234,4 +274,47 @@ test("el estudiante pinta una fracción", async ({ page }) => {
   await page.getByRole("button", { name: "Parte 2" }).click();
   await page.getByRole("button", { name: "Parte 3" }).click();
   await expect(page.getByLabel(/Mi respuesta es/i)).toHaveValue("0.75");
+});
+
+
+test("el estudiante ve la ruta publicada de su clase", async ({ page }) => {
+  await page.goto("/entrar");
+  await page.getByLabel(/Código de clase/i).fill("MATES-3A");
+  await page.getByLabel(/Tu alias/i).fill("Sofía");
+  await page.getByRole("button", { name: /Entrar al club/i }).click();
+  await page.goto("/hoja-de-ruta");
+  await expect(page.getByText(/Rutas de mi clase/i)).toBeVisible();
+  await expect(page.getByText("Repaso de sumas y restas")).toBeVisible();
+});
+
+test("después de resolver aparece el siguiente reto", async ({ page }) => {
+  await page.goto("/ejercicio/ejercicio_math_001");
+  await page.getByLabel(/Mi respuesta es/i).fill("32");
+  await page.getByRole("button", { name: /Comprobar/i }).click();
+  const next = page.getByRole("link", { name: /Siguiente reto/i });
+  await expect(next).toBeVisible();
+  await next.click();
+  await expect(page).toHaveURL(/\/ejercicio\/ejercicio_math_003$/);
+});
+
+test("se puede arrastrar una decena al tablero Base10", async ({ page }) => {
+  await page.goto("/ejercicio/ejercicio_math_001");
+  await dragByMouse(
+    page,
+    page.getByRole("button", { name: "Arrastrar Decena" }),
+    page.getByText("Arrastra los bloques aquí"),
+  );
+  await expect(page.getByLabel(/Mi respuesta es/i)).toHaveValue("10");
+});
+
+test("se puede arrastrar una pieza a la barra de fracciones", async ({
+  page,
+}) => {
+  await page.goto("/ejercicio/ejercicio_math_023");
+  await dragByMouse(
+    page,
+    page.getByRole("button", { name: "Arrastrar una parte" }).first(),
+    page.getByRole("group", { name: /Fracción con 4 partes/i }),
+  );
+  await expect(page.getByLabel(/Mi respuesta es/i)).toHaveValue("0.25");
 });

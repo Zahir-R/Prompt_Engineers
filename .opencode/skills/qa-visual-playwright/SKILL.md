@@ -21,6 +21,7 @@ pnpm exec playwright install chromium
 3. Revisar estas rutas:
    - `/`
    - `/hoja-de-ruta`
+   - `/ruta/ruta_clase_repaso`
    - `/unidades`
    - `/unidad/unidad_sumas`
    - `/club`
@@ -42,6 +43,8 @@ pnpm exec playwright install chromium
     bonus de detective se suma al resolver.
    - El perfil muestra racha, XP, insignias, chispas y pegatinas.
    - Base10, recta y fracciones actualizan el campo de respuesta.
+   - Base10 y fracciones admiten arrastre con mouse/touch y alternativa de teclado.
+   - El docente crea una ruta, agrega actividades y la publica a su clase.
    - La ruta muestra N0–N6 y cada nivel tiene 5 ejercicios.
    - Las figuras de fracciones, geometría y objetos se ven bien en móvil.
    - El docente entra a `/panel`, crea alias y modera sin aparecer en la UI del
