@@ -8,14 +8,18 @@ de trabajo viva, con papel, tinta, stickers y anotaciones, no como un dashboard.
 ## Principios
 
 1. **Una idea por pantalla.** El niño debe saber qué mirar y qué hacer.
-2. **El color enseña.** Azul, naranja, verde, violeta y amarillo pertenecen al
+2. **Aventura, no aula.** Los cursos son públicos y el docente es backstage; no
+   aparece en la navegación ni en el club del estudiante.
+3. **El color enseña.** Azul, naranja, verde, violeta y amarillo pertenecen al
    Modo Desglose; no son decoración.
-3. **Error sin castigo.** El feedback siempre abre una siguiente oportunidad.
-4. **Concreto antes que abstracto.** Bloques, grupos y dibujos antes de reglas.
-5. **Identidad propia.** Mascota, doodles y microcopy humano; nada de
+4. **Error sin castigo.** El feedback siempre abre una siguiente oportunidad.
+5. **Concreto antes que abstracto.** Bloques, grupos y dibujos antes de reglas.
+6. **Identidad propia.** Mascota, doodles y microcopy humano; nada de
    ilustraciones genéricas.
-6. **Movimiento con intención.** Corto, comprensible y opcional.
-7. **Accesible desde el inicio.** Contraste, teclado, foco y tamaño táctil.
+7. **Movimiento con intención.** Corto, comprensible y opcional.
+8. **Accesible desde el inicio.** Contraste, teclado, foco y tamaño táctil.
+9. **Gamificación ética.** Chispas y sellos por explorar; XP por resolver. Sin
+   castigos, sin leaderboards y sin farmear clics.
 
 ## Composición
 

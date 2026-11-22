@@ -1,6 +1,6 @@
 ---
 name: contratos-repo
-description: Use before changing shared types, exercise data, AppProvider, constants, routes, or component props. Prevents breaking the student, anatomy, teacher, and learning-path modules.
+description: Use before changing shared types, demo data, AppProvider, constants, routes, or component props. Prevents breaking the public course flow, guest sessions, La Fogata, profile, and backstage panel.
 ---
 
 # Contratos del repositorio
@@ -10,70 +10,84 @@ description: Use before changing shared types, exercise data, AppProvider, const
 Cambios aditivos y coordinados:
 
 - `src/types/exercise.ts`
+- `src/types/demo.ts`
+- `src/types/anatomy.ts`
+- `src/types/cosmetics.ts`
 - `src/data/exercises.json`
+- `src/data/demo.ts`
 - `src/context/AppProvider.tsx`
 - `src/lib/constants.ts`
-- `src/lib/exercises.ts`
+- `src/lib/demo.ts`
 - `src/app/ejercicio/[id]/page.tsx`
+- `src/app/unidad/[id]/page.tsx`
+- `src/app/club/[threadId]/page.tsx`
 
 No renombrar campos del SRS sin actualizar todos los consumidores.
 
 ## Modelo de ejercicio
 
-Campos obligatorios:
-
-- `id`
-- `categoria`
-- `nivel`
-- `titulo`
-- `enunciado`
-- `datos`
-- `respuesta_correcta`
-- `desglose_pasos`
-
-Cada paso usa `color_tag` del conjunto:
+Campos obligatorios: `id`, `categoria`, `nivel`, `titulo`, `enunciado`, `datos`,
+`respuesta_correcta`, `desglose_pasos`. Cada paso usa `color_tag`:
 `blue | orange | green | purple | yellow`.
+
+## Sesión demo
+
+- `session.profileId === null` es invitado.
+- Invitado: cursos públicos, lectura de La Fogata y progreso local.
+- Estudiante con alias: XP, racha, carnet y escritura en La Fogata.
+- Docente: solo backstage en `/panel`; nunca en la navegación del estudiante.
 
 ## Estado
 
-`AppProvider` expone:
+`AppProvider` expone, entre otros:
 
-- `exercises`
-- `progress`
-- `ready`
-- `getExercise(id)`
-- `addExercise(exercise)`
-- `recordAttempt(id, answer)`
-- `markCompleted(id)`
-- `resetProgress()`
+- `exercises`, `progress`, `progressByProfile`, `ready`
+- `profiles`, `classrooms`, `club`, `session`, `activeProfile`
+- `getExercise`, `getProfile`, `getUnit`, `getUnitForExercise`
+- `recordAttempt`, `markCompleted`, `resetProgress`
+- `enterClass`, `createStudentAlias`, `switchProfile`, `logout`
+- `recordAnatomyStep`, `completeAnatomy`, `getAnatomyProgress`
+- `buySticker`, `equipSticker`, `getProfileCosmetics`
+- `addThread`, `addReply`, `resolveThread`, `togglePinThread`,
+  `toggleHideThread`, `reportThread`, `reportReply`
+- `resetDemo`
 
-No mover lógica de intentos al `AnatomyPanel`; el contenedor del estudiante es
-quien decide cuándo abrir el desglose.
+No mover lógica de intentos al `AnatomyPanel`; el contenedor del estudiante
+decide cuándo abrir el desglose. No otorgar XP a invitados.
 
 ## Rutas
 
-- `/`
-- `/ruta`
-- `/docente`
-- `/ejercicio/[id]`
+- `/`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`
+- `/club`, `/club/[threadId]`
+- `/entrar`, `/perfil`
+- `/panel`, `/docente`
+
+Las rutas dinámicas usan `generateStaticParams` + `<Suspense>` porque el header
+usa `usePathname` con `cacheComponents`.
 
 ## Persistencia
 
-- `mates:progress:v1`
+- `mates:demo:profiles:v1`
+- `mates:demo:classrooms:v1`
+- `mates:demo:session:v1`
+- `mates:demo:progress:v1`
+- `mates:demo:xp-awards:v1`
+- `mates:demo:anatomy:v1`
+- `mates:demo:sparks:v1`
+- `mates:demo:cosmetics:v1`
+- `mates:demo:club:v1`
 - `mates:custom-exercises:v1`
+- `mates:progress:v1` (legado, migrado a invitado)
 
-Si cambia la forma de los datos, versionar la clave y migrar o descartar de
-forma segura.
+Versionar la clave si cambia la forma de los datos.
 
 ## Verificación
-
-Antes de cerrar:
 
 ```bash
 pnpm lint
 pnpm typecheck
 pnpm build
+pnpm test:e2e
 ```
 
-Revisar que los ejercicios semilla sigan funcionando y que el docente pueda
-crear uno nuevo.
+Revisar cursos públicos, invitado, alias, carnet, La Fogata y panel backstage.

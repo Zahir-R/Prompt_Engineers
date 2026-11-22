@@ -31,47 +31,66 @@ nix shell nixpkgs#chromium --command sh -c \
 - Tests en `e2e/`: humo, axe (solo falla en `critical`/`serious`) y capturas
   1440×900 + Pixel 7. Las capturas se escriben en `test-results/` (ignorado).
 
+## Producto actual
+
+- **Los cursos son públicos**: unidades, ejercicios y Modo Desglose no piden
+  cuenta.
+- La cuenta es opcional: código de clase + alias. Desbloquea XP, racha, carnet
+  y escritura en **La Fogata** (`/club`).
+- El Modo Desglose se gamifica con retos en pasos clave, chispas, sello de
+  detective y bonus de XP al resolver después de completarlo. El XP se gana al
+  resolver, no por hacer clic en pasos.
+- Las chispas se canjean por 3 pegatinas cosméticas en `/perfil`.
+- No hay correos de estudiantes, contraseñas ni backend. Todo es demo local en
+  `localStorage`; el progreso de invitado se importa al elegir alias.
+- **El docente es backstage**: no aparece en la navegación del estudiante. Su
+  panel vive en `/panel`; no lo enlaces desde la UI del estudiante.
+- No introduzcas backend, autenticación real ni LLM en el producto sin pedido.
+  El LLM es solo herramienta de desarrollo.
+- No se ingresan datos de menores; solo alias y avatar.
+
 ## Stack y arquitectura
 
 - Next.js 16 App Router, React 19, TypeScript estricto, Tailwind 4, pnpm.
 - `next.config.ts` tiene `cacheComponents` y `partialPrefetching` activos.
-- `src/app/ejercicio/[id]/page.tsx` prerenderiza los IDs semilla con
-  `generateStaticParams` y mantiene un `<Suspense>` para ejercicios creados por
-  docentes. No quites ese boundary.
-- Rutas: `/`, `/ruta`, `/docente`, `/ejercicio/[id]`.
-- `src/components/anatomy/` es el Modo Desglose; `student/`, `route/`,
+- Rutas: `/`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`, `/club`,
+  `/club/[threadId]`, `/entrar`, `/perfil`, `/panel`, `/docente`.
+- `/unidad/[id]`, `/club/[threadId]` y `/ejercicio/[id]` usan
+  `generateStaticParams` + `<Suspense>`; mantén ambos. El header usa
+  `usePathname`, así que una ruta dinámica sin params estáticos rompe el build.
+- `src/components/anatomy/` es el Modo Desglose; `club/`, `student/`, `route/`,
   `teacher/` y `companion/` son módulos separados.
-- `AppProvider` combina `src/data/exercises.json` con ejercicios creados por
-  docentes y persiste en `localStorage`. La UI espera `ready` para evitar
-  mismatch de hidratación; el override de ESLint para
-  `react-hooks/set-state-in-effect` en ese archivo es intencional.
+- `AppProvider` combina ejercicios semilla + creados por docentes y persiste
+  perfiles, sesión, progreso por perfil, XP, racha y La Fogata.
+- La UI espera `ready` para evitar mismatch de hidratación; el override de ESLint
+  para `react-hooks/set-state-in-effect` en `AppProvider` es intencional.
+- Los seeds de `src/data/demo.ts` usan fechas estáticas. No uses `new Date()`
+  ni `Date.now()` en inicializadores o render: Next 16 falla al prerenderizar
+  client components con tiempo inestable.
 
 ## Cambios compartidos
 
 Aditivos y coordinados:
 
-- `src/types/exercise.ts`
-- `src/data/exercises.json`
+- `src/types/exercise.ts`, `src/types/demo.ts`, `src/types/anatomy.ts`,
+  `src/types/cosmetics.ts`
+- `src/data/exercises.json`, `src/data/demo.ts`
 - `src/context/AppProvider.tsx`
-- `src/lib/constants.ts`
+- `src/lib/constants.ts`, `src/lib/demo.ts`
+- `src/components/anatomy/`
 
 No renombres campos del SRS (`desglose_pasos`, `color_tag`, `visual_state`,
 `respuesta_correcta`) sin actualizar todos los consumidores. Los colores
 `blue/orange/green/purple/yellow` son semánticos del desglose.
-
-## Producto y alcance
-
-- Producto y microcopy en español claro, con acentos y contexto boliviano.
-- No introduzcas backend, autenticación ni LLM dentro del producto sin pedido.
-- El LLM es solo herramienta de desarrollo.
-- No se ingresan datos de menores; como máximo cuentas de docentes.
-- No expongas secretos ni API keys en cliente ni repo.
 
 ## Diseño
 
 Concepto: **cuaderno de aventuras matemáticas**. Papel cálido, tinta, coral,
 mostaza y turquesa; bordes dibujados, sombras duras, mascota Tinta y doodles SVG.
 
+- La experiencia del estudiante debe sentirse como juego/aventura, no LMS.
+  No muestres “Docente”, “Mi clase”, listas de compañeros ni diagnóstico en su
+  navegación.
 - No usar gradientes radiales de fondo, glassmorphism/`backdrop-blur`, héroes
   con estadísticas, filas de tres tarjetas idénticas ni exceso de
   `rounded-3xl`.

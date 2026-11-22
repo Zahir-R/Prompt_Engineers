@@ -8,10 +8,10 @@
   --ink: #2c2733;
   --ink-soft: #5b5264;
   --coral: #e26352;
-  --coral-deep: #b83f30;
+  --coral-deep: #a93628;
   --mustard: #e8a73a;
-  --teal: #24887b;
-  --sky: #3c77b4;
+  --teal: #1d6f66;
+  --sky: #32689f;
   --plum: #7052a3;
 }
 
@@ -105,4 +105,41 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+@keyframes spark-pop {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.4) rotate(0deg);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(1) rotate(140deg);
+  }
+}
+
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.8) rotate(-12deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+.spark-float {
+  animation: spark-pop 700ms ease-out forwards;
+}
+
+.stamp-in {
+  animation: stamp-in 420ms ease-out both;
 }

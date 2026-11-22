@@ -1,12 +1,14 @@
 # Capturas del rediseño
 
 Capturas generadas con Playwright en la iteración de lenguaje visual
-“cuaderno de aventuras”.
+“cuaderno de aventuras” y demo de club.
 
 - `desktop-*`: 1440×900.
 - `mobile-*`: Pixel 7.
 
-Rutas capturadas: inicio, ruta, docente y ejercicio.
+Rutas capturadas: inicio, unidades, unidad, club, entrar, perfil, ejercicio y
+docente. También hay capturas del reto del desglose, la chispa, el sello, el
+carnet de detective y las pegatinas canjeables.
 
 Para regenerarlas:
 

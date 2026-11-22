@@ -17,7 +17,10 @@ description: Use when editing student UI, landing pages, exercise screens, anato
 ## Concepto
 
 La aplicación debe sentirse como un **cuaderno de aventuras matemáticas** hecho
-para un niño de 6 a 13 años, no como un dashboard SaaS.
+para un niño de 6 a 13 años, no como un dashboard SaaS ni como un aula virtual.
+El docente es backstage: no aparece en la navegación, el carnet ni el club del
+estudiante. Los cursos se exploran sin cuenta; el alias solo desbloquea juego
+social, racha y XP.
 
 - Papel cálido, tinta oscura, acentos coral, mostaza y turquesa.
 - Bordes dibujados, sombras duras y ligeras rotaciones.
@@ -97,3 +100,11 @@ para un niño de 6 a 13 años, no como un dashboard SaaS.
 - ¿Funciona en 360 px y en escritorio?
 - ¿El foco es visible y el contraste es suficiente?
 - ¿La pantalla se entiende sin explicación externa?
+
+## Gamificación ética
+
+- Premiar comprensión, no velocidad ni clics.
+- No castigar por abrir el desglose ni por equivocarse.
+- Chispas y sellos son cosméticos; el XP se gana al resolver.
+- Nada de leaderboards públicos.
+- El confeti y las animaciones deben respetar `prefers-reduced-motion`.

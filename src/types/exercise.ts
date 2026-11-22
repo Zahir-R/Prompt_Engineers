@@ -45,6 +45,13 @@ export type VisualState =
   | GeometryVisual
   | MarbleVisual;
 
+export interface StepChallenge {
+  pregunta: string;
+  opciones: string[];
+  correcta: number;
+  pista?: string;
+}
+
 export interface DesgloseStep {
   paso: number;
   titulo: string;
@@ -53,6 +60,7 @@ export interface DesgloseStep {
   operacion_destacada?: string;
   visual_state?: VisualState | null;
   resultado_final?: number;
+  reto?: StepChallenge;
 }
 
 export interface ExerciseData {
