@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-55 -55 110 110" width="110" height="110">
+  <!-- Balón -->
+  <g id="Componente_Balon">
+    <circle cx="0" cy="0" r="50" fill="#FFFFFF" stroke="#2D3436" stroke-width="3"/>
+    <polygon points="0,-16 15.2,-4.9 9.4,13 -9.4,13 -15.2,-4.9" fill="#2D3436"/>
+    <circle cx="0" cy="-40" r="7" fill="#2D3436"/>
+    <circle cx="38" cy="-12" r="7" fill="#2D3436"/>
+    <circle cx="24" cy="32" r="7" fill="#2D3436"/>
+    <circle cx="-24" cy="32" r="7" fill="#2D3436"/>
+    <circle cx="-38" cy="-12" r="7" fill="#2D3436"/>
+  </g>
+</svg>

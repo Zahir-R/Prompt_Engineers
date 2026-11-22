@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-80 -80 160 160" width="160" height="160">
+  <!-- Sol -->
+  <g id="Componente_Sol">
+    <g stroke="#FFD93D" stroke-width="6" stroke-linecap="round">
+      <line x1="50" y1="0" x2="75" y2="0"/>
+      <line x1="35.36" y1="35.36" x2="53.03" y2="53.03"/>
+      <line x1="0" y1="50" x2="0" y2="75"/>
+      <line x1="-35.36" y1="35.36" x2="-53.03" y2="53.03"/>
+      <line x1="-50" y1="0" x2="-75" y2="0"/>
+      <line x1="-35.36" y1="-35.36" x2="-53.03" y2="-53.03"/>
+      <line x1="0" y1="-50" x2="0" y2="-75"/>
+      <line x1="35.36" y1="-35.36" x2="53.03" y2="-53.03"/>
+    </g>
+    <circle cx="0" cy="0" r="40" fill="#FFD93D" stroke="#2D3436" stroke-width="3"/>
+    <circle cx="-14" cy="-8" r="4" fill="#2D3436"/>
+    <circle cx="14" cy="-8" r="4" fill="#2D3436"/>
+    <path d="M-12,8 Q0,18 12,8" fill="none" stroke="#2D3436" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

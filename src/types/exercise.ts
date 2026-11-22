@@ -17,9 +17,33 @@ export interface FractionVisual {
   numerador: number;
   denominador: number;
   pintadas: number;
+  forma?: "circulo" | "barra" | "ambos";
 }
 
-export type VisualState = Base10Visual | GroupingVisual | FractionVisual;
+export interface GeometryVisual {
+  tipo: "geometria";
+  figura: "rectangle" | "square" | "triangle" | "pentagon" | "hexagon";
+  ancho?: number;
+  alto?: number;
+  modo?: "area" | "perimeter" | "vertices";
+}
+
+export interface MarbleVisual {
+  tipo: "canicas";
+  modo: "base10" | "multiplication" | "sharing" | "free";
+  total?: number;
+  filas?: number;
+  columnas?: number;
+  gruposReparto?: number;
+  color?: StepColor;
+}
+
+export type VisualState =
+  | Base10Visual
+  | GroupingVisual
+  | FractionVisual
+  | GeometryVisual
+  | MarbleVisual;
 
 export interface DesgloseStep {
   paso: number;

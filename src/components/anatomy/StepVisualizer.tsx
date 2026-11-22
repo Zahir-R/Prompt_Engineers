@@ -1,4 +1,9 @@
 import { Base10Blocks } from "@/components/anatomy/Base10Blocks";
+import {
+  FractionFigure,
+  GeometryFigure,
+  MarbleFigure,
+} from "@/components/figures";
 import type { VisualState } from "@/types/exercise";
 
 export function StepVisualizer({ visual }: { visual?: VisualState | null }) {
@@ -39,27 +44,46 @@ export function StepVisualizer({ visual }: { visual?: VisualState | null }) {
   }
 
   if (visual.tipo === "fraccion") {
-    const total = Math.max(1, visual.denominador);
-    const pintadas = Math.min(Math.max(visual.pintadas, 0), total);
-
     return (
       <div className="mt-4 rounded-[0.8rem_1.2rem_0.7rem_1rem] border-2 border-ink/20 bg-paper/80 p-4">
-        <p className="mb-2 font-hand text-lg font-bold text-purple-700">
-          fracción
+        <FractionFigure
+          tipo={visual.forma || "ambos"}
+          denominador={visual.denominador}
+          numerador={visual.pintadas}
+          color="purple"
+          interactivo={true}
+        />
+        <p className="mt-2 text-center text-sm font-bold text-purple-800">
+          {visual.pintadas}/{visual.denominador} partes seleccionadas
         </p>
-        <div className="flex overflow-hidden rounded-xl border-2 border-ink/40">
-          {Array.from({ length: total }, (_, index) => (
-            <span
-              key={index}
-              className={`h-10 flex-1 border-r-2 border-ink/20 last:border-r-0 ${
-                index < pintadas ? "bg-purple-400" : "bg-purple-50"
-              }`}
-            />
-          ))}
-        </div>
-        <p className="mt-2 text-sm font-bold text-purple-800">
-          {visual.pintadas}/{visual.denominador} partes
-        </p>
+      </div>
+    );
+  }
+
+  if (visual.tipo === "geometria") {
+    return (
+      <div className="mt-4 flex flex-col items-center rounded-[0.8rem_1.2rem_0.7rem_1rem] border-2 border-ink/20 bg-paper/80 p-4">
+        <GeometryFigure
+          tipo={visual.figura}
+          anchoUnidades={visual.ancho ?? 5}
+          altoUnidades={visual.alto ?? 3}
+          modo={visual.modo ?? "area"}
+        />
+      </div>
+    );
+  }
+
+  if (visual.tipo === "canicas") {
+    return (
+      <div className="mt-4 flex flex-col items-center rounded-[0.8rem_1.2rem_0.7rem_1rem] border-2 border-ink/20 bg-paper/80 p-4">
+        <MarbleFigure
+          modo={visual.modo}
+          total={visual.total ?? 20}
+          filas={visual.filas ?? 3}
+          columnas={visual.columnas ?? 4}
+          gruposReparto={visual.gruposReparto ?? 3}
+          color={visual.color === "yellow" ? "yellow" : visual.color || "blue"}
+        />
       </div>
     );
   }
