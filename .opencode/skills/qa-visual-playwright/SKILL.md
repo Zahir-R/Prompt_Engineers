@@ -36,6 +36,8 @@ pnpm exec playwright install chromium
    - Código `MATES-3A` + alias crea/entra a un perfil.
    - El progreso de invitado se importa al entrar.
    - Solo cuentas de estudiante ganan XP y racha.
+  - El reto del desglose muestra chispa, el sello aparece al terminar y el
+    bonus de detective se suma al resolver.
    - El carnet muestra racha, XP, insignias y capítulos.
    - El docente entra a `/panel`, crea alias y modera sin aparecer en la UI del
      estudiante.

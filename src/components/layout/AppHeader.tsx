@@ -26,7 +26,7 @@ const links = [
 
 export function AppHeader() {
   const pathname = usePathname();
-  const { activeProfile, ready } = useApp();
+  const { activeProfile, cosmetics, ready } = useApp();
 
   return (
     <header className="sticky top-0 z-40 border-b-2 border-ink bg-paper/95">
@@ -83,7 +83,12 @@ export function AppHeader() {
             href="/perfil"
             className="ml-auto flex items-center gap-2 rounded-[1rem_0.7rem_1.1rem_0.8rem] border-2 border-ink bg-paper px-2 py-1.5 text-sm font-black text-ink shadow-hard sm:ml-0"
           >
-            <Avatar alias={activeProfile.alias} avatar={activeProfile.avatar} size="sm" />
+            <Avatar
+              alias={activeProfile.alias}
+              avatar={activeProfile.avatar}
+              sticker={cosmetics.equipped}
+              size="sm"
+            />
             <span className="hidden max-w-20 truncate md:inline">
               {activeProfile.alias}
             </span>

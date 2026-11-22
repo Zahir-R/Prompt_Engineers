@@ -212,3 +212,11 @@ export function xpKeyUnit(unitId: string): string {
 export function xpKeyDay(dateKey: string): string {
   return `day:${dateKey}`;
 }
+
+export const SPARKS_PER_CHALLENGE = 1;
+export const SPARKS_PER_ANATOMY = 2;
+export const XP_PER_DETECTIVE = 5;
+
+export function xpKeyAnatomy(exerciseId: string): string {
+  return `anatomy:${exerciseId}`;
+}

@@ -15,6 +15,7 @@ import { useApp } from "@/context/AppProvider";
 export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
   const {
     activeProfile,
+    getAnatomyProgress,
     getExercise,
     getUnitForExercise,
     progress,
@@ -25,6 +26,9 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState<Feedback>({ type: "idle", message: "" });
   const [anatomyOpen, setAnatomyOpen] = useState(false);
+  const [anatomySource, setAnatomySource] = useState<"auto" | "manual">(
+    "manual",
+  );
 
   const exercise = getExercise(exerciseId);
   const unit = getUnitForExercise(exerciseId);
@@ -65,6 +69,8 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
   const entry = progress[exercise.id];
   const attempts = entry?.attempts ?? 0;
   const solved = entry?.solved ?? false;
+  const anatomyEntry = getAnatomyProgress(exercise.id);
+  const detectiveReady = Boolean(anatomyEntry?.completed && !solved);
 
   const handleSubmit = () => {
     const parsed = Number(answer.trim().replace(",", "."));
@@ -80,12 +86,13 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
     const result = recordAttempt(exercise.id, parsed);
 
     if (result.correct) {
-      markCompleted(exercise.id);
+      const reward = markCompleted(exercise.id);
       setFeedback({
         type: "correct",
-        message:
-          activeProfile?.role === "student"
-            ? "¡Muy bien! Encontraste la respuesta. Tu XP y tu racha ya se actualizaron."
+        message: reward.detectiveBonus
+          ? "¡Resuelto con ayuda! Ganaste +5 XP de detective y tu racha se actualizó."
+          : activeProfile?.role === "student"
+            ? `¡Muy bien! Ganaste  XP y tu racha se actualizó.`
             : "¡Muy bien! Encontraste la respuesta. Puedes ver el desglose para repasar el procedimiento.",
       });
       return;
@@ -100,6 +107,7 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
     });
 
     if (result.attempts >= 2) {
+      setAnatomySource("auto");
       setAnatomyOpen(true);
     }
   };
@@ -123,7 +131,11 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
           feedback={feedback}
           attempts={attempts}
           solved={solved}
-          onOpenAnatomy={() => setAnatomyOpen(true)}
+          onOpenAnatomy={() => {
+            setAnatomySource("manual");
+            setAnatomyOpen(true);
+          }}
+          detectiveBonusReady={detectiveReady}
           backHref={backHref}
           backLabel={backLabel}
         />
@@ -213,7 +225,13 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
       <DeconstructionModal
         exercise={exercise}
         open={anatomyOpen}
+        source={anatomySource}
         onClose={() => setAnatomyOpen(false)}
+        onFinish={() => {
+          window.setTimeout(() => {
+            document.getElementById("respuesta")?.focus();
+          }, 80);
+        }}
       />
     </div>
   );

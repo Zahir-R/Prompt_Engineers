@@ -7,13 +7,17 @@ import type { Exercise } from "@/types/exercise";
 interface DeconstructionModalProps {
   exercise: Exercise;
   open: boolean;
+  source?: "auto" | "manual";
   onClose: () => void;
+  onFinish?: () => void;
 }
 
 export function DeconstructionModal({
   exercise,
   open,
+  source = "manual",
   onClose,
+  onFinish,
 }: DeconstructionModalProps) {
   useEffect(() => {
     if (!open) return;
@@ -52,7 +56,9 @@ export function DeconstructionModal({
           key={exercise.id}
           exercise={exercise}
           mode="modal"
+          source={source}
           onClose={onClose}
+          onFinish={onFinish}
         />
       </div>
     </div>

@@ -41,6 +41,9 @@ export default function PanelPage() {
     switchProfile,
     createStudentAlias,
     getProfileProgress,
+    getProfileSparks,
+    getProfileAnatomy,
+    getProfileCosmetics,
     resolveThread,
     togglePinThread,
     toggleHideThread,
@@ -193,6 +196,11 @@ export default function PanelPage() {
           <ul className="mt-3 space-y-3">
             {students.map((student, index) => {
               const studentProgress = getProfileProgress(student.id);
+              const studentSparks = getProfileSparks(student.id);
+              const completedDesgloses = Object.values(
+                getProfileAnatomy(student.id),
+              ).filter((entry) => entry.completed).length;
+              const studentCosmetics = getProfileCosmetics(student.id);
               const solved = getSolvedCount(studentProgress);
               const completedUnits = units.filter(
                 (unit) => getUnitProgress(unit, studentProgress).complete,
@@ -207,13 +215,19 @@ export default function PanelPage() {
                     )}
                   >
                     <div className="flex flex-wrap items-center gap-3">
-                      <Avatar alias={student.alias} avatar={student.avatar} size="md" />
+                      <Avatar
+                        alias={student.alias}
+                        avatar={student.avatar}
+                        sticker={studentCosmetics.equipped}
+                        size="md"
+                      />
                       <div className="min-w-0 flex-1">
                         <p className="font-display text-xl font-semibold text-ink">
                           {student.alias}
                         </p>
                         <p className="text-xs font-bold text-ink-soft">
-                          {solved} hojas resueltas · {completedUnits} capítulos ·
+                          {solved} hoja{solved === 1 ? "" : "s"} · {completedUnits} capítulo{completedUnits === 1 ? "" : "s"} ·{" "}
+                          {completedDesgloses} desglose{completedDesgloses === 1 ? "" : "s"} · {studentSparks} chispa{studentSparks === 1 ? "" : "s"} ·{" "}
                           racha {student.streakCurrent}
                         </p>
                       </div>

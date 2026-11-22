@@ -66,3 +66,11 @@ Antes de cerrar un ejercicio:
 - ¿Los pasos no saltan ninguna idea necesaria?
 - ¿El lenguaje es claro y con acentos?
 - ¿El desglose coincide con el método esperado en primaria?
+
+## Retos dentro del desglose
+
+- Poner retos solo en pasos clave, no en todos.
+- La pregunta debe anticipar la comprensión, no pedir memorizar.
+- Un error no bloquea: se muestra una pista y se revela la explicación.
+- No dar XP por hacer clic en pasos; el bonus se gana al resolver después.
+- Evitar opciones ambiciosas o con doble interpretación.

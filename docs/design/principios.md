@@ -18,6 +18,8 @@ de trabajo viva, con papel, tinta, stickers y anotaciones, no como un dashboard.
    ilustraciones genéricas.
 7. **Movimiento con intención.** Corto, comprensible y opcional.
 8. **Accesible desde el inicio.** Contraste, teclado, foco y tamaño táctil.
+9. **Gamificación ética.** Chispas y sellos por explorar; XP por resolver. Sin
+   castigos, sin leaderboards y sin farmear clics.
 
 ## Composición
 

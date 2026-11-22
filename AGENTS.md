@@ -37,6 +37,10 @@ nix shell nixpkgs#chromium --command sh -c \
   cuenta.
 - La cuenta es opcional: código de clase + alias. Desbloquea XP, racha, carnet
   y escritura en **La Fogata** (`/club`).
+- El Modo Desglose se gamifica con retos en pasos clave, chispas, sello de
+  detective y bonus de XP al resolver después de completarlo. El XP se gana al
+  resolver, no por hacer clic en pasos.
+- Las chispas se canjean por 3 pegatinas cosméticas en `/perfil`.
 - No hay correos de estudiantes, contraseñas ni backend. Todo es demo local en
   `localStorage`; el progreso de invitado se importa al elegir alias.
 - **El docente es backstage**: no aparece en la navegación del estudiante. Su
@@ -68,10 +72,12 @@ nix shell nixpkgs#chromium --command sh -c \
 
 Aditivos y coordinados:
 
-- `src/types/exercise.ts`, `src/types/demo.ts`
+- `src/types/exercise.ts`, `src/types/demo.ts`, `src/types/anatomy.ts`,
+  `src/types/cosmetics.ts`
 - `src/data/exercises.json`, `src/data/demo.ts`
 - `src/context/AppProvider.tsx`
 - `src/lib/constants.ts`, `src/lib/demo.ts`
+- `src/components/anatomy/`
 
 No renombres campos del SRS (`desglose_pasos`, `color_tag`, `visual_state`,
 `respuesta_correcta`) sin actualizar todos los consumidores. Los colores

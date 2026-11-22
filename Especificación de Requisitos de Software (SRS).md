@@ -1,9 +1,20 @@
 # Especificación de Requisitos de Software (SRS)
 ## Proyecto: Plataforma de Nivelación Matemática con "Modo Desglose"
+**Versión:** 1.1 — demo implementada  
 **Evento:** Abstracthon 2026 (MLSA - University Community, Bolivia)  
 **Track Principal:** Educación  
 **Público Objetivo:** Estudiantes de nivel primario (6 a 13 años), Docentes y Tutores/Padres.  
 **Fecha Límite de Entrega:** Domingo 22 de Noviembre de 2026, 16:30 (Hora de Bolivia).  
+**Estado del despliegue:** pendiente de URL pública en Vercel; importar `main` desde el dashboard.
+
+### Changelog v1.1
+- Los cursos son públicos y no exigen cuenta.
+- Se agrega cuenta opcional de estudiante con código de clase + alias.
+- Se agregan unidades, progreso por capítulo, carnet, XP, racha, chispas e insignias.
+- El Modo Desglose se gamifica con retos, chispas, sello de detective y bonus XP.
+- Se agrega La Fogata: club de dudas por unidad con lectura pública y escritura con alias.
+- Se agrega panel docente backstage para progreso, alias y moderación.
+- Se documentan límites de la demo local y el despliegue en Vercel.
 
 ---
 
@@ -21,84 +32,132 @@ Según los datos presentados en el informe **ERCE 2023 de la UNESCO** para Boliv
 
 ### 1.3 Solución Propuesta
 Una plataforma dinámica donde:
-1. **Los estudiantes (6–13 años)** resuelven ejercicios sin la presión de un aula tradicional o un LMS rígido. Al fallar o dudar, pueden activar el **"Modo Desglose"**, que disecciona el ejercicio en capas de colores, metáforas visuales y explicaciones paso a paso.
-2. **Los docentes y tutores** pueden crear, editar y desplegar ejercicios o rutas de nivelación personalizadas mediante un panel intuitivo sin requerir conocimientos de programación.
+
+1. **Cualquier visitante** puede explorar unidades, resolver ejercicios y abrir el Modo Desglose sin crear una cuenta.
+2. **El estudiante** puede elegir un alias con un código de clase para guardar XP, racha, carnet, chispas e insignias.
+3. **El Modo Desglose** se siente como una misión: retos cortos en pasos clave, chispas, sello de detective y bonus al resolver después de entender.
+4. **La Fogata** permite leer dudas y pistas por unidad; para escribir se necesita alias.
+5. **El docente** crea actividades, gestiona códigos y modera desde un panel backstage, sin aparecer en la navegación del estudiante.
 
 ---
 
 ## 2. Diferenciadores Clave frente al Mercado (Duolingo, Khan Academy, Coursera)
 
-1. **Anatomía del Procedimiento ("Modo Desglose"):** A diferencia de apps que solo marcan "Correcto/Incorrecto", el sistema descompone la operación en partes lógicas identificadas por colores (ej. *Dato A $\rightarrow$ Operación $\rightarrow$ Agrupación $\rightarrow$ Verificación*).
-2. **Diagnóstico del "Primer Paso Roto":** El sistema detecta exactamente dónde ocurrió el fallo (ej. planteamiento del problema vs. error en la tabla de sumar/multiplicar).
-3. **Experiencia Infantil Amigable (No LMS Rígido):** Se eliminan las interfaces secas tipo Coursera/NetAcad. El niño experimenta retos cortos (2-4 minutos) centrados en la resolución visual, mientras que los reportes de avance se envían/resumen para el adulto en un panel separado.
-4. **Creación de Contenido por Docentes sin Código:** El módulo docente transforma plantillas estáticas en actividades interactivas y visuales.
+1. **Anatomía del Procedimiento ("Modo Desglose"):** Descompone la operación en partes lógicas identificadas por colores (Dato → Operación → Agrupación → Verificación).
+2. **Desglose gamificado:** El estudiante predice pasos, gana chispas, recibe un sello de detective y obtiene un bonus de XP si resuelve después de usar la ayuda.
+3. **Experiencia Infantil Amigable (No LMS Rígido):** Cursos públicos, carnet de aventuras, retos cortos y un club de dudas; no un aula digital obligatoria.
+4. **Cuenta opcional y privada:** Código de clase + alias; sin correo de menores ni nombres reales.
+5. **Docente backstage:** El docente crea, revisa y modera desde un panel separado; el estudiante no ve “Docente” en su navegación.
+6. **Creación de Contenido por Docentes sin Código:** Formulario con vista previa del Modo Desglose.
 
 ---
 
 ## 3. Descripción General del Sistema
 
 ### 3.1 Roles de Usuario
-* **Estudiante (Niño 6–13 años):** Interactúa con la interfaz de retos, utiliza manipulativos visuales y consulta el Modo Desglose.
-* **Docente / Tutor:** Crea lecciones, gestiona parámetros de ejercicios y revisa métricas consolidadas de nivelación.
+* **Visitante:** Explora cursos, resuelve ejercicios y lee La Fogata sin cuenta. Su progreso se guarda localmente en el navegador.
+* **Estudiante con alias (6–13 años):** Entra con código de clase + alias. Desbloquea XP, racha, carnet, chispas, pegatinas y escritura en La Fogata.
+* **Docente / Tutor:** Trabaja en backstage. Crea actividades, gestiona códigos, revisa avance agregado y modera La Fogata.
+* **Acompañante:** Puede consultar un resumen de avance desde el panel o un espacio secundario. No aparece en el header del estudiante.
 
-### 3.2 Arquitectura del Sistema (Formato Hackathon MVP)
+### 3.2 Arquitectura del Sistema (Demo Hackathon)
 ```
-[ Frontend: React / Next.js / Tailwind CSS / Lucide Icons ]
+[ Frontend: Next.js 16 App Router / React 19 / TypeScript / Tailwind 4 / Lucide ]
        │
-       ├─► Engine de Ejercicios (Estado local + Componentes Dinámicos)
-       ├─► Módulo "Modo Desglose" (Visualizador paso a paso)
-       └─► Panel Docente (Creador de JSON de Ejercicios)
+       ├─► Contenido público: unidades, ejercicios y Modo Desglose
+       ├─► Motor de ejercicios + anatomía gamificada
+       ├─► Sesión demo: invitado / estudiante con alias / docente backstage
+       ├─► Perfil, XP, racha, chispas, pegatinas e insignias
+       ├─► La Fogata: club de dudas por unidad
+       └─► Panel docente backstage: progreso, alias y moderación
 ```
+
+**Persistencia:** `localStorage` para perfiles, sesión, progreso, anatomía, chispas, cosméticos, ejercicios creados y La Fogata. No hay backend ni autenticación real en esta versión.
+
+### 3.3 Principios de Experiencia
+- El estudiante debe sentir una aventura, no una extensión del colegio.
+- El error no castiga; abre una pista.
+- El color del desglose tiene significado pedagógico.
+- El docente es infraestructura invisible, no un personaje del club.
+- No se usan datos personales de menores.
 
 ---
 
 ## 4. Requisitos Funcionales (RF)
 
 ### 4.1 Módulo Estudiante (Interfaz de Aprendizaje)
-* **RF-01: Interfaz de Reto Activo:** Debe presentar el problema utilizando lenguaje sencillo, gráficos ilustrativos y bloques de interacción drag-and-drop o campos numéricos.
+* **RF-01: Interfaz de Reto Activo:** Presentar el problema con lenguaje sencillo, datos visibles y campo numérico o interacción equivalente.
 * **RF-02: Activación del Modo Desglose:**
-  * Debe estar disponible tanto a demanda del estudiante como sugerido automáticamente tras 2 intentos fallidos.
-  * Debe pausar el reto y desplegar una guía animada/paso a paso del procedimiento.
-* **RF-03: Retroalimentación Positiva e Inmediata:** La plataforma no usa castigos ni resta puntos por error. Promueve el reintento asistido.
-* **RF-04: Metáforas Visuales:** Las cantidades numéricas deben asociarse a elementos gráficos manipulables (ej. bloques de decenas/unidades, porciones de pizzas, bolsas de agrupamiento).
+  * Disponible a demanda.
+  * Se abre automáticamente después de 2 intentos fallidos, con una introducción amable.
+  * Pausa el reto y muestra el procedimiento paso a paso.
+* **RF-03: Retroalimentación Positiva e Inmediata:** Sin castigos, sin resta de puntos y con reintento asistido.
+* **RF-04: Metáforas Visuales:** Bloques de decenas/unidades, agrupaciones y fracciones como apoyo concreto.
 
 ### 4.2 Módulo "Modo Desglose" (Motor de Anatomía)
 * **RF-05: Mapeo de Pasos por Código de Colores:**
-  * **Color Azul:** Datos iniciales del problema.
-  * **Color Naranja:** Transformación / Operación a aplicar.
-  * **Color Verde:** Resultado intermedio o agrupación.
-  * **Color Violeta/Amarillo:** Verificación y respuesta final.
-* **RF-06: Explicación Textual y Visual:** Cada paso debe acompañar una frase corta explícita (ej. *"Primero juntamos las unidades: 7 + 5 = 12. Dejamos 2 y llevamos 1 a las decenas"*).
+  * **Azul:** Datos iniciales.
+  * **Naranja:** Transformación u operación.
+  * **Verde:** Resultado intermedio o agrupación.
+  * **Violeta:** Respuesta final.
+  * **Amarillo:** Verificación.
+* **RF-06: Explicación Textual y Visual:** Cada paso incluye una frase corta, operación destacada cuando corresponde y visual si aporta.
+* **RF-06.1:** El desglose debe permitir navegación Anterior/Siguiente, cierre con Escape y foco visible.
 
-
-[EXTENSION]
 ### 4.3 Módulo Docente / Creador de Actividades
-* **RF-07: Formulario de Creación sin Código:** El docente debe poder seleccionar el tipo de ejercicio (ej. Suma con llevadas, Fracciones equivalentes, Conteo) e ingresar:
-  1. Enunciado del problema.
-  2. Valores numéricos / Opciones.
-  3. Pasos del modo desglose asociados a los valores.
-* **RF-08: Vista Previa en Tiempo Real:** El docente debe ver cómo se mostrará el ejercicio y su desglose al estudiante antes de guardarlo.
+* **RF-07: Formulario de Creación sin Código:** Tipo de ejercicio, enunciado, valores, respuesta y pasos del desglose.
+* **RF-08: Vista Previa en Tiempo Real:** El docente ve el ejercicio y su desglose antes de guardarlo.
 
-[EXTENSION]
 ### 4.4 Módulo Acompañante (Resumen para Tutores/Padres)
-* **RF-09: Tarjeta de Diagnóstico:** Muestra un resumen simplificado del desempeño:
-  * Conceptos dominados.
-  * Punto exacto donde requiere apoyo (ej. *"Confusión al llevar decenas en la adición"*).
+* **RF-09: Tarjeta de Diagnóstico:** Resumen de conceptos dominados y punto de apoyo. No se muestra en la navegación principal del estudiante.
+
+### 4.5 Modo Desglose gamificado
+* **RF-10: Retos en pasos clave:** Algunos pasos preguntan “¿qué crees que pasa?” antes de revelar la explicación.
+* **RF-11: Recompensas del desglose:**
+  * +1 chispa por primer acierto de un reto.
+  * +2 chispas al completar un desglose por primera vez.
+  * Sello visual “Detective de pasos”.
+  * +5 XP si el estudiante resuelve el ejercicio después de completar el desglose, una sola vez.
+* **RF-11.1:** Un fallo en el reto muestra una pista y revela la explicación sin bloquear.
+
+### 4.6 Unidades y progreso
+* **RF-12: Catálogo público:** Cualquier visitante puede ver unidades, hojas y ejercicios.
+* **RF-13: Progreso por unidad:** Cada capítulo muestra hojas resueltas, porcentaje y estado completado.
+
+### 4.7 Cuenta opcional, perfil y gamificación
+* **RF-14: Cuenta con alias:** Código de clase + alias + avatar. Sin correo de estudiantes.
+* **RF-15: Carnet:** XP, nivel, racha actual, mejor racha, hojas resueltas, chispas e insignias.
+* **RF-16: Pegatinas cosméticas:** Lupa (3 chispas), Cohete (5) y Estrella (8); se compran una vez y se equipan en el avatar.
+* **RF-17: Importación de invitado:** Al elegir alias, se ofrece traer progreso, anatomía y chispas locales.
+
+### 4.8 La Fogata
+* **RF-18: Club por unidad:** Cualquiera puede leer hilos; para crear o responder se necesita alias.
+* **RF-19: Moderación:** Reportar, fijar, resolver y ocultar desde el panel docente. La moderación es backstage.
+
+### 4.9 Panel docente backstage
+* **RF-20: Panel de guía:** Ver estudiantes, avance, chispas, desgloses completados y hilos; crear alias; moderar La Fogata.
+* **RF-21: Aislamiento de la experiencia:** El panel y el creador de actividades no se enlazan desde la navegación del estudiante.
 
 ---
 
 ## 5. Requisitos No Funcionales (RNF)
 
-* **RNF-01 (Usabilidad UX/UI):** Interfaz adaptada a niños. Tipografía legible (ej. Fredoka, Nunito o Inter con tamaño amplio), botones grandes, paleta de colores vibrantes pero accesible.
-* **RNF-02 (Rendimiento):** La carga de las animaciones y transiciones de los desgloses no debe superar 1 segundo entre pasos.
-* **RNF-03 (Despliegue y Portabilidad):** Debe ser compatible con navegadores web móviles y de escritorio. El código debe estar listo para ejecutarse de forma estática o en Vercel/Netlify.
-* **RNF-04 (Restricciones del Evento):** Repositorio público en GitHub con código fuente, dependencias claras y archivo `README.md` estructurado.
+* **RNF-01 (Usabilidad UX/UI):** Interfaz infantil, tipografía legible, botones grandes y paleta accesible. Concepto de cuaderno de aventuras.
+* **RNF-02 (Rendimiento):** Transiciones de pasos y animaciones breves; no deben superar 1 segundo entre pasos.
+* **RNF-03 (Despliegue y Portabilidad):** Next.js listo para Vercel; responsive en móvil y escritorio.
+* **RNF-04 (Restricciones del Evento):** Repositorio público, dependencias claras y README estructurado.
+* **RNF-05 (Privacidad):** Solo alias y avatar. Sin correos, nombres reales ni datos sensibles de menores. El correo docente no es necesario en la demo.
+* **RNF-06 (Accesibilidad):** WCAG AA, contraste, teclado, foco visible, `aria-live` y `prefers-reduced-motion`.
+* **RNF-07 (Demo local):** Persistencia en `localStorage`; los datos no se comparten entre navegadores.
+* **RNF-08 (Moderación):** La Fogata permite reportes y moderación docente; no hay mensajes directos ni imágenes.
+* **RNF-09 (Alcance técnico):** Sin backend, autenticación real ni LLM dentro del producto en esta versión.
 
 ---
 
-## 6. Modelo de Datos (Esquema JSON)
+## 6. Modelo de Datos
 
-Para que el desarrollo frontend e IA procese dinámicamente los ejercicios y sus desgloses, se define la siguiente estructura estándar:
+### 6.1 Ejercicio
+Se mantiene el esquema base y se agrega opcionalmente `reto` en pasos clave.
 
 ```json
 {
@@ -106,74 +165,153 @@ Para que el desarrollo frontend e IA procese dinámicamente los ejercicios y sus
   "categoria": "Adicion",
   "nivel": "Tercero_Primaria",
   "titulo": "Ayuda a juntar las manzanas",
-  "enunciado": "Lucas tiene 17 manzanas y Maria le regala 15 mas. ¿Cuantas manzanas tiene Lucas en total?",
-  "datos": {
-    "num1": 17,
-    "num2": 15,
-    "operacion": "+"
-  },
+  "enunciado": "Lucas tiene 17 manzanas y María le regala 15 más. ¿Cuántas manzanas tiene Lucas en total?",
+  "datos": { "num1": 17, "num2": 15, "operacion": "+" },
   "respuesta_correcta": 32,
   "desglose_pasos": [
     {
       "paso": 1,
       "titulo": "Identificar los datos",
       "color_tag": "blue",
-      "explicacion": "Lucas empieza con 17 y recibe 15. Debemos sumar ambos numeros.",
-      "visual_state": { "decenas": [10, 10], "unidades": [7, 5] }
+      "explicacion": "Lucas empieza con 17 y recibe 15. Debemos sumar ambos números.",
+      "visual_state": { "tipo": "base10", "decenas": [10, 10], "unidades": [7, 5] }
     },
     {
       "paso": 2,
-      "titulo": "Sumar las Unidades",
+      "titulo": "Sumar las unidades",
       "color_tag": "orange",
-      "explicacion": "Sumamos 7 + 5 = 12 unidades. Como 12 es mayor a 9, se forma 1 nueva decena (10) y quedan 2 unidades sueltas.",
-      "operacion_destacada": "7 + 5 = 12"
-    },
-    {
-      "paso": 3,
-      "titulo": "Sumar las Decenas",
-      "color_tag": "green",
-      "explicacion": "Sumamos la decena de 17 (1), la decena de 15 (1) y la nueva decena que llevamos (1). 1 + 1 + 1 = 3 decenas.",
-      "operacion_destacada": "1 + 1 + 1 = 3"
-    },
-    {
-      "paso": 4,
-      "titulo": "Resultado Final",
-      "color_tag": "purple",
-      "explicacion": "Juntamos 3 decenas y 2 unidades. El resultado es 32 manzanas.",
-      "resultado_final": 32
+      "explicacion": "Sumamos 7 + 5 = 12 unidades. Se forma 1 decena y quedan 2 unidades.",
+      "operacion_destacada": "7 + 5 = 12",
+      "reto": {
+        "pregunta": "¿Qué ocurre cuando sumamos 7 + 5?",
+        "opciones": [
+          "Quedan 12 unidades sueltas",
+          "Se forma 1 decena y quedan 2 unidades",
+          "Se forma 1 decena y quedan 3 unidades"
+        ],
+        "correcta": 1,
+        "pista": "12 tiene una decena completa y dos unidades sueltas."
+      }
     }
   ],
   "metafora_grafica": "bloques_base_10"
 }
 ```
 
+### 6.2 Entidades
+| Entidad | Campos principales |
+| :--- | :--- |
+| `UserProfile` | `id`, `role`, `alias`, `avatar`, `classId`, `xp`, `level`, `streakCurrent`, `streakBest`, `lastActivityDate` |
+| `Classroom` | `id`, `name`, `code`, `teacherId` |
+| `Unit` | `id`, `title`, `description`, `order`, `exerciseIds`, `accent` |
+| `ProgressEntry` | `attempts`, `solved`, `lastAnswer`, `updatedAt` |
+| `AnatomyEntry` | `steps`, `completed`, `updatedAt` |
+| `ProfileCosmetics` | `owned`, `equipped` |
+| `ClubThread` | `id`, `unitId`, `authorId`, `title`, `body`, `status`, `pinned`, `hidden`, `reported`, `createdAt` |
+| `ClubReply` | `id`, `threadId`, `authorId`, `body`, `hidden`, `reported`, `createdAt` |
+
+### 6.3 Persistencia local
+- `mates:demo:profiles:v1`
+- `mates:demo:classrooms:v1`
+- `mates:demo:session:v1`
+- `mates:demo:progress:v1`
+- `mates:demo:xp-awards:v1`
+- `mates:demo:anatomy:v1`
+- `mates:demo:sparks:v1`
+- `mates:demo:cosmetics:v1`
+- `mates:demo:club:v1`
+- `mates:custom-exercises:v1`
+
 ---
 
-## 7. Especificación para Agentes LLM y Código (Guía de Implementación)
+## 7. Guía de Implementación
 
-### 7.1 Directivas para la Generación de Código (Cursor / Bolt.new / Lovable / Replit)
-Al usar esta especificación como contexto para herramientas de IA de programación, se deben seguir las siguientes directivas estrictas:
+### 7.1 Rutas
+| Ruta | Propósito |
+| :--- | :--- |
+| `/` | Inicio del estudiante |
+| `/unidades` | Catálogo de capítulos |
+| `/unidad/[id]` | Ficha de unidad |
+| `/ejercicio/[id]` | Reto activo |
+| `/club` | La Fogata |
+| `/club/[threadId]` | Hilo y respuestas |
+| `/entrar` | Código de clase + alias |
+| `/perfil` | Carnet, pegatinas e insignias |
+| `/panel` | Panel docente backstage |
+| `/docente` | Creador de actividades |
 
-1. **Estructura Componentizada:**
-   * `<ExerciseContainer />`: Maneja el flujo general de la lección.
-   * `<MathProblemView />`: Renderiza los números o gráficos manipulables.
-   * `<DeconstructionModal />` o `<AnatomyPanel />`: El componente que renderiza el **Modo Desglose** con navegación paso a paso (Botones "Anterior" / "Siguiente").
-   * `<TeacherCreatorForm />`: Formulario para añadir nuevos JSON de ejercicios a la lista local.
-2. **Estilos:** Usar **Tailwind CSS**. Aplicar clases de bordes redondeados (`rounded-2xl`), sombras suaves (`shadow-lg`), y colores pastel/brillantes (`bg-blue-100`, `text-blue-700`, `bg-emerald-500`).
-3. **Estado Global/Local:** Utilizar estado local de React (`useState`, `useContext`) para evitar dependencias complejas de backend durante la demo del Hackathon.
-4. **Métricas de Presentación:** Incluir un botón en el encabezado llamado **"Ver Diagnóstico para Acompañante"** que muestre un modal rápido con el reporte simplificado para tutores.
+`/ruta` redirige a `/unidades` por compatibilidad.
+
+### 7.2 Componentes principales
+- `<ExerciseContainer />`
+- `<MathProblemView />`
+- `<DeconstructionModal />` / `<AnatomyPanel />`
+- `<StepChallenge />`, `<SparkBurst />`, `<CompletionStamp />`
+- `<UnitDetail />`, `<ClubBoard />`, `<ThreadDetail />`
+- `<TeacherCreatorForm />`
+- `<Avatar />`, `<CosmeticIcon />`
+
+### 7.3 Estilos
+Usar Tailwind CSS 4 con el lenguaje **cuaderno de aventuras**: papel cálido, tinta, bordes dibujados, sombras duras y doodles. Evitar gradientes de fondo, glassmorphism, filas de tres tarjetas idénticas y exceso de `rounded-3xl`.
+
+### 7.4 Estado
+Usar React Context + `localStorage`. La UI espera `ready` antes de mostrar datos persistidos para evitar mismatch de hidratación.
+
+### 7.5 Testing
+- Playwright + axe en escritorio y móvil.
+- Smoke de cursos públicos, alias, carnet, La Fogata, panel y Modo Desglose.
+- Verificación antes de entregar: `pnpm lint`, `pnpm typecheck`, `pnpm build`, `pnpm test:e2e`.
 
 ---
 
-## 8. Cronograma de Cierre y Entregables (Abstracthon 2026)
+## 8. Cronograma y Estado de Implementación
 
 | Hito | Hora Límite | Estado / Entregable |
 | :--- | :--- | :--- |
-| **Construcción del Frontend MVP** | Domingo 22 - 12:30 | Aplicación web funcional con 2 ejercicios interactivos y Modo Desglose activo. |
-| **Integración Módulo Docente / Creador** | Domingo 22 - 14:00 | Formulario básico para agregar 1 ejercicio personalizado a la lista. |
-| **Despliegue y GitHub Clean-up** | Domingo 22 - 15:30 | Subir a GitHub con `README.md` detallado, capturas de pantalla y enlace de demo en vivo. |
-| **Cierre de Entregas Oficial** | Domingo 22 - 16:30 | Confirmación de formulario de entrega en plataforma Abstracthon. |
-| **Pitch & Demo (4 min)** | Domingo 22 - 17:00 en adelante | Presentación ante el jurado exponiendo la estadística UNESCO ERCE 2023, la solución visual y la demo interactiva. |
+| **Construcción del Frontend MVP** | Domingo 22 - 12:30 | Completado: 4 ejercicios, unidades y Modo Desglose. |
+| **Integración Módulo Docente** | Domingo 22 - 14:00 | Completado: creador, códigos, panel y moderación. |
+| **Despliegue y GitHub Clean-up** | Domingo 22 - 15:30 | Código en `main`; despliegue Vercel pendiente. |
+| **Cierre de Entregas Oficial** | Domingo 22 - 16:30 | Pendiente de URL pública. |
+| **Pitch & Demo (4 min)** | Domingo 22 - 17:00 | Pendiente de ensayo final. |
+
+### Estado técnico
+- Cursos públicos: implementado.
+- Cuenta opcional por alias: implementado.
+- Unidades y progreso: implementado.
+- Carnet, XP, racha, chispas e insignias: implementado.
+- Pegatinas canjeables: implementado.
+- Modo Desglose gamificado: implementado.
+- La Fogata: implementado en demo local.
+- Panel docente backstage: implementado.
+- Despliegue Vercel: pendiente.
+- Cuentas reales y foro compartido: fuera de alcance de la demo.
 
 ---
+
+## 9. Alcance de la Demo y Trabajo Futuro
+
+### Incluido
+- Demo local con `localStorage`.
+- Cuenta simulada por código + alias.
+- Foro local por navegador.
+- Moderación docente simulada.
+- Sin datos personales de menores.
+
+### Fuera de alcance
+- Backend y base de datos compartida.
+- Autenticación real.
+- Foro multiusuario real.
+- Notificaciones, mensajes directos o imágenes.
+- LLM dentro del producto.
+
+### Trabajo futuro
+- Supabase/Postgres + Auth + RLS.
+- Foro compartido con moderación real.
+- Retos configurables por docentes.
+- Más pegatinas y personalización.
+- Evaluación con niños y docentes.
+- Actualizar el SRS con métricas de uso reales.
+
+---
+
 **Aprobado para desarrollo por el equipo de Abstracthon 2026.**

@@ -30,6 +30,7 @@ interface MathProblemViewProps {
   onOpenAnatomy: () => void;
   backHref?: string;
   backLabel?: string;
+  detectiveBonusReady?: boolean;
 }
 
 export function MathProblemView({
@@ -43,6 +44,7 @@ export function MathProblemView({
   onOpenAnatomy,
   backHref = "/unidades",
   backLabel = "Seguir explorando",
+  detectiveBonusReady = false,
 }: MathProblemViewProps) {
   return (
     <div className="relative">
@@ -81,6 +83,15 @@ export function MathProblemView({
             {exercise.datos.num2}
           </span>
         </div>
+
+        {detectiveBonusReady && (
+          <div className="mt-5 flex items-start gap-2 rounded-xl border-2 border-teal bg-[#cce9e3] p-3 text-sm font-bold text-ink">
+            <Sparkles className="mt-0.5 size-4 shrink-0 text-coral-deep" aria-hidden="true" />
+            <span>
+              Bonus de detective listo: resuelve ahora y gana +5 XP extra.
+            </span>
+          </div>
+        )}
 
         <form
           className="mt-7"

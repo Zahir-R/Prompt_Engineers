@@ -9,9 +9,14 @@ racha, XP, el carnet y la escritura en **La Fogata**, el club de dudas por
 unidad. El docente trabaja solo en backstage: no aparece en la navegación del
 estudiante.
 
+El **Modo Desglose** también es una misión: retos en pasos clave, chispas,
+sello de detective y un bonus de XP al resolver después de entender el
+procedimiento. Las chispas se canjean por pegatinas cosméticas en el carnet.
+
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
-**Especificación completa:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md)
+**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.1  
+**Demo:** pendiente de URL pública en Vercel
 
 ## Problema
 
@@ -196,6 +201,9 @@ guarda la demo en `localStorage`:
 - `mates:demo:session:v1`
 - `mates:demo:progress:v1`
 - `mates:demo:xp-awards:v1`
+- `mates:demo:anatomy:v1`
+- `mates:demo:sparks:v1`
+- `mates:demo:cosmetics:v1`
 - `mates:demo:club:v1`
 - `mates:custom-exercises:v1`
 
@@ -224,20 +232,44 @@ El progreso de invitado se guarda aparte y se puede importar al elegir alias.
 
 1. `/` → explorar sin cuenta.
 2. `/unidades` → abrir un capítulo y una hoja.
-3. Fallar dos veces → el Modo Desglose se abre solo.
-4. Navegar los pasos con Anterior/Siguiente.
-5. Responder correctamente → progreso actualizado.
-6. `/entrar` → código **MATES-3A** + alias → carnet, XP y racha.
-7. `/club` → leer La Fogata; con alias, abrir una duda.
-8. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
+3. Fallar dos veces → el Modo Desglose se abre solo con una intro amable.
+4. En pasos clave, responder un mini reto y ver la chispa.
+5. Completar el desglose → sello de detective y bonus de XP.
+6. Responder correctamente → progreso actualizado.
+7. `/entrar` → código **MATES-3A** + alias → carnet, XP, chispas y racha.
+8. `/club` → leer La Fogata; con alias, abrir una duda.
+9. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
 
-## Despliegue
+## Despliegue en Vercel
 
-El proyecto está listo para Vercel o Netlify. En Vercel:
+La app no necesita variables de entorno. La demo usa `localStorage`, por lo que
+cada navegador tiene su propio progreso, La Fogata y cuentas simuladas.
 
-1. Importar el repositorio.
-2. Framework preset: Next.js.
-3. Build command: `pnpm build`.
+### Desde el dashboard
+
+1. Importar el repositorio `Zahir-R/Prompt_Engineers` en Vercel.
+2. Framework preset: **Next.js**.
+3. Root directory: `./`.
+4. Install command: `pnpm install`.
+5. Build command: `pnpm build`.
+6. Node.js: 22 o 24 LTS; el proyecto declara `node >=20`.
+7. Deploy desde `main`.
+
+### Verificación posterior
+
+- `/`, `/unidades`, `/unidad/unidad_sumas`, `/ejercicio/ejercicio_math_001`
+- `/club`, `/entrar`, `/perfil`, `/panel`
+- `/ruta` debe redirigir a `/unidades`
+- Fallar dos veces abre el Modo Desglose con la intro de Tinta.
+- Código de demo: `MATES-3A`.
+- Revisar móvil, escritorio y que las fuentes carguen.
+
+### Notas
+
+- Si Vercel no acepta la versión de pnpm declarada, ajustar `packageManager` o
+  la versión de Node en el proyecto.
+- La demo no tiene backend ni foro compartido entre navegadores.
+- Actualizar la URL pública aquí y en el SRS después del despliegue.
 
 ## Créditos
 
