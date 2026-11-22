@@ -70,6 +70,8 @@ Una plataforma dinámica donde:
   * **Color Violeta/Amarillo:** Verificación y respuesta final.
 * **RF-06: Explicación Textual y Visual:** Cada paso debe acompañar una frase corta explícita (ej. *"Primero juntamos las unidades: 7 + 5 = 12. Dejamos 2 y llevamos 1 a las decenas"*).
 
+
+[EXTENSION]
 ### 4.3 Módulo Docente / Creador de Actividades
 * **RF-07: Formulario de Creación sin Código:** El docente debe poder seleccionar el tipo de ejercicio (ej. Suma con llevadas, Fracciones equivalentes, Conteo) e ingresar:
   1. Enunciado del problema.
@@ -77,6 +79,7 @@ Una plataforma dinámica donde:
   3. Pasos del modo desglose asociados a los valores.
 * **RF-08: Vista Previa en Tiempo Real:** El docente debe ver cómo se mostrará el ejercicio y su desglose al estudiante antes de guardarlo.
 
+[EXTENSION]
 ### 4.4 Módulo Acompañante (Resumen para Tutores/Padres)
 * **RF-09: Tarjeta de Diagnóstico:** Muestra un resumen simplificado del desempeño:
   * Conceptos dominados.
