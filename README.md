@@ -247,7 +247,7 @@ cada navegador tiene su propio progreso, La Fogata y cuentas simuladas.
 
 ### Desde el dashboard
 
-1. Importar el repositorio `Zahir-R/mates` en Vercel.
+1. Importar el repositorio `Zahir-R/Prompt_Engineers` en Vercel.
 2. Framework preset: **Next.js**.
 3. Root directory: `./`.
 4. Install command: `pnpm install`.
