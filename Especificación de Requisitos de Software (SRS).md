@@ -1,11 +1,17 @@
 # Especificación de Requisitos de Software (SRS)
 ## Proyecto: Plataforma de Nivelación Matemática con "Modo Desglose"
-**Versión:** 1.2 — hoja de ruta N0–N6 integrada  
+**Versión:** 1.3 — acceso docente e interactividad  
 **Evento:** Abstracthon 2026 (MLSA - University Community, Bolivia)  
 **Track Principal:** Educación  
 **Público Objetivo:** Estudiantes de nivel primario (6 a 13 años), Docentes y Tutores/Padres.  
 **Fecha Límite de Entrega:** Domingo 22 de Noviembre de 2026, 16:30 (Hora de Bolivia).  
 **Estado del despliegue:** pendiente de URL pública en Vercel; importar `main` desde el dashboard.
+
+### Changelog v1.3
+- Se agrega acceso de educador con correo y clave simulada en `/entrar`.
+- “Mi carnet” pasa a “Mi perfil” en la navegación.
+- El creador docente usa plantillas de cinco pasos y permite editar explicaciones.
+- Se agregan bloques Base10, recta numérica y fracciones interactivas.
 
 ### Changelog v1.2
 - Se integra la hoja de ruta curricular N0–N6 con 7 niveles de dominio.
@@ -101,6 +107,7 @@ Una plataforma dinámica donde:
   * Pausa el reto y muestra el procedimiento paso a paso.
 * **RF-03: Retroalimentación Positiva e Inmediata:** Sin castigos, sin resta de puntos y con reintento asistido.
 * **RF-04: Metáforas Visuales:** Bloques de decenas/unidades, agrupaciones y fracciones como apoyo concreto.
+* **RF-04.1: Espacio interactivo:** El estudiante puede construir con Base10, avanzar en una recta numérica o pintar fracciones; el input numérico sigue disponible.
 
 ### 4.2 Módulo "Modo Desglose" (Motor de Anatomía)
 * **RF-05: Mapeo de Pasos por Código de Colores:**
@@ -113,8 +120,10 @@ Una plataforma dinámica donde:
 * **RF-06.1:** El desglose debe permitir navegación Anterior/Siguiente, cierre con Escape y foco visible.
 
 ### 4.3 Módulo Docente / Creador de Actividades
-* **RF-07: Formulario de Creación sin Código:** Tipo de ejercicio, enunciado, valores, respuesta y pasos del desglose.
+* **RF-07: Formulario de Creación sin Código:** Nivel, tipo de ejercicio, enunciado y valores. La respuesta se calcula automáticamente.
 * **RF-08: Vista Previa en Tiempo Real:** El docente ve el ejercicio y su desglose antes de guardarlo.
+* **RF-08.1: Plantillas pedagógicas:** Cada tipo genera cinco pasos (datos, estrategia, resolución, resultado y verificación), un reto y un visual coherente.
+* **RF-08.2: Edición de explicaciones:** El docente puede ajustar el texto de cada paso sin romper la estructura.
 
 ### 4.4 Módulo Acompañante (Resumen para Tutores/Padres)
 * **RF-09: Tarjeta de Diagnóstico:** Resumen de conceptos dominados y punto de apoyo. No se muestra en la navegación principal del estudiante.
@@ -134,6 +143,7 @@ Una plataforma dinámica donde:
 
 ### 4.7 Cuenta opcional, perfil y gamificación
 * **RF-14: Cuenta con alias:** Código de clase + alias + avatar. Sin correo de estudiantes.
+* **RF-14.1: Acceso docente:** Correo y clave simulada para entrar al panel de guía. No es autenticación real en la demo.
 * **RF-15: Carnet:** XP, nivel, racha actual, mejor racha, hojas resueltas, chispas e insignias.
 * **RF-16: Pegatinas cosméticas:** Lupa (3 chispas), Cohete (5) y Estrella (8); se compran una vez y se equipan en el avatar.
 * **RF-17: Importación de invitado:** Al elegir alias, se ofrece traer progreso, anatomía y chispas locales.
@@ -153,6 +163,8 @@ Una plataforma dinámica donde:
 * **RF-23: Cobertura por nivel:** Cada nivel debe tener 5 ejercicios practicables.
 * **RF-24: Figuras dinámicas:** El desglose puede usar fracciones, geometría, objetos contables y agrupaciones visuales.
 * **RF-25: Meta diaria:** Mostrar cuántas hojas se resolvieron hoy y una meta simple de 2 hojas.
+* **RF-26: Interactivos de práctica:** Base10, recta numérica y fracciones deben actualizar el campo de respuesta y funcionar con teclado.
+* **RF-27: Ejercicios docentes con nivel:** Los retos creados se asignan a N0–N6 y aparecen como hojas creadas por la guía.
 
 ---
 
@@ -217,7 +229,7 @@ Se mantiene el esquema base y se agrega opcionalmente `reto` en pasos clave.
 ### 6.2 Entidades
 | Entidad | Campos principales |
 | :--- | :--- |
-| `UserProfile` | `id`, `role`, `alias`, `avatar`, `classId`, `xp`, `level`, `streakCurrent`, `streakBest`, `lastActivityDate` |
+| `UserProfile` | `id`, `role`, `alias`, `avatar`, `classId`, `xp`, `level`, `streakCurrent`, `streakBest`, `lastActivityDate`, `email?`, `password?` (docente demo) |
 | `Classroom` | `id`, `name`, `code`, `teacherId` |
 | `Unit` | `id`, `title`, `description`, `order`, `exerciseIds`, `accent`, `levelId` |
 | `RoadmapLevel` | `id`, `order`, `title`, `baseYear`, `focus`, `canDo`, `checkpoint`, `criticalGate`, `components`, `unitIds` |
@@ -308,6 +320,9 @@ Usar React Context + `localStorage`. La UI espera `ready` antes de mostrar datos
 - Modo Desglose gamificado: implementado.
 - La Fogata: implementado en demo local.
 - Panel docente backstage: implementado.
+- Acceso de educador con correo y clave simulada: implementado.
+- Plantillas docentes de cinco pasos con explicaciones editables: implementado.
+- Interactivos Base10, recta y fracciones: implementado.
 - Meta diaria, racha semanal, resumen de clase y diagnóstico: implementado.
 - Microcopy libre de textos de demo en la UI: implementado.
 - Despliegue Vercel: pendiente.

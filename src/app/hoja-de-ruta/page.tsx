@@ -256,7 +256,7 @@ export default function HojaDeRutaPage() {
         <section className="mt-8 rounded-2xl border-2 border-ink bg-[#fbe7b8] p-4 shadow-hard">
           <p className="text-sm font-bold text-ink">
             Puedes practicar sin cuenta. Si eliges un alias, guardas tu racha,
-            tus chispas y tu avance en el carnet.
+            tus chispas y tu avance en tu perfil.
           </p>
           <Link
             href="/entrar"

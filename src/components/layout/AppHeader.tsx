@@ -21,7 +21,7 @@ const links = [
   { href: "/", label: "Inicio", icon: House },
   { href: "/hoja-de-ruta", label: "Ruta", icon: Route },
   { href: "/club", label: "La Fogata", icon: MessageCircle },
-  { href: "/perfil", label: "Mi carnet", icon: UserRound },
+  { href: "/perfil", label: "Mi perfil", icon: UserRound },
 ];
 
 export function AppHeader() {

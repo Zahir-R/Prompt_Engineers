@@ -24,7 +24,7 @@ pnpm exec playwright install chromium
    - `/unidades`
    - `/unidad/unidad_sumas`
    - `/club`
-   - `/entrar`
+   - `/entrar` (estudiante y educador)
    - `/perfil`
    - `/ejercicio/ejercicio_math_001`
    - `/panel`
@@ -35,11 +35,13 @@ pnpm exec playwright install chromium
    - Un invitado puede abrir unidades y ejercicios sin cuenta.
    - Un invitado puede leer La Fogata pero no publicar.
    - Código `MATES-3A` + alias crea/entra a un perfil.
+   - Correo `ana@mates.club` + clave `mates2026` entra al panel docente.
    - El progreso de invitado se importa al entrar.
    - Solo cuentas de estudiante ganan XP y racha.
   - El reto del desglose muestra chispa, el sello aparece al terminar y el
     bonus de detective se suma al resolver.
-   - El carnet muestra racha, XP, insignias, chispas y pegatinas.
+   - El perfil muestra racha, XP, insignias, chispas y pegatinas.
+   - Base10, recta y fracciones actualizan el campo de respuesta.
    - La ruta muestra N0–N6 y cada nivel tiene 5 ejercicios.
    - Las figuras de fracciones, geometría y objetos se ven bien en móvil.
    - El docente entra a `/panel`, crea alias y modera sin aparecer en la UI del

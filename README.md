@@ -16,9 +16,13 @@ procedimiento. Las chispas se canjean por pegatinas cosméticas en el carnet.
 La **hoja de ruta N0–N6** organiza el currículo oficial de primaria en 7 niveles
 de dominio. Cada nivel tiene 5 ejercicios: **35 retos** en total.
 
+El estudiante puede construir respuestas con bloques Base10, moverse en la recta
+numérica y pintar fracciones. Los docentes crean retos desde plantillas de cinco
+pasos y pueden ajustar las explicaciones.
+
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
-**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.2  
+**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.3  
 **Fuente curricular:** [`hoja-de-ruta-matematica-primaria-bolivia.md`](./hoja-de-ruta-matematica-primaria-bolivia.md)  
 **Demo:** pendiente de URL pública en Vercel
 
@@ -99,7 +103,7 @@ El resultado de las capturas queda en `test-results/capturas/`.
 | `/ejercicio/[id]` | Reto activo del estudiante |
 | `/club` | La Fogata: dudas y pistas por unidad |
 | `/club/[threadId]` | Hilo y respuestas |
-| `/entrar` | Código de clase + alias opcional |
+| `/entrar` | Acceso de estudiante o educador |
 | `/perfil` | Carnet de aventuras |
 | `/panel` | Backstage docente, sin enlace en la navegación del estudiante |
 | `/docente` | Creador de actividades sin código |
@@ -108,9 +112,16 @@ El resultado de las capturas queda en `test-results/capturas/`.
 
 ### Cuenta de demo
 
+**Estudiante**
 - Código de clase: **MATES-3A**
-- Perfiles semilla: Profe Ana (guía), Sofía y Mateo.
-- No hay contraseñas, correos de estudiantes ni backend real.
+- Alias: elige el tuyo o usa Sofía / Mateo.
+
+**Educador**
+- Correo: `ana@mates.club`
+- Clave: `mates2026`
+
+- No hay correos de estudiantes ni backend real. El acceso docente es local y
+  simulado para la demo.
 
 ## Estructura
 
@@ -126,7 +137,8 @@ src/
 │   ├── layout/               Encabezado
 │   ├── route/                Unidades y detalle de capítulo
 │   ├── student/              Reto activo del estudiante
-│   └── teacher/              Creador de actividades
+│   ├── student/interactions/ Bloques Base10, recta y fracciones
+│   └── teacher/              Creador de actividades con plantillas
 ├── context/AppProvider.tsx   Estado global, sesión demo y persistencia
 ├── data/
 │   ├── demo.ts               Clase, perfiles, unidades y club semilla
@@ -165,6 +177,9 @@ aditivos.
 - `src/data/demo.ts`: clase, perfiles, unidades y club semilla.
 - `src/data/roadmap.ts`: ruta N0–N6 y compuertas críticas.
 - `src/lib/roadmap.ts`: nivel actual, progreso por nivel y meta diaria.
+- `src/lib/exerciseTemplates.ts`: generador de retos docentes en cinco pasos.
+- `src/components/student/interactions/`: Base10, recta numérica y fracciones.
+- `src/types/exercise.ts`: `levelId`, `interaccion` y `expresion`.
 - `src/lib/demo.ts`: reglas de XP, niveles, racha y avatares.
 - `src/lib/constants.ts`: claves de `localStorage`.
 
@@ -248,9 +263,11 @@ El progreso de invitado se guarda aparte y se puede importar al elegir alias.
 5. En pasos clave, responder un mini reto y ver la chispa.
 6. Completar el desglose → sello de detective y bonus de XP.
 7. Responder correctamente → progreso actualizado.
-8. `/entrar` → código **MATES-3A** + alias → carnet, XP, chispas y racha.
-9. `/club` → leer La Fogata; con alias, abrir una duda.
-10. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
+8. `/entrar` → estudiante con código **MATES-3A** + alias, o educador con
+   `ana@mates.club` / `mates2026` → perfil, XP, chispas y racha.
+9. Construir la respuesta con bloques, recta o fracción; luego comprobar.
+10. `/club` → leer La Fogata; con alias, abrir una duda.
+11. `/panel` → crear un reto con plantilla, revisar estudiantes y moderar.
 
 ## Despliegue en Vercel
 

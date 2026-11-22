@@ -43,6 +43,10 @@ nix shell nixpkgs#chromium --command sh -c \
 - Las chispas se canjean por 3 pegatinas cosméticas en `/perfil`.
 - La hoja de ruta N0–N6 usa 7 niveles con 5 ejercicios cada uno (35 retos).
 - Las figuras dinámicas viven en `src/components/figures/` y se usan desde `StepVisualizer`.
+- Los ejercicios docentes se generan con `src/lib/exerciseTemplates.ts` y
+  permiten editar explicaciones sin romper los cinco pasos.
+- La práctica interactiva vive en `src/components/student/interactions/`:
+  Base10, recta numérica y fracciones.
 - No hay correos de estudiantes, contraseñas ni backend. Todo es demo local en
   `localStorage`; el progreso de invitado se importa al elegir alias.
 - **El docente es backstage**: no aparece en la navegación del estudiante. Su
@@ -60,7 +64,8 @@ nix shell nixpkgs#chromium --command sh -c \
 - `/unidad/[id]`, `/club/[threadId]` y `/ejercicio/[id]` usan
   `generateStaticParams` + `<Suspense>`; mantén ambos. El header usa
   `usePathname`, así que una ruta dinámica sin params estáticos rompe el build.
-- `src/components/anatomy/` y `src/components/figures/` componen el Modo Desglose; `club/`, `student/`, `route/`,
+- `src/components/anatomy/`, `src/components/figures/` y
+  `src/components/student/interactions/` componen la práctica; `club/`, `student/`, `route/`,
   `teacher/` y `companion/` son módulos separados.
 - `AppProvider` combina ejercicios semilla + creados por docentes y persiste
   perfiles, sesión, progreso por perfil, XP, racha y La Fogata.
@@ -78,7 +83,8 @@ Aditivos y coordinados:
   `src/types/cosmetics.ts`, `src/types/roadmap.ts`
 - `src/data/exercises.json`, `src/data/demo.ts`, `src/data/roadmap.ts`
 - `src/context/AppProvider.tsx`
-- `src/lib/constants.ts`, `src/lib/demo.ts`, `src/lib/roadmap.ts`
+- `src/lib/constants.ts`, `src/lib/demo.ts`, `src/lib/roadmap.ts`,
+  `src/lib/exerciseTemplates.ts`
 - `src/components/anatomy/`
 
 No renombres campos del SRS (`desglose_pasos`, `color_tag`, `visual_state`,
@@ -102,6 +108,7 @@ mostaza y turquesa; bordes dibujados, sombras duras, mascota Tinta y doodles SVG
 - Capturas de referencia: `docs/design/screenshots/`.
 - No usar textos de demo/desarrollo en la UI. Preferir “aprende sin cuenta”,
   “tu avance se guarda en este navegador” y “elige tu alias”.
+- La navegación usa **Mi perfil**, no “Mi carnet”.
 
 ## Skills y subagentes
 

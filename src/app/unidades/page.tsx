@@ -191,29 +191,45 @@ export default function UnidadesPage() {
       {extraExercises.length > 0 && (
         <section className="mt-10">
           <h2 className="font-display text-2xl font-semibold text-ink">
-            Hojas libres del club
+            Hojas creadas por tu guía
           </h2>
           <p className="mt-1 font-hand text-xl font-bold text-ink-soft">
-            actividades creadas por la comunidad
+            retos del docente, con el mismo formato de cinco pasos
           </p>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            {extraExercises.map((exercise) => (
-              <Link
-                key={exercise.id}
-                href={`/ejercicio/${exercise.id}`}
-                className="rounded-xl border-2 border-ink bg-paper p-4 shadow-hard"
-              >
-                <p className="text-xs font-black uppercase tracking-wide text-coral-deep">
-                  {exercise.categoria}
-                </p>
-                <p className="mt-1 font-display text-lg font-semibold text-ink">
-                  {exercise.titulo}
-                </p>
-                <p className="mt-1 line-clamp-2 text-sm font-semibold text-ink-soft">
-                  {exercise.enunciado}
-                </p>
-              </Link>
-            ))}
+          <div className="mt-4 space-y-6">
+            {ROADMAP_LEVELS.map((level) => {
+              const items = extraExercises.filter(
+                (exercise) => exercise.levelId === level.id,
+              );
+              if (items.length === 0) return null;
+
+              return (
+                <div key={level.id}>
+                  <Sticker tone="paper">
+                    {level.id} · {level.title}
+                  </Sticker>
+                  <div className="mt-2 grid gap-3 sm:grid-cols-2">
+                    {items.map((exercise) => (
+                      <Link
+                        key={exercise.id}
+                        href={`/ejercicio/${exercise.id}`}
+                        className="rounded-xl border-2 border-ink bg-paper p-4 shadow-hard"
+                      >
+                        <p className="text-xs font-black uppercase tracking-wide text-coral-deep">
+                          {exercise.categoria}
+                        </p>
+                        <p className="mt-1 font-display text-lg font-semibold text-ink">
+                          {exercise.titulo}
+                        </p>
+                        <p className="mt-1 line-clamp-2 text-sm font-semibold text-ink-soft">
+                          {exercise.enunciado}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}

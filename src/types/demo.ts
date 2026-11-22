@@ -16,6 +16,8 @@ export interface UserProfile {
   streakCurrent: number;
   streakBest: number;
   lastActivityDate: string | null;
+  email?: string;
+  password?: string;
 }
 
 export interface Classroom {

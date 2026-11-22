@@ -21,6 +21,8 @@ Cambios aditivos y coordinados:
 - `src/lib/constants.ts`
 - `src/lib/demo.ts`
 - `src/lib/roadmap.ts`
+- `src/lib/exerciseTemplates.ts`
+- `src/components/student/interactions/`
 - `src/components/figures/`
 - `src/app/ejercicio/[id]/page.tsx`
 - `src/app/unidad/[id]/page.tsx`
@@ -49,7 +51,7 @@ Campos obligatorios: `id`, `categoria`, `nivel`, `titulo`, `enunciado`, `datos`,
 - `profiles`, `classrooms`, `club`, `session`, `activeProfile`
 - `getExercise`, `getProfile`, `getUnit`, `getUnitForExercise`
 - `recordAttempt`, `markCompleted`, `resetProgress`
-- `enterClass`, `createStudentAlias`, `switchProfile`, `logout`
+- `enterClass`, `enterTeacher`, `createStudentAlias`, `switchProfile`, `logout`
 - `recordAnatomyStep`, `completeAnatomy`, `getAnatomyProgress`
 - `buySticker`, `equipSticker`, `getProfileCosmetics`
 - `addThread`, `addReply`, `resolveThread`, `togglePinThread`,
@@ -94,5 +96,6 @@ pnpm build
 pnpm test:e2e
 ```
 
-Revisar cursos públicos, invitado, alias, carnet, La Fogata, panel backstage,
-hoja de ruta N0–N6 y figuras del desglose.
+Revisar cursos públicos, invitado, alias, perfil, La Fogata, panel backstage,
+hoja de ruta N0–N6, figuras del desglose, plantillas docentes e interactivos
+Base10, recta y fracciones.

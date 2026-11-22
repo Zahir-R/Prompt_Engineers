@@ -88,7 +88,7 @@ export default function Home() {
               <div>
                 <Sticker tone="teal">
                   <Sparkles className="size-3.5" aria-hidden="true" />
-                  {activeProfile.role === "teacher" ? "Panel de guía" : "Tu carnet"}
+                  {activeProfile.role === "teacher" ? "Panel de guía" : "Tu perfil"}
                 </Sticker>
                 <h1 className="mt-2 font-display text-4xl font-semibold leading-none text-ink">
                   Hola, {activeProfile.alias}

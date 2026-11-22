@@ -1,3 +1,5 @@
+import type { RoadmapLevelId } from "@/types/roadmap";
+
 export type StepColor = "blue" | "orange" | "green" | "purple" | "yellow";
 
 export interface Base10Visual {
@@ -81,6 +83,8 @@ export interface Exercise {
   respuesta_correcta: number;
   desglose_pasos: DesgloseStep[];
   metafora_grafica?: string;
+  levelId?: RoadmapLevelId;
+  interaccion?: ExerciseInteraction;
 }
 
 export interface ProgressEntry {
@@ -89,3 +93,12 @@ export interface ProgressEntry {
   lastAnswer: number | null;
   updatedAt: string;
 }
+
+export type ExerciseInteraction =
+  | { tipo: "base10"; max?: number }
+  | { tipo: "recta"; min: number; max: number; paso: number }
+  | {
+      tipo: "fraccion";
+      denominador: number;
+      salida: "decimal" | "numerador";
+    };

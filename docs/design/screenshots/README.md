@@ -6,8 +6,7 @@ Capturas generadas con Playwright en la iteración de lenguaje visual
 - `desktop-*`: 1440×900.
 - `mobile-*`: Pixel 7.
 
-Rutas capturadas: inicio, unidades, unidad, club, entrar, perfil, ejercicio y
-docente. También hay capturas de la hoja de ruta, el panel de creación, el reto
+Rutas capturadas: inicio, unidades, unidad, club, entrar, perfil y ejercicio. También hay capturas de la hoja de ruta, el acceso de educador, el panel de creación, el reto
 del desglose, la chispa, el sello, el carnet de detective, las pegatinas
 canjeables y las figuras de conteo, multiplicación, geometría y fracciones.
 

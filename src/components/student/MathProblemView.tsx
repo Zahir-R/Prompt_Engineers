@@ -11,6 +11,7 @@ import {
 import { PaperCard } from "@/components/brand/PaperCard";
 import { Sticker } from "@/components/brand/Sticker";
 import { StarDoodle } from "@/components/brand/Doodle";
+import { InteractiveWorkspace } from "@/components/student/interactions/InteractiveWorkspace";
 import type { Exercise } from "@/types/exercise";
 import { cn } from "@/lib/utils";
 
@@ -90,6 +91,10 @@ export function MathProblemView({
               </span>
             </>
           )}
+        </div>
+
+        <div className="mt-5">
+          <InteractiveWorkspace exercise={exercise} value={value} onChange={onChange} />
         </div>
 
         {detectiveBonusReady && (
