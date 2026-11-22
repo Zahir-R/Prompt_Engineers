@@ -7,8 +7,8 @@ Capturas generadas con Playwright en la iteración de lenguaje visual
 - `mobile-*`: Pixel 7.
 
 Rutas capturadas: inicio, unidades, unidad, club, entrar, perfil, ejercicio y
-docente. También hay capturas del reto del desglose, la chispa, el sello y el
-carnet de detective.
+docente. También hay capturas del reto del desglose, la chispa, el sello, el
+carnet de detective y las pegatinas canjeables.
 
 Para regenerarlas:
 

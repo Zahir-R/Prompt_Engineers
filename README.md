@@ -11,7 +11,7 @@ estudiante.
 
 El **Modo Desglose** también es una misión: retos en pasos clave, chispas,
 sello de detective y un bonus de XP al resolver después de entender el
-procedimiento.
+procedimiento. Las chispas se canjean por pegatinas cosméticas en el carnet.
 
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
@@ -202,6 +202,7 @@ guarda la demo en `localStorage`:
 - `mates:demo:xp-awards:v1`
 - `mates:demo:anatomy:v1`
 - `mates:demo:sparks:v1`
+- `mates:demo:cosmetics:v1`
 - `mates:demo:club:v1`
 - `mates:custom-exercises:v1`
 

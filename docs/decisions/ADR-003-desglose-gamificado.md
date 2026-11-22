@@ -28,3 +28,9 @@ que abrirlo sea parte del juego y no una admisión de fracaso.
 - Los ejercicios sin retos siguen funcionando con el modo pasivo.
 - La gamificación debe respetar `prefers-reduced-motion` y no bloquear la
   lectura.
+
+## Actualización: pegatinas canjeables
+
+Las chispas se gastan en 3 pegatinas cosméticas del carnet: Lupa (3), Cohete
+(5) y Estrella (8). Comprar descuenta chispas una sola vez; equipar cambia el
+adorno del avatar. No dan ventajas académicas.

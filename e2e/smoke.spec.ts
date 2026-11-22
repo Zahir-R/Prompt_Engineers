@@ -142,3 +142,16 @@ test("el detective resuelve retos y gana el bonus", async ({ page }) => {
   await page.getByRole("button", { name: /Comprobar/i }).click();
   await expect(page.getByText(/Resuelto con ayuda/i)).toBeVisible();
 });
+
+test("se pueden canjear y equipar pegatinas con chispas", async ({ page }) => {
+  await page.goto("/entrar");
+  await page.getByLabel(/Código de clase/i).fill("MATES-3A");
+  await page.getByLabel(/Tu alias/i).fill("Sofía");
+  await page.getByRole("button", { name: /Entrar al club/i }).click();
+  await page.goto("/perfil");
+  await page.getByRole("button", { name: "Canjear Lupa" }).click();
+  await expect(page.getByText(/Canjeaste Lupa/i)).toBeVisible();
+  await page.getByRole("button", { name: "Equipar Lupa" }).click();
+  await expect(page.getByText(/Lupa equipada/i)).toBeVisible();
+  await expect(page.getByText("Equipada", { exact: true })).toBeVisible();
+});

@@ -43,6 +43,7 @@ export default function PanelPage() {
     getProfileProgress,
     getProfileSparks,
     getProfileAnatomy,
+    getProfileCosmetics,
     resolveThread,
     togglePinThread,
     toggleHideThread,
@@ -199,6 +200,7 @@ export default function PanelPage() {
               const completedDesgloses = Object.values(
                 getProfileAnatomy(student.id),
               ).filter((entry) => entry.completed).length;
+              const studentCosmetics = getProfileCosmetics(student.id);
               const solved = getSolvedCount(studentProgress);
               const completedUnits = units.filter(
                 (unit) => getUnitProgress(unit, studentProgress).complete,
@@ -213,7 +215,12 @@ export default function PanelPage() {
                     )}
                   >
                     <div className="flex flex-wrap items-center gap-3">
-                      <Avatar alias={student.alias} avatar={student.avatar} size="md" />
+                      <Avatar
+                        alias={student.alias}
+                        avatar={student.avatar}
+                        sticker={studentCosmetics.equipped}
+                        size="md"
+                      />
                       <div className="min-w-0 flex-1">
                         <p className="font-display text-xl font-semibold text-ink">
                           {student.alias}

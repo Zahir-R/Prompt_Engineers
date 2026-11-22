@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -9,16 +10,19 @@ import {
   LogIn,
   LogOut,
   MessageCircle,
+  ShoppingBag,
   Sparkles,
   Star,
   Trophy,
 } from "lucide-react";
 import { Avatar } from "@/components/brand/Avatar";
+import { CosmeticIcon } from "@/components/brand/CosmeticIcon";
 import { Mascot } from "@/components/brand/Mascot";
 import { PaperCard } from "@/components/brand/PaperCard";
 import { Sticker } from "@/components/brand/Sticker";
 import { StarDoodle } from "@/components/brand/Doodle";
 import { useApp } from "@/context/AppProvider";
+import { COSMETIC_STICKERS } from "@/data/demo";
 import {
   formatShortDate,
   getLevelInfo,
@@ -35,11 +39,15 @@ export default function PerfilPage() {
     progress,
     anatomyProgress,
     sparks,
+    cosmetics,
+    buySticker,
+    equipSticker,
     units,
     club,
     logout,
     getProfileProgress,
   } = useApp();
+  const [cosmeticMessage, setCosmeticMessage] = useState<string | null>(null);
 
   if (!ready) {
     return (
@@ -184,6 +192,7 @@ export default function PerfilPage() {
             <Avatar
               alias={activeProfile.alias}
               avatar={activeProfile.avatar}
+              sticker={cosmetics.equipped}
               size="lg"
             />
             <div>
@@ -295,13 +304,97 @@ export default function PerfilPage() {
                     "rounded-full border-2 px-3 py-1 text-xs font-black",
                     badge.active
                       ? "border-ink bg-[#cce9e3] text-ink"
-                      : "border-ink/20 bg-paper-deep text-ink-soft/50",
+                      : "border-ink/30 bg-paper-deep text-ink-soft",
                   )}
                 >
                   {badge.label}
                 </li>
               ))}
             </ul>
+          </PaperCard>
+
+          <PaperCard className="-rotate-1 p-5">
+            <h2 className="flex items-center gap-2 font-display text-2xl font-semibold text-ink">
+              <ShoppingBag className="size-5 text-coral-deep" aria-hidden="true" />
+              Pegatinas de Tinta
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-ink-soft">
+              Canjea chispas por pegatinas y equípalas en tu carnet.
+            </p>
+            <div className="mt-3 space-y-2">
+              {COSMETIC_STICKERS.map((sticker) => {
+                const owned = cosmetics.owned.includes(sticker.id);
+                const equipped = cosmetics.equipped === sticker.id;
+
+                return (
+                  <div
+                    key={sticker.id}
+                    className="flex flex-wrap items-center gap-3 rounded-xl border-2 border-ink/20 bg-paper-deep/40 p-3"
+                  >
+                    <span
+                      className={cn(
+                        "flex size-10 shrink-0 items-center justify-center rounded-xl border-2 border-ink",
+                        sticker.bg,
+                        sticker.text,
+                      )}
+                    >
+                      <CosmeticIcon id={sticker.id} className="size-5" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-display text-lg font-semibold text-ink">
+                        {sticker.label}
+                      </p>
+                      <p className="text-xs font-semibold text-ink-soft">
+                        {sticker.description}
+                      </p>
+                    </div>
+                    {equipped ? (
+                      <span className="rounded-lg border-2 border-teal bg-[#cce9e3] px-2.5 py-1 text-xs font-black text-ink">
+                        Equipada
+                      </span>
+                    ) : owned ? (
+                      <button
+                        type="button"
+                        aria-label={`Equipar ${sticker.label}`}
+                        onClick={() => {
+                          const result = equipSticker(sticker.id);
+                          setCosmeticMessage(
+                            result.ok
+                              ? `${sticker.label} equipada.`
+                              : result.error ?? "No pudimos equiparla.",
+                          );
+                        }}
+                        className="rounded-lg border-2 border-ink bg-paper px-2.5 py-1 text-xs font-black text-ink shadow-hard"
+                      >
+                        Equipar
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        aria-label={`Canjear ${sticker.label}`}
+                        disabled={sparks < sticker.cost}
+                        onClick={() => {
+                          const result = buySticker(sticker.id);
+                          setCosmeticMessage(
+                            result.ok
+                              ? `Canjeaste ${sticker.label}.`
+                              : result.error ?? "No pudimos canjearla.",
+                          );
+                        }}
+                        className="rounded-lg border-2 border-ink bg-mustard px-2.5 py-1 text-xs font-black text-ink shadow-hard disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        Canjear · {sticker.cost}
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            {cosmeticMessage && (
+              <p className="mt-3 rounded-xl border-2 border-ink/20 bg-paper p-2 text-xs font-bold text-ink">
+                {cosmeticMessage}
+              </p>
+            )}
           </PaperCard>
         </div>
       </div>

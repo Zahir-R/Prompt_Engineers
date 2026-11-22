@@ -15,6 +15,7 @@ import {
   DEMO_ANATOMY_KEY,
   DEMO_CLASSROOMS_KEY,
   DEMO_CLUB_KEY,
+  DEMO_COSMETICS_KEY,
   DEMO_PROFILES_KEY,
   DEMO_PROGRESS_KEY,
   DEMO_SESSION_KEY,
@@ -26,8 +27,10 @@ import {
   createSeedClassrooms,
   createSeedClub,
   createSeedProfiles,
+  createSeedCosmetics,
   createSeedProgress,
   createSeedSparks,
+  COSMETIC_STICKERS,
   DEMO_UNITS,
 } from "@/data/demo";
 import {
@@ -53,6 +56,11 @@ import {
 import { createId } from "@/lib/utils";
 import type { Exercise, ProgressEntry } from "@/types/exercise";
 import type { AnatomyByProfile, AnatomyEntry } from "@/types/anatomy";
+import type {
+  CosmeticId,
+  CosmeticsByProfile,
+  ProfileCosmetics,
+} from "@/types/cosmetics";
 import type {
   AvatarId,
   Classroom,
@@ -96,6 +104,8 @@ export interface AppContextValue {
   anatomyByProfile: AnatomyByProfile;
   sparks: number;
   sparksByProfile: Record<string, number>;
+  cosmetics: ProfileCosmetics;
+  cosmeticsByProfile: CosmeticsByProfile;
   ready: boolean;
   units: Unit[];
   profiles: UserProfile[];
@@ -111,6 +121,7 @@ export interface AppContextValue {
   getProfileSparks: (profileId: string) => number;
   getProfileAnatomy: (profileId: string) => Record<string, AnatomyEntry>;
   getAnatomyProgress: (exerciseId: string) => AnatomyEntry | undefined;
+  getProfileCosmetics: (profileId: string) => ProfileCosmetics;
   getUnit: (id: string) => Unit | undefined;
   getUnitForExercise: (exerciseId: string) => Unit | undefined;
   addExercise: (exercise: Exercise) => void;
@@ -122,6 +133,8 @@ export interface AppContextValue {
     challengeCorrect: boolean,
   ) => { sparksGained: number };
   completeAnatomy: (exerciseId: string) => AnatomyReward;
+  buySticker: (stickerId: CosmeticId) => { ok: boolean; error?: string };
+  equipSticker: (stickerId: CosmeticId | null) => { ok: boolean; error?: string };
   resetProgress: () => void;
   enterClass: (code: string, alias: string, avatar: AvatarId) => EnterClassResult;
   createStudentAlias: (
@@ -210,6 +223,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sparksByProfile, setSparksByProfile] = useState<Record<string, number>>(
     () => readStorage<Record<string, number>>(DEMO_SPARKS_KEY, createSeedSparks()),
   );
+  const [cosmeticsByProfile, setCosmeticsByProfile] =
+    useState<CosmeticsByProfile>(() =>
+      readStorage<CosmeticsByProfile>(DEMO_COSMETICS_KEY, createSeedCosmetics()),
+    );
   const [xpAwards, setXpAwards] = useState<XpAwards>(() =>
     readStorage<XpAwards>(DEMO_XP_KEY, {}),
   );
@@ -258,6 +275,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!ready) return;
+    writeStorage(DEMO_COSMETICS_KEY, cosmeticsByProfile);
+  }, [cosmeticsByProfile, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
     writeStorage(DEMO_XP_KEY, xpAwards);
   }, [xpAwards, ready]);
 
@@ -303,6 +325,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [anatomyByProfile, progressKey],
   );
   const sparks = sparksByProfile[progressKey] ?? 0;
+  const cosmetics = useMemo(
+    () =>
+      cosmeticsByProfile[progressKey] ?? {
+        owned: [],
+        equipped: null,
+      },
+    [cosmeticsByProfile, progressKey],
+  );
 
   const getProfileProgress = useCallback(
     (profileId: string) => progressByProfile[profileId] ?? {},
@@ -322,6 +352,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const getAnatomyProgress = useCallback(
     (exerciseId: string) => anatomyByProfile[progressKey]?.[exerciseId],
     [anatomyByProfile, progressKey],
+  );
+
+  const getProfileCosmetics = useCallback(
+    (profileId: string) =>
+      cosmeticsByProfile[profileId] ?? { owned: [], equipped: null },
+    [cosmeticsByProfile],
   );
 
   const getUnit = useCallback(
@@ -387,6 +423,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
         }));
       }
 
+      const guestCosmetics = cosmeticsByProfile.guest ?? {
+        owned: [],
+        equipped: null,
+      };
+      if (guestCosmetics.owned.length > 0 || guestCosmetics.equipped) {
+        setCosmeticsByProfile((current) => {
+          const target = current[profileId] ?? { owned: [], equipped: null };
+          return {
+            ...current,
+            guest: { owned: [], equipped: null },
+            [profileId]: {
+              owned: Array.from(
+                new Set([...target.owned, ...guestCosmetics.owned]),
+              ),
+              equipped: target.equipped ?? guestCosmetics.equipped,
+            },
+          };
+        });
+      }
+
       if (solvedIncoming > 0) {
         const gained = solvedIncoming * XP_PER_EXERCISE;
         setProfiles((current) =>
@@ -404,7 +460,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
       return solvedIncoming;
     },
-    [anatomyByProfile, progressByProfile, sparksByProfile],
+    [anatomyByProfile, cosmeticsByProfile, progressByProfile, sparksByProfile],
   );
 
   const enterClass = useCallback(
@@ -889,6 +945,74 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
+  const buySticker = useCallback(
+    (stickerId: CosmeticId): { ok: boolean; error?: string } => {
+      const sticker = COSMETIC_STICKERS.find((item) => item.id === stickerId);
+      if (!sticker) {
+        return { ok: false, error: "Esa pegatina no existe." };
+      }
+
+      const current = cosmeticsByProfile[progressKey] ?? {
+        owned: [],
+        equipped: null,
+      };
+
+      if (current.owned.includes(stickerId)) {
+        return { ok: false, error: "Ya tienes esa pegatina." };
+      }
+
+      if ((sparksByProfile[progressKey] ?? 0) < sticker.cost) {
+        return {
+          ok: false,
+          error: `Necesitas  chispas para canjearla.`,
+        };
+      }
+
+      setSparksByProfile((sparks) => ({
+        ...sparks,
+        [progressKey]: (sparks[progressKey] ?? 0) - sticker.cost,
+      }));
+
+      setCosmeticsByProfile((cosmetics) => {
+        const profile = cosmetics[progressKey] ?? { owned: [], equipped: null };
+        return {
+          ...cosmetics,
+          [progressKey]: {
+            ...profile,
+            owned: [...profile.owned, stickerId],
+          },
+        };
+      });
+
+      return { ok: true };
+    },
+    [cosmeticsByProfile, progressKey, sparksByProfile],
+  );
+
+  const equipSticker = useCallback(
+    (stickerId: CosmeticId | null): { ok: boolean; error?: string } => {
+      const current = cosmeticsByProfile[progressKey] ?? {
+        owned: [],
+        equipped: null,
+      };
+
+      if (stickerId && !current.owned.includes(stickerId)) {
+        return { ok: false, error: "Primero canjea esa pegatina." };
+      }
+
+      setCosmeticsByProfile((cosmetics) => {
+        const profile = cosmetics[progressKey] ?? { owned: [], equipped: null };
+        return {
+          ...cosmetics,
+          [progressKey]: { ...profile, equipped: stickerId },
+        };
+      });
+
+      return { ok: true };
+    },
+    [cosmeticsByProfile, progressKey],
+  );
+
   const resetDemo = useCallback(() => {
     setProfiles(createSeedProfiles());
     setClassrooms(createSeedClassrooms());
@@ -896,6 +1020,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setProgressByProfile(createSeedProgress());
     setAnatomyByProfile({});
     setSparksByProfile(createSeedSparks());
+    setCosmeticsByProfile(createSeedCosmetics());
     setXpAwards({});
     setClub(createSeedClub());
     setCustomExercises([]);
@@ -910,6 +1035,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       anatomyByProfile,
       sparks,
       sparksByProfile,
+      cosmetics,
+      cosmeticsByProfile,
       ready,
       units: DEMO_UNITS,
       profiles,
@@ -925,6 +1052,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       getProfileSparks,
       getProfileAnatomy,
       getAnatomyProgress,
+      getProfileCosmetics,
       getUnit,
       getUnitForExercise,
       addExercise,
@@ -932,6 +1060,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       markCompleted,
       recordAnatomyStep,
       completeAnatomy,
+      buySticker,
+      equipSticker,
       resetProgress,
       enterClass,
       createStudentAlias,
@@ -954,6 +1084,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       anatomyByProfile,
       sparks,
       sparksByProfile,
+      cosmetics,
+      cosmeticsByProfile,
       ready,
       profiles,
       classrooms,
@@ -967,6 +1099,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       getProfileSparks,
       getProfileAnatomy,
       getAnatomyProgress,
+      getProfileCosmetics,
       getUnit,
       getUnitForExercise,
       addExercise,
@@ -974,6 +1107,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       markCompleted,
       recordAnatomyStep,
       completeAnatomy,
+      buySticker,
+      equipSticker,
       resetProgress,
       enterClass,
       createStudentAlias,

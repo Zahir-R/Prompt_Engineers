@@ -61,3 +61,12 @@ extra se gana al resolver después del desglose.
 
 Capturas: `desktop-desglose-reto.png`, `desktop-desglose-chispa.png`,
 `desktop-desglose-sello.png`.
+
+## 2026-11-22 — Pegatinas de Tinta
+
+Cambio aplicado: tienda mínima en el carnet para canjear chispas por Lupa,
+Cohete y Estrella. La pegatina equipada aparece en el avatar del carnet y del
+header.
+
+Decisión: cosméticos sin ventajas académicas. Comprar descuenta chispas una
+sola vez.

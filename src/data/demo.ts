@@ -5,6 +5,10 @@ import type {
   Unit,
   UserProfile,
 } from "@/types/demo";
+import type {
+  CosmeticSticker,
+  CosmeticsByProfile,
+} from "@/types/cosmetics";
 
 export const SEED_DAY = "2026-11-22";
 export const SEED_PREVIOUS_DAY = "2026-11-21";
@@ -179,5 +183,40 @@ export function createSeedSparks(): Record<string, number> {
     profile_sofia: 6,
     profile_mateo: 1,
     guest: 0,
+  };
+}
+
+export const COSMETIC_STICKERS: CosmeticSticker[] = [
+  {
+    id: "lupa",
+    label: "Lupa",
+    description: "Para detectives que miran cada paso.",
+    cost: 3,
+    bg: "bg-[#d6e6f5]",
+    text: "text-sky",
+  },
+  {
+    id: "cohete",
+    label: "Cohete",
+    description: "Para quienes no paran de avanzar.",
+    cost: 5,
+    bg: "bg-[#f8d8d1]",
+    text: "text-coral-deep",
+  },
+  {
+    id: "estrella",
+    label: "Estrella",
+    description: "Para maestros del cuaderno.",
+    cost: 8,
+    bg: "bg-[#fbe7b8]",
+    text: "text-ink",
+  },
+];
+
+export function createSeedCosmetics(): CosmeticsByProfile {
+  return {
+    profile_sofia: { owned: ["cohete"], equipped: "cohete" },
+    profile_mateo: { owned: [], equipped: null },
+    guest: { owned: [], equipped: null },
   };
 }

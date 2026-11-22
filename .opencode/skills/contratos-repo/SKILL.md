@@ -12,6 +12,7 @@ Cambios aditivos y coordinados:
 - `src/types/exercise.ts`
 - `src/types/demo.ts`
 - `src/types/anatomy.ts`
+- `src/types/cosmetics.ts`
 - `src/data/exercises.json`
 - `src/data/demo.ts`
 - `src/context/AppProvider.tsx`
@@ -46,6 +47,7 @@ Campos obligatorios: `id`, `categoria`, `nivel`, `titulo`, `enunciado`, `datos`,
 - `recordAttempt`, `markCompleted`, `resetProgress`
 - `enterClass`, `createStudentAlias`, `switchProfile`, `logout`
 - `recordAnatomyStep`, `completeAnatomy`, `getAnatomyProgress`
+- `buySticker`, `equipSticker`, `getProfileCosmetics`
 - `addThread`, `addReply`, `resolveThread`, `togglePinThread`,
   `toggleHideThread`, `reportThread`, `reportReply`
 - `resetDemo`
@@ -72,6 +74,7 @@ usa `usePathname` con `cacheComponents`.
 - `mates:demo:xp-awards:v1`
 - `mates:demo:anatomy:v1`
 - `mates:demo:sparks:v1`
+- `mates:demo:cosmetics:v1`
 - `mates:demo:club:v1`
 - `mates:custom-exercises:v1`
 - `mates:progress:v1` (legado, migrado a invitado)
