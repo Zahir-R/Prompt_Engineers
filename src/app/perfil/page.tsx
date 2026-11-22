@@ -33,6 +33,8 @@ export default function PerfilPage() {
     ready,
     activeProfile,
     progress,
+    anatomyProgress,
+    sparks,
     units,
     club,
     logout,
@@ -146,6 +148,13 @@ export default function PerfilPage() {
   }
 
   const solvedCount = getSolvedCount(progress);
+  const anatomyEntries = Object.values(anatomyProgress);
+  const completedDesgloses = anatomyEntries.filter((entry) => entry.completed).length;
+  const discoveredSteps = anatomyEntries.reduce(
+    (total, entry) =>
+      total + Object.values(entry.steps).filter((step) => step.viewed).length,
+    0,
+  );
   const level = getLevelInfo(activeProfile.xp);
   const streakDays = getStreakDays(activeProfile);
   const unitProgress = units.map((unit) => ({
@@ -160,6 +169,8 @@ export default function PerfilPage() {
     { label: "Primer paso", active: solvedCount > 0 },
     { label: "Racha de 3", active: activeProfile.streakBest >= 3 },
     { label: "Capítulo completo", active: completedUnits.length > 0 },
+    { label: "Detective de pasos", active: completedDesgloses > 0 },
+    { label: "Tres pistas", active: discoveredSteps >= 6 },
     { label: "Voz de la Fogata", active: authoredThreads.length > 0 },
   ];
 
@@ -204,7 +215,7 @@ export default function PerfilPage() {
             )}
           </div>
 
-          <div className="mt-4 grid grid-cols-3 gap-3">
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
             <div className="rounded-xl border-2 border-ink bg-[#fbe7b8] p-3 text-center shadow-hard">
               <Flame className="mx-auto size-5 text-coral-deep" aria-hidden="true" />
               <p className="mt-1 font-display text-2xl font-black text-ink">
@@ -226,7 +237,18 @@ export default function PerfilPage() {
               </p>
               <p className="text-xs font-bold text-ink-soft">hojas</p>
             </div>
+            <div className="rounded-xl border-2 border-ink bg-[#fbe7b8] p-3 text-center shadow-hard">
+              <Sparkles className="mx-auto size-5 text-coral-deep" aria-hidden="true" />
+              <p className="mt-1 font-display text-2xl font-black text-ink">
+                {sparks}
+              </p>
+              <p className="text-xs font-bold text-ink-soft">chispas</p>
+            </div>
           </div>
+
+          <p className="mt-2 font-hand text-lg font-bold text-ink-soft">
+            {discoveredSteps} pasos descubiertos · {completedDesgloses} desglose{completedDesgloses === 1 ? "" : "s"} completado{completedDesgloses === 1 ? "" : "s"}
+          </p>
         </PaperCard>
 
         <div className="space-y-4">
@@ -256,7 +278,7 @@ export default function PerfilPage() {
               ))}
             </div>
             <p className="mt-2 font-hand text-lg font-bold text-ink-soft">
-              mejor racha: {activeProfile.streakBest} días
+              mejor racha: {activeProfile.streakBest} día{activeProfile.streakBest === 1 ? "" : "s"}
             </p>
           </PaperCard>
 

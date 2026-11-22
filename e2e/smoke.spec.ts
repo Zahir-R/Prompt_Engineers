@@ -89,6 +89,7 @@ test("dos fallos abren el Modo Desglose y se puede cerrar", async ({ page }) => 
 
   const dialog = page.getByRole("dialog", { name: /Modo desglose/i });
   await expect(dialog).toBeVisible();
+  await expect(dialog.getByText(/Tinta encontró una pista/i)).toBeVisible();
   await dialog.getByRole("button", { name: /Cerrar Modo Desglose/i }).click();
   await expect(dialog).toBeHidden();
 });
@@ -109,8 +110,35 @@ test("un estudiante gana XP y racha al resolver", async ({ page }) => {
   await page.goto("/ejercicio/ejercicio_math_001");
   await page.getByLabel(/Mi respuesta es/i).fill("32");
   await page.getByRole("button", { name: /Comprobar/i }).click();
-  await expect(page.getByText(/Tu XP y tu racha/i)).toBeVisible();
+  await expect(page.getByText(/Ganaste .* XP y tu racha/i)).toBeVisible();
   await page.goto("/perfil");
   await expect(page.getByText("15 XP").first()).toBeVisible();
   await expect(page.getByText(/racha/).first()).toBeVisible();
+});
+
+
+test("el detective resuelve retos y gana el bonus", async ({ page }) => {
+  await page.goto("/entrar");
+  await page.getByLabel(/Código de clase/i).fill("MATES-3A");
+  await page.getByLabel(/Tu alias/i).fill("Detective");
+  await page.getByRole("button", { name: /Entrar al club/i }).click();
+  await page.goto("/ejercicio/ejercicio_math_001");
+  await page.getByRole("button", { name: /Ver Modo Desglose/i }).click();
+  const dialog = page.getByRole("dialog", { name: /Modo desglose/i });
+  await dialog.getByRole("button", { name: /Siguiente/i }).click();
+  await expect(
+    dialog.getByText(/¿Qué ocurre cuando sumamos 7 \+ 5\?/i),
+  ).toBeVisible();
+  await dialog
+    .getByRole("button", { name: "Se forma 1 decena y quedan 2 unidades" })
+    .click();
+  await expect(dialog.getByText(/¡Chispa! \+1/i)).toBeVisible();
+  await dialog.getByRole("button", { name: /Siguiente/i }).click();
+  await dialog.getByRole("button", { name: /Siguiente/i }).click();
+  await dialog.getByRole("button", { name: /Terminar/i }).click();
+  await expect(dialog.getByText(/Sello de detective/i)).toBeVisible();
+  await dialog.getByRole("button", { name: /Ahora inténtalo tú/i }).click();
+  await page.getByLabel(/Mi respuesta es/i).fill("32");
+  await page.getByRole("button", { name: /Comprobar/i }).click();
+  await expect(page.getByText(/Resuelto con ayuda/i)).toBeVisible();
 });

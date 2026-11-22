@@ -100,3 +100,11 @@ social, racha y XP.
 - ¿Funciona en 360 px y en escritorio?
 - ¿El foco es visible y el contraste es suficiente?
 - ¿La pantalla se entiende sin explicación externa?
+
+## Gamificación ética
+
+- Premiar comprensión, no velocidad ni clics.
+- No castigar por abrir el desglose ni por equivocarse.
+- Chispas y sellos son cosméticos; el XP se gana al resolver.
+- Nada de leaderboards públicos.
+- El confeti y las animaciones deben respetar `prefers-reduced-motion`.

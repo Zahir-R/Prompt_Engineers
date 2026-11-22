@@ -17,7 +17,17 @@
         "titulo": "Identificar los datos",
         "color_tag": "blue",
         "explicacion": "Lucas empieza con 17 y recibe 15. Debemos sumar ambos números.",
-        "visual_state": { "tipo": "base10", "decenas": [10, 10], "unidades": [7, 5] }
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [
+            10,
+            10
+          ],
+          "unidades": [
+            7,
+            5
+          ]
+        }
       },
       {
         "paso": 2,
@@ -25,14 +35,38 @@
         "color_tag": "orange",
         "explicacion": "Sumamos 7 + 5 = 12 unidades. Como 12 es mayor a 9, se forma 1 nueva decena (10) y quedan 2 unidades sueltas.",
         "operacion_destacada": "7 + 5 = 12",
-        "visual_state": { "tipo": "agrupacion", "grupos": 1, "sobrantes": 2 }
+        "visual_state": {
+          "tipo": "agrupacion",
+          "grupos": 1,
+          "sobrantes": 2
+        },
+        "reto": {
+          "pregunta": "¿Qué ocurre cuando sumamos 7 + 5?",
+          "opciones": [
+            "Quedan 12 unidades sueltas",
+            "Se forma 1 decena y quedan 2 unidades",
+            "Se forma 1 decena y quedan 3 unidades"
+          ],
+          "correcta": 1,
+          "pista": "12 tiene una decena completa y dos unidades sueltas."
+        }
       },
       {
         "paso": 3,
         "titulo": "Sumar las decenas",
         "color_tag": "green",
         "explicacion": "Sumamos la decena de 17 (1), la decena de 15 (1) y la nueva decena que llevamos (1). 1 + 1 + 1 = 3 decenas.",
-        "operacion_destacada": "1 + 1 + 1 = 3"
+        "operacion_destacada": "1 + 1 + 1 = 3",
+        "reto": {
+          "pregunta": "¿Cuántas decenas sumamos en total?",
+          "opciones": [
+            "2 decenas",
+            "3 decenas",
+            "4 decenas"
+          ],
+          "correcta": 1,
+          "pista": "1 + 1 + 1 = 3 decenas."
+        }
       },
       {
         "paso": 4,
@@ -62,7 +96,19 @@
         "titulo": "Identificar los datos",
         "color_tag": "blue",
         "explicacion": "Ana tiene 42 caramelos y regala 17. Para saber cuántos le quedan debemos restar.",
-        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10, 10], "unidades": [1, 1] }
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "unidades": [
+            1,
+            1
+          ]
+        }
       },
       {
         "paso": 2,
@@ -70,7 +116,29 @@
         "color_tag": "orange",
         "explicacion": "No podemos restar 7 unidades a 2. Pedimos prestada 1 decena: 2 + 10 = 12 unidades. Ahora sí podemos restar 12 - 7 = 5.",
         "operacion_destacada": "12 - 7 = 5",
-        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10], "unidades": [10, 1, 1] }
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [
+            10,
+            10,
+            10
+          ],
+          "unidades": [
+            10,
+            1,
+            1
+          ]
+        },
+        "reto": {
+          "pregunta": "¿Qué hacemos cuando no podemos restar 7 a 2?",
+          "opciones": [
+            "Cambiamos el 7 por 2",
+            "Pedimos prestada 1 decena",
+            "Sumamos 7 + 2"
+          ],
+          "correcta": 1,
+          "pista": "Prestar 1 decena convierte 2 en 12."
+        }
       },
       {
         "paso": 3,
@@ -91,7 +159,17 @@
         "titulo": "Comprobar la respuesta",
         "color_tag": "yellow",
         "explicacion": "Si sumamos el resultado y lo que Ana regaló recuperamos el total: 25 + 17 = 42. ¡La resta es correcta!",
-        "operacion_destacada": "25 + 17 = 42"
+        "operacion_destacada": "25 + 17 = 42",
+        "reto": {
+          "pregunta": "¿Cómo comprobamos la resta?",
+          "opciones": [
+            "25 + 17 = 42",
+            "25 - 17 = 8",
+            "42 + 17 = 59"
+          ],
+          "correcta": 0,
+          "pista": "Sumar el resultado y lo que se regaló debe dar el total."
+        }
       }
     ],
     "metafora_grafica": "bloques_base_10"
@@ -114,7 +192,17 @@
         "titulo": "Identificar los datos",
         "color_tag": "blue",
         "explicacion": "Elena empieza con 28 naranjas y recibe 15. Debemos sumar ambos números.",
-        "visual_state": { "tipo": "base10", "decenas": [10, 10], "unidades": [8, 5] }
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [
+            10,
+            10
+          ],
+          "unidades": [
+            8,
+            5
+          ]
+        }
       },
       {
         "paso": 2,
@@ -122,14 +210,38 @@
         "color_tag": "orange",
         "explicacion": "Sumamos 8 + 5 = 13 unidades. Formamos 1 nueva decena y quedan 3 unidades sueltas.",
         "operacion_destacada": "8 + 5 = 13",
-        "visual_state": { "tipo": "agrupacion", "grupos": 1, "sobrantes": 3 }
+        "visual_state": {
+          "tipo": "agrupacion",
+          "grupos": 1,
+          "sobrantes": 3
+        },
+        "reto": {
+          "pregunta": "8 + 5 = 13. ¿Qué formamos?",
+          "opciones": [
+            "1 decena y 3 unidades",
+            "3 decenas y 1 unidad",
+            "13 decenas"
+          ],
+          "correcta": 0,
+          "pista": "13 es una decena completa y 3 unidades."
+        }
       },
       {
         "paso": 3,
         "titulo": "Sumar las decenas",
         "color_tag": "green",
         "explicacion": "Sumamos las 2 decenas de 28, la decena de 15 y la decena que llevamos: 2 + 1 + 1 = 4 decenas.",
-        "operacion_destacada": "2 + 1 + 1 = 4"
+        "operacion_destacada": "2 + 1 + 1 = 4",
+        "reto": {
+          "pregunta": "¿Cuántas decenas quedan al final?",
+          "opciones": [
+            "3 decenas",
+            "4 decenas",
+            "5 decenas"
+          ],
+          "correcta": 1,
+          "pista": "2 + 1 + 1 = 4 decenas."
+        }
       },
       {
         "paso": 4,
@@ -166,7 +278,21 @@
         "titulo": "Identificar los datos",
         "color_tag": "blue",
         "explicacion": "Hay 53 libros y se prestan 27. Para saber cuántos quedan debemos restar.",
-        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10, 10, 10], "unidades": [1, 1, 1] }
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "unidades": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
         "paso": 2,
@@ -174,7 +300,31 @@
         "color_tag": "orange",
         "explicacion": "No podemos restar 7 unidades a 3. Pedimos prestada 1 decena: 3 + 10 = 13 unidades. Ahora sí podemos restar 13 - 7 = 6.",
         "operacion_destacada": "13 - 7 = 6",
-        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10, 10], "unidades": [10, 1, 1, 1] }
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "unidades": [
+            10,
+            1,
+            1,
+            1
+          ]
+        },
+        "reto": {
+          "pregunta": "53 - 27: ¿qué hacemos con las unidades?",
+          "opciones": [
+            "Restamos 7 - 3",
+            "Pedimos prestada 1 decena y hacemos 13 - 7",
+            "Sumamos 3 + 7"
+          ],
+          "correcta": 1,
+          "pista": "Prestar 1 decena convierte 3 en 13."
+        }
       },
       {
         "paso": 3,
@@ -195,7 +345,17 @@
         "titulo": "Comprobar la respuesta",
         "color_tag": "yellow",
         "explicacion": "Si sumamos los libros que quedan y los que se prestaron recuperamos el total: 26 + 27 = 53. ¡La resta es correcta!",
-        "operacion_destacada": "26 + 27 = 53"
+        "operacion_destacada": "26 + 27 = 53",
+        "reto": {
+          "pregunta": "¿Cómo comprobamos 53 - 27 = 26?",
+          "opciones": [
+            "26 + 27 = 53",
+            "53 + 27 = 80",
+            "53 - 26 = 27"
+          ],
+          "correcta": 0,
+          "pista": "La suma del resultado y lo restado devuelve el total."
+        }
       }
     ],
     "metafora_grafica": "bloques_base_10"

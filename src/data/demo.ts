@@ -173,3 +173,11 @@ export function createSeedClub(): ClubState {
     ],
   };
 }
+
+export function createSeedSparks(): Record<string, number> {
+  return {
+    profile_sofia: 6,
+    profile_mateo: 1,
+    guest: 0,
+  };
+}

@@ -7,3 +7,5 @@ export const DEMO_CLUB_KEY = "mates:demo:club:v1";
 export const DEMO_SESSION_KEY = "mates:demo:session:v1";
 export const DEMO_PROGRESS_KEY = "mates:demo:progress:v1";
 export const DEMO_XP_KEY = "mates:demo:xp-awards:v1";
+export const DEMO_ANATOMY_KEY = "mates:demo:anatomy:v1";
+export const DEMO_SPARKS_KEY = "mates:demo:sparks:v1";

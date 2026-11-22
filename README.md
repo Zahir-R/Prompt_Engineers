@@ -9,6 +9,10 @@ racha, XP, el carnet y la escritura en **La Fogata**, el club de dudas por
 unidad. El docente trabaja solo en backstage: no aparece en la navegación del
 estudiante.
 
+El **Modo Desglose** también es una misión: retos en pasos clave, chispas,
+sello de detective y un bonus de XP al resolver después de entender el
+procedimiento.
+
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
 **Especificación completa:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md)
@@ -196,6 +200,8 @@ guarda la demo en `localStorage`:
 - `mates:demo:session:v1`
 - `mates:demo:progress:v1`
 - `mates:demo:xp-awards:v1`
+- `mates:demo:anatomy:v1`
+- `mates:demo:sparks:v1`
 - `mates:demo:club:v1`
 - `mates:custom-exercises:v1`
 
@@ -224,12 +230,13 @@ El progreso de invitado se guarda aparte y se puede importar al elegir alias.
 
 1. `/` → explorar sin cuenta.
 2. `/unidades` → abrir un capítulo y una hoja.
-3. Fallar dos veces → el Modo Desglose se abre solo.
-4. Navegar los pasos con Anterior/Siguiente.
-5. Responder correctamente → progreso actualizado.
-6. `/entrar` → código **MATES-3A** + alias → carnet, XP y racha.
-7. `/club` → leer La Fogata; con alias, abrir una duda.
-8. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
+3. Fallar dos veces → el Modo Desglose se abre solo con una intro amable.
+4. En pasos clave, responder un mini reto y ver la chispa.
+5. Completar el desglose → sello de detective y bonus de XP.
+6. Responder correctamente → progreso actualizado.
+7. `/entrar` → código **MATES-3A** + alias → carnet, XP, chispas y racha.
+8. `/club` → leer La Fogata; con alias, abrir una duda.
+9. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
 
 ## Despliegue
 
