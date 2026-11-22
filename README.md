@@ -15,7 +15,8 @@ procedimiento. Las chispas se canjean por pegatinas cosméticas en el carnet.
 
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
-**Especificación completa:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md)
+**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.1  
+**Demo:** pendiente de URL pública en Vercel
 
 ## Problema
 
@@ -239,13 +240,36 @@ El progreso de invitado se guarda aparte y se puede importar al elegir alias.
 8. `/club` → leer La Fogata; con alias, abrir una duda.
 9. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
 
-## Despliegue
+## Despliegue en Vercel
 
-El proyecto está listo para Vercel o Netlify. En Vercel:
+La app no necesita variables de entorno. La demo usa `localStorage`, por lo que
+cada navegador tiene su propio progreso, La Fogata y cuentas simuladas.
 
-1. Importar el repositorio.
-2. Framework preset: Next.js.
-3. Build command: `pnpm build`.
+### Desde el dashboard
+
+1. Importar el repositorio `Zahir-R/mates` en Vercel.
+2. Framework preset: **Next.js**.
+3. Root directory: `./`.
+4. Install command: `pnpm install`.
+5. Build command: `pnpm build`.
+6. Node.js: 22 o 24 LTS; el proyecto declara `node >=20`.
+7. Deploy desde `main`.
+
+### Verificación posterior
+
+- `/`, `/unidades`, `/unidad/unidad_sumas`, `/ejercicio/ejercicio_math_001`
+- `/club`, `/entrar`, `/perfil`, `/panel`
+- `/ruta` debe redirigir a `/unidades`
+- Fallar dos veces abre el Modo Desglose con la intro de Tinta.
+- Código de demo: `MATES-3A`.
+- Revisar móvil, escritorio y que las fuentes carguen.
+
+### Notas
+
+- Si Vercel no acepta la versión de pnpm declarada, ajustar `packageManager` o
+  la versión de Node en el proyecto.
+- La demo no tiene backend ni foro compartido entre navegadores.
+- Actualizar la URL pública aquí y en el SRS después del despliegue.
 
 ## Créditos
 
