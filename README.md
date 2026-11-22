@@ -13,9 +13,13 @@ El **Modo Desglose** también es una misión: retos en pasos clave, chispas,
 sello de detective y un bonus de XP al resolver después de entender el
 procedimiento. Las chispas se canjean por pegatinas cosméticas en el carnet.
 
+La **hoja de ruta N0–N6** organiza el currículo oficial de primaria en 7 niveles
+de dominio. Cada nivel tiene 5 ejercicios: **35 retos** en total.
+
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
-**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.1  
+**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.2  
+**Fuente curricular:** [`hoja-de-ruta-matematica-primaria-bolivia.md`](./hoja-de-ruta-matematica-primaria-bolivia.md)  
 **Demo:** pendiente de URL pública en Vercel
 
 ## Problema
@@ -89,7 +93,8 @@ El resultado de las capturas queda en `test-results/capturas/`.
 | Ruta | Propósito |
 | :--- | :--- |
 | `/` | Inicio del estudiante: aventura de hoy, racha y capítulos |
-| `/unidades` | Mapa de capítulos abierto a todos |
+| `/hoja-de-ruta` | Camino N0–N6, nivel actual y checkpoints |
+| `/unidades` | Capítulos agrupados por nivel |
 | `/unidad/[id]` | Ficha de unidad, hojas y acceso a La Fogata |
 | `/ejercicio/[id]` | Reto activo del estudiante |
 | `/club` | La Fogata: dudas y pistas por unidad |
@@ -99,7 +104,7 @@ El resultado de las capturas queda en `test-results/capturas/`.
 | `/panel` | Backstage docente, sin enlace en la navegación del estudiante |
 | `/docente` | Creador de actividades sin código |
 
-`/ruta` redirige a `/unidades` por compatibilidad.
+`/ruta` redirige a `/hoja-de-ruta` por compatibilidad.
 
 ### Cuenta de demo
 
@@ -117,6 +122,7 @@ src/
 │   ├── brand/                Mascota, avatares, doodles y papel
 │   ├── club/                 La Fogata
 │   ├── companion/            Diagnóstico para acompañante
+│   ├── figures/              Figuras de fracciones, geometría y objetos
 │   ├── layout/               Encabezado
 │   ├── route/                Unidades y detalle de capítulo
 │   ├── student/              Reto activo del estudiante
@@ -124,10 +130,12 @@ src/
 ├── context/AppProvider.tsx   Estado global, sesión demo y persistencia
 ├── data/
 │   ├── demo.ts               Clase, perfiles, unidades y club semilla
-│   └── exercises.json        Ejercicios semilla
-├── lib/                      Gamificación, selectores y utilidades
+│   ├── roadmap.ts            Niveles N0–N6, componentes y compuertas
+│   └── exercises.json        35 ejercicios semilla
+├── lib/                      Gamificación, ruta, selectores y utilidades
 └── types/
     ├── demo.ts               Perfiles, unidades y club
+    ├── roadmap.ts            Niveles de dominio
     └── exercise.ts           Contratos del ejercicio
 
 .opencode/
@@ -148,12 +156,15 @@ aditivos.
 
 - `src/types/exercise.ts`: `Exercise`, `DesgloseStep`, `VisualState`,
   `ProgressEntry`.
+- `src/types/roadmap.ts`: `RoadmapLevel`, `RoadmapComponent`, `CriticalGate`.
 - `src/types/demo.ts`: `UserProfile`, `Classroom`, `Unit`, `ClubThread`,
   `ClubReply`, `DemoSession`.
 - `src/context/AppProvider.tsx`: ejercicios, progreso por perfil, sesión de
   invitado/estudiante/docente, XP, racha, La Fogata y persistencia.
 - `src/data/exercises.json`: ejercicios semilla.
 - `src/data/demo.ts`: clase, perfiles, unidades y club semilla.
+- `src/data/roadmap.ts`: ruta N0–N6 y compuertas críticas.
+- `src/lib/roadmap.ts`: nivel actual, progreso por nivel y meta diaria.
 - `src/lib/demo.ts`: reglas de XP, niveles, racha y avatares.
 - `src/lib/constants.ts`: claves de `localStorage`.
 
@@ -231,14 +242,15 @@ El progreso de invitado se guarda aparte y se puede importar al elegir alias.
 ## Flujo de demo
 
 1. `/` → explorar sin cuenta.
-2. `/unidades` → abrir un capítulo y una hoja.
-3. Fallar dos veces → el Modo Desglose se abre solo con una intro amable.
-4. En pasos clave, responder un mini reto y ver la chispa.
-5. Completar el desglose → sello de detective y bonus de XP.
-6. Responder correctamente → progreso actualizado.
-7. `/entrar` → código **MATES-3A** + alias → carnet, XP, chispas y racha.
-8. `/club` → leer La Fogata; con alias, abrir una duda.
-9. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
+2. `/hoja-de-ruta` → ver el camino N0–N6 y el nivel actual.
+3. `/unidades` → abrir un capítulo y una hoja.
+4. Fallar dos veces → el Modo Desglose se abre solo con una intro amable.
+5. En pasos clave, responder un mini reto y ver la chispa.
+6. Completar el desglose → sello de detective y bonus de XP.
+7. Responder correctamente → progreso actualizado.
+8. `/entrar` → código **MATES-3A** + alias → carnet, XP, chispas y racha.
+9. `/club` → leer La Fogata; con alias, abrir una duda.
+10. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
 
 ## Despliegue en Vercel
 

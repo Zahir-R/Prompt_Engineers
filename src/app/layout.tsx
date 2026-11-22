@@ -40,9 +40,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AppHeader />
           <main className="flex-1">{children}</main>
           <footer className="mt-10 border-t-2 border-ink/80 bg-paper-deep/70 px-4 py-6 text-center text-sm font-bold text-ink-soft">
-            Abstracthon 2026 · Educación · Modo Desglose
+            Mates · Cuaderno de aventuras matemáticas
             <span className="mt-1 block text-xs font-semibold text-ink-soft/70">
-              Demo local: el avance y La Fogata se guardan en este navegador.
+              Tu avance y La Fogata se guardan en este navegador.
             </span>
           </footer>
         </AppProvider>

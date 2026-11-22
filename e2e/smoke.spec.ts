@@ -7,13 +7,13 @@ test("la portada invita a explorar sin cuenta", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /Explorar unidades/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Elegir mi alias/i })).toBeVisible();
-  await expect(page.getByText("Capítulos del cuaderno")).toBeVisible();
+  await expect(page.getByText(/Capítulos de N0/i)).toBeVisible();
 });
 
 test("las unidades son públicas y listan sus hojas", async ({ page }) => {
   await page.goto("/unidades");
   await expect(
-    page.getByRole("heading", { name: /Capítulos del/i }),
+    page.getByRole("heading", { name: /Capítulos por/i }),
   ).toBeVisible();
   await expect(page.getByText("Sumas que cruzan el 10")).toBeVisible();
   await expect(page.getByText("Restas con préstamo")).toBeVisible();
@@ -154,4 +154,42 @@ test("se pueden canjear y equipar pegatinas con chispas", async ({ page }) => {
   await page.getByRole("button", { name: "Equipar Lupa" }).click();
   await expect(page.getByText(/Lupa equipada/i)).toBeVisible();
   await expect(page.getByText("Equipada", { exact: true })).toBeVisible();
+});
+
+
+test("la hoja de ruta muestra los niveles N0 a N6", async ({ page }) => {
+  await page.goto("/hoja-de-ruta");
+  await expect(
+    page.getByRole("heading", { name: /Mi ruta de/i }),
+  ).toBeVisible();
+  for (const level of ["N0", "N1", "N2", "N3", "N4", "N5", "N6"]) {
+    await expect(page.getByText(level, { exact: true }).first()).toBeVisible();
+  }
+  await expect(page.getByText(/Compuertas críticas/i)).toBeVisible();
+  await page.getByRole("link", { name: /Practicar N0/i }).click();
+  await expect(page).toHaveURL(/\/unidad\/unidad_n0$/);
+});
+
+test("la interfaz no muestra textos de desarrollo", async ({ page }) => {
+  for (const route of ["/", "/entrar", "/club", "/perfil"]) {
+    await page.goto(route);
+    const body = await page.locator("body").innerText();
+    expect(body).not.toMatch(/demo local|de demostración|reiniciar demo/i);
+  }
+});
+
+test("el panel docente crea retos y abre el resumen de un estudiante", async ({
+  page,
+}) => {
+  await page.goto("/panel");
+  await page.getByRole("button", { name: /Entrar como Profe Ana/i }).click();
+  await page.getByRole("button", { name: "Crear reto" }).click();
+  await expect(page.getByRole("heading", { name: /Crear un reto/i })).toBeVisible();
+  await expect(page.getByLabel("Título")).toBeVisible();
+  await page.getByRole("button", { name: "Mi clase" }).click();
+  await page.getByRole("button", { name: /Ver resumen/i }).first().click();
+  const dialog = page.getByRole("dialog", { name: /Resumen/i });
+  await expect(dialog).toBeVisible();
+  await dialog.getByRole("button", { name: /Cerrar diagnóstico/i }).click();
+  await expect(dialog).toBeHidden();
 });

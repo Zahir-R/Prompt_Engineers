@@ -11,10 +11,13 @@ import { cn } from "@/lib/utils";
 interface DiagnosisModalProps {
   open: boolean;
   onClose: () => void;
+  profileId?: string;
 }
 
-export function DiagnosisModal({ open, onClose }: DiagnosisModalProps) {
-  const { exercises, progress } = useApp();
+export function DiagnosisModal({ open, onClose, profileId }: DiagnosisModalProps) {
+  const { exercises, progress, getProfile, getProfileProgress } = useApp();
+  const targetProgress = profileId ? getProfileProgress(profileId) : progress;
+  const targetProfile = profileId ? getProfile(profileId) : undefined;
   const closeButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export function DiagnosisModal({ open, onClose }: DiagnosisModalProps) {
 
   const entries = exercises.map((exercise) => ({
     exercise,
-    entry: progress[exercise.id],
+    entry: targetProgress[exercise.id],
   }));
   const attempted = entries.filter(({ entry }) => (entry?.attempts ?? 0) > 0);
   const solved = entries.filter(({ entry }) => entry?.solved);
@@ -72,7 +75,7 @@ export function DiagnosisModal({ open, onClose }: DiagnosisModalProps) {
                   id="diagnosis-title"
                   className="mt-2 font-display text-2xl font-semibold leading-tight text-ink"
                 >
-                  Resumen del cuaderno
+                  {targetProfile ? `Resumen de ${targetProfile.alias}` : "Resumen del cuaderno"}
                 </h2>
                 <p className="mt-1 text-sm font-semibold text-ink-soft">
                   Avance rápido, sin castigos ni puntajes negativos.
@@ -126,7 +129,7 @@ export function DiagnosisModal({ open, onClose }: DiagnosisModalProps) {
 
           <ul className="mt-5 space-y-2">
             {exercises.map((exercise) => {
-              const entry = progress[exercise.id];
+              const entry = targetProgress[exercise.id];
               const status = entry?.solved
                 ? "Dominado"
                 : (entry?.attempts ?? 0) > 0

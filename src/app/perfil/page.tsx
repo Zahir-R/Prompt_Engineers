@@ -23,6 +23,11 @@ import { Sticker } from "@/components/brand/Sticker";
 import { StarDoodle } from "@/components/brand/Doodle";
 import { useApp } from "@/context/AppProvider";
 import { COSMETIC_STICKERS } from "@/data/demo";
+import { ROADMAP_LEVELS } from "@/data/roadmap";
+import {
+  getCurrentLevel,
+  getTodaySolvedCount,
+} from "@/lib/roadmap";
 import {
   formatShortDate,
   getLevelInfo,
@@ -97,8 +102,8 @@ export default function PerfilPage() {
             </div>
             {guestSolved > 0 && (
               <p className="mt-4 rounded-xl border-2 border-mustard bg-[#fbe7b8] p-3 text-sm font-bold text-ink">
-                Ya resolviste {guestSolved} hoja{guestSolved === 1 ? "" : "s"} en
-                este navegador. Al elegir alias podemos traerlas a tu carnet.
+                Ya practicaste {guestSolved} hoja{guestSolved === 1 ? "" : "s"} en
+                este navegador. Elige un alias para guardarlas en tu carnet.
               </p>
             )}
           </PaperCard>
@@ -164,6 +169,8 @@ export default function PerfilPage() {
     0,
   );
   const level = getLevelInfo(activeProfile.xp);
+  const currentLevel = getCurrentLevel(ROADMAP_LEVELS, units, progress);
+  const todaySolved = getTodaySolvedCount(progress);
   const streakDays = getStreakDays(activeProfile);
   const unitProgress = units.map((unit) => ({
     unit,
@@ -206,6 +213,12 @@ export default function PerfilPage() {
               <p className="mt-1 font-hand text-xl font-bold text-ink-soft">
                 {level.name}
               </p>
+              <Link
+                href="/hoja-de-ruta"
+                className="mt-1 inline-flex rounded-lg border-2 border-ink/20 bg-paper-deep/40 px-2 py-1 text-xs font-black text-ink-soft hover:text-ink"
+              >
+                Ruta {currentLevel.id} · {currentLevel.title}
+              </Link>
             </div>
           </div>
 
@@ -257,6 +270,9 @@ export default function PerfilPage() {
 
           <p className="mt-2 font-hand text-lg font-bold text-ink-soft">
             {discoveredSteps} pasos descubiertos · {completedDesgloses} desglose{completedDesgloses === 1 ? "" : "s"} completado{completedDesgloses === 1 ? "" : "s"}
+          </p>
+          <p className="mt-1 font-hand text-lg font-bold text-ink-soft">
+            Hoy: {todaySolved} de 2 hojas
           </p>
         </PaperCard>
 

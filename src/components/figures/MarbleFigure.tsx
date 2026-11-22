@@ -42,7 +42,11 @@ export function MarbleFigure({
     const unidades = cant % 10;
 
     return (
-      <div className="flex flex-wrap justify-center gap-5 max-w-2xl py-2">
+      <div
+      className="flex flex-wrap justify-center gap-5 max-w-2xl py-2"
+      role="img"
+      aria-label={`${Math.max(0, total)} ${objeto} en decenas y unidades`}
+    >
         {Array.from({ length: decenas }).map((_, d) => (
           <div key={`${uid}-decena-${d}`} className="text-center">
             <span className="font-hand text-lg font-bold text-teal">
@@ -92,7 +96,11 @@ export function MarbleFigure({
     let counter = 1;
 
     return (
-      <div className="flex flex-col gap-2.5 rounded-2xl border-2 border-ink bg-paper-deep p-4 shadow-hard">
+      <div
+        className="flex flex-col gap-2.5 rounded-2xl border-2 border-ink bg-paper-deep p-4 shadow-hard"
+        role="img"
+        aria-label={`${Math.max(1, filas)} filas de ${Math.max(1, columnas)} ${objeto}`}
+      >
         {Array.from({ length: r }).map((_, rIdx) => (
           <div key={`${uid}-mrow-${rIdx}`} className="flex items-center gap-3">
             <span className="w-14 text-right font-hand text-lg font-bold text-coral-deep">
@@ -124,7 +132,11 @@ export function MarbleFigure({
     let counter = 1;
 
     return (
-      <div className="flex flex-wrap justify-center gap-4 py-2">
+      <div
+        className="flex flex-wrap justify-center gap-4 py-2"
+        role="img"
+        aria-label={`${Math.max(1, total)} ${objeto} repartidos en ${Math.max(1, gruposReparto)} grupos`}
+      >
         {Array.from({ length: g }).map((_, gIdx) => (
           <div
             key={`${uid}-group-${gIdx}`}
@@ -241,7 +253,7 @@ export function MarbleFigure({
   // Free counting mode
   const cant = Math.max(1, total);
   return (
-    <div className="flex flex-wrap justify-center gap-3 rounded-2xl border-2 border-ink bg-paper-deep p-4 shadow-hard max-w-xl">
+    <div className="flex flex-wrap justify-center gap-3 rounded-2xl border-2 border-ink bg-paper-deep p-4 shadow-hard max-w-xl" role="img" aria-label={`${cant} ${objeto}`}>
       {Array.from({ length: cant }).map((_, i) => (
         <CountingItem key={`${uid}-free-${i}`} tipo={objeto} numero={i + 1} color={color} />
       ))}

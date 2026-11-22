@@ -92,7 +92,7 @@ function buildExercise(values: FormValues, id: string): Exercise | null {
   };
 }
 
-export function TeacherCreatorForm() {
+export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean }) {
   const { addExercise } = useApp();
   const [values, setValues] = useState<FormValues>(initialValues);
   const [createdId, setCreatedId] = useState<string | null>(null);
@@ -124,16 +124,18 @@ export function TeacherCreatorForm() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
-      <Link
-        href="/panel"
-        className="inline-flex items-center gap-2 rounded-xl border-2 border-transparent px-3 py-2 text-sm font-black text-ink-soft hover:border-ink hover:bg-paper hover:text-ink"
-      >
-        <ArrowLeft className="size-4" aria-hidden="true" />
-        Volver al panel de guía
-      </Link>
+    <div className={embedded ? "" : "mx-auto max-w-6xl px-4 py-8"}>
+      {!embedded && (
+        <Link
+          href="/panel"
+          className="inline-flex items-center gap-2 rounded-xl border-2 border-transparent px-3 py-2 text-sm font-black text-ink-soft hover:border-ink hover:bg-paper hover:text-ink"
+        >
+          <ArrowLeft className="size-4" aria-hidden="true" />
+          Volver al panel de guía
+        </Link>
+      )}
 
-      <section className="relative mt-2 grid gap-5 rounded-[1.4rem_1rem_1.6rem_1.1rem] border-2 border-ink bg-[#cce9e3] p-6 shadow-hard sm:grid-cols-[1fr_auto] sm:items-center sm:p-8">
+      <section className={embedded ? "hidden" : "relative mt-2 grid gap-5 rounded-[1.4rem_1rem_1.6rem_1.1rem] border-2 border-ink bg-[#cce9e3] p-6 shadow-hard sm:grid-cols-[1fr_auto] sm:items-center sm:p-8"}>
         <div>
           <Sticker tone="paper">
             <GraduationCap className="size-3.5" aria-hidden="true" />
@@ -154,6 +156,15 @@ export function TeacherCreatorForm() {
         <Mascot className="mx-auto size-36" label="Tinta revisa tu nueva hoja" />
       </section>
 
+      {embedded && (
+        <div className="mb-4">
+          <h2 className="font-display text-2xl font-semibold text-ink">Crear un reto</h2>
+          <p className="mt-1 text-sm font-semibold text-ink-soft">
+            Completa los datos y revisa la vista previa del Modo Desglose antes de guardarlo.
+          </p>
+        </div>
+      )}
+
       {createdId && (
         <div className="paper-note mt-5 flex flex-wrap items-center gap-3 p-4">
           <span className="flex items-center gap-2 font-bold text-ink">
@@ -167,10 +178,10 @@ export function TeacherCreatorForm() {
             Probar ejercicio
           </Link>
           <Link
-            href="/ruta"
+            href="/unidades"
             className="rounded-xl border-2 border-ink bg-paper px-3 py-2 text-sm font-black text-ink shadow-hard"
           >
-            Ver en la ruta
+            Ver en los capítulos
           </Link>
         </div>
       )}

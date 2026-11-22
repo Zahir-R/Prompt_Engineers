@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 
 const routes = [
   { path: "/", name: "portada" },
+  { path: "/hoja-de-ruta", name: "hoja-de-ruta" },
   { path: "/unidades", name: "unidades" },
   { path: "/unidad/unidad_sumas", name: "unidad" },
   { path: "/club", name: "club" },

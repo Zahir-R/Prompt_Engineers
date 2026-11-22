@@ -74,3 +74,9 @@ Antes de cerrar un ejercicio:
 - Un error no bloquea: se muestra una pista y se revela la explicación.
 - No dar XP por hacer clic en pasos; el bonus se gana al resolver después.
 - Evitar opciones ambiciosas o con doble interpretación.
+
+## Cobertura por nivel
+
+La hoja de ruta N0–N6 tiene 5 ejercicios por nivel. Cada nivel debe cubrir
+entrada, práctica y verificación; no llenar con ejercicios repetidos sin
+progresión.

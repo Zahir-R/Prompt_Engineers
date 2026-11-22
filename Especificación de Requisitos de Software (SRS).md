@@ -1,11 +1,18 @@
 # Especificación de Requisitos de Software (SRS)
 ## Proyecto: Plataforma de Nivelación Matemática con "Modo Desglose"
-**Versión:** 1.1 — demo implementada  
+**Versión:** 1.2 — hoja de ruta N0–N6 integrada  
 **Evento:** Abstracthon 2026 (MLSA - University Community, Bolivia)  
 **Track Principal:** Educación  
 **Público Objetivo:** Estudiantes de nivel primario (6 a 13 años), Docentes y Tutores/Padres.  
 **Fecha Límite de Entrega:** Domingo 22 de Noviembre de 2026, 16:30 (Hora de Bolivia).  
 **Estado del despliegue:** pendiente de URL pública en Vercel; importar `main` desde el dashboard.
+
+### Changelog v1.2
+- Se integra la hoja de ruta curricular N0–N6 con 7 niveles de dominio.
+- Cada nivel tiene 5 ejercicios: 35 retos en total.
+- Se agregan figuras dinámicas de fracciones, geometría y objetos contables.
+- Se agregan meta diaria, racha semanal, resumen de clase y diagnóstico por estudiante.
+- Se reemplazan textos de demo/desarrollo por microcopy para el usuario.
 
 ### Changelog v1.1
 - Los cursos son públicos y no exigen cuenta.
@@ -38,6 +45,7 @@ Una plataforma dinámica donde:
 3. **El Modo Desglose** se siente como una misión: retos cortos en pasos clave, chispas, sello de detective y bonus al resolver después de entender.
 4. **La Fogata** permite leer dudas y pistas por unidad; para escribir se necesita alias.
 5. **El docente** crea actividades, gestiona códigos y modera desde un panel backstage, sin aparecer en la navegación del estudiante.
+6. **La hoja de ruta N0–N6** organiza el currículo oficial en niveles de dominio, con checkpoints y compuertas críticas.
 
 ---
 
@@ -137,6 +145,14 @@ Una plataforma dinámica donde:
 ### 4.9 Panel docente backstage
 * **RF-20: Panel de guía:** Ver estudiantes, avance, chispas, desgloses completados y hilos; crear alias; moderar La Fogata.
 * **RF-21: Aislamiento de la experiencia:** El panel y el creador de actividades no se enlazan desde la navegación del estudiante.
+* **RF-21.1: Creación interactiva:** El panel permite crear y previsualizar retos sin salir de la vista docente.
+* **RF-21.2: Resumen por estudiante:** El docente puede abrir el diagnóstico de un estudiante desde la lista de la clase.
+
+### 4.10 Hoja de ruta y figuras
+* **RF-22: Ruta N0–N6:** Mostrar los 7 niveles de dominio, el nivel actual, el progreso, el checkpoint y las compuertas críticas.
+* **RF-23: Cobertura por nivel:** Cada nivel debe tener 5 ejercicios practicables.
+* **RF-24: Figuras dinámicas:** El desglose puede usar fracciones, geometría, objetos contables y agrupaciones visuales.
+* **RF-25: Meta diaria:** Mostrar cuántas hojas se resolvieron hoy y una meta simple de 2 hojas.
 
 ---
 
@@ -203,12 +219,17 @@ Se mantiene el esquema base y se agrega opcionalmente `reto` en pasos clave.
 | :--- | :--- |
 | `UserProfile` | `id`, `role`, `alias`, `avatar`, `classId`, `xp`, `level`, `streakCurrent`, `streakBest`, `lastActivityDate` |
 | `Classroom` | `id`, `name`, `code`, `teacherId` |
-| `Unit` | `id`, `title`, `description`, `order`, `exerciseIds`, `accent` |
+| `Unit` | `id`, `title`, `description`, `order`, `exerciseIds`, `accent`, `levelId` |
+| `RoadmapLevel` | `id`, `order`, `title`, `baseYear`, `focus`, `canDo`, `checkpoint`, `criticalGate`, `components`, `unitIds` |
 | `ProgressEntry` | `attempts`, `solved`, `lastAnswer`, `updatedAt` |
 | `AnatomyEntry` | `steps`, `completed`, `updatedAt` |
 | `ProfileCosmetics` | `owned`, `equipped` |
 | `ClubThread` | `id`, `unitId`, `authorId`, `title`, `body`, `status`, `pinned`, `hidden`, `reported`, `createdAt` |
 | `ClubReply` | `id`, `threadId`, `authorId`, `body`, `hidden`, `reported`, `createdAt` |
+
+`ExerciseData.expresion` es opcional para mostrar formatos como `mcm(6, 8)`,
+`1/2 + 1/4` o `2³`. `VisualState` admite `base10`, `agrupacion`, `fraccion`,
+`geometria` y `canicas`.
 
 ### 6.3 Persistencia local
 - `mates:demo:profiles:v1`
@@ -230,7 +251,8 @@ Se mantiene el esquema base y se agrega opcionalmente `reto` en pasos clave.
 | Ruta | Propósito |
 | :--- | :--- |
 | `/` | Inicio del estudiante |
-| `/unidades` | Catálogo de capítulos |
+| `/hoja-de-ruta` | Camino N0–N6 y nivel actual |
+| `/unidades` | Capítulos agrupados por nivel |
 | `/unidad/[id]` | Ficha de unidad |
 | `/ejercicio/[id]` | Reto activo |
 | `/club` | La Fogata |
@@ -240,7 +262,7 @@ Se mantiene el esquema base y se agrega opcionalmente `reto` en pasos clave.
 | `/panel` | Panel docente backstage |
 | `/docente` | Creador de actividades |
 
-`/ruta` redirige a `/unidades` por compatibilidad.
+`/ruta` redirige a `/hoja-de-ruta` por compatibilidad.
 
 ### 7.2 Componentes principales
 - `<ExerciseContainer />`
@@ -276,6 +298,9 @@ Usar React Context + `localStorage`. La UI espera `ready` antes de mostrar datos
 
 ### Estado técnico
 - Cursos públicos: implementado.
+- Hoja de ruta N0–N6: implementada.
+- 35 ejercicios (5 por nivel): implementado.
+- Figuras dinámicas: implementado.
 - Cuenta opcional por alias: implementado.
 - Unidades y progreso: implementado.
 - Carnet, XP, racha, chispas e insignias: implementado.
@@ -283,6 +308,8 @@ Usar React Context + `localStorage`. La UI espera `ready` antes de mostrar datos
 - Modo Desglose gamificado: implementado.
 - La Fogata: implementado en demo local.
 - Panel docente backstage: implementado.
+- Meta diaria, racha semanal, resumen de clase y diagnóstico: implementado.
+- Microcopy libre de textos de demo en la UI: implementado.
 - Despliegue Vercel: pendiente.
 - Cuentas reales y foro compartido: fuera de alcance de la demo.
 

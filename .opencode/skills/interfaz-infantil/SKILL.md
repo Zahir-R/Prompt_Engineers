@@ -108,3 +108,9 @@ social, racha y XP.
 - Chispas y sellos son cosméticos; el XP se gana al resolver.
 - Nada de leaderboards públicos.
 - El confeti y las animaciones deben respetar `prefers-reduced-motion`.
+
+## Microcopy de producto
+
+No mostrar textos de demo/desarrollo como “Demo local”, “no hay contraseña” o
+“Reiniciar demo”. Usar frases útiles: “aprende sin cuenta”, “tu avance se guarda
+en este navegador”, “elige tu alias”.

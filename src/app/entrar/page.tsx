@@ -179,9 +179,9 @@ export default function EntrarPage() {
 
               {guestSolved > 0 && (
                 <p className="rounded-xl border-2 border-mustard bg-[#fbe7b8] p-3 text-sm font-bold text-ink">
-                  Encontramos {guestSolved} hoja{guestSolved === 1 ? "" : "s"}{" "}
-                  resuelta{guestSolved === 1 ? "" : "s"} en este navegador.
-                  Podemos traerlas a tu carnet al entrar.
+                  Vimos que ya practicaste {guestSolved} hoja
+                  {guestSolved === 1 ? "" : "s"} en este navegador. Al entrar,
+                  las guardamos en tu carnet.
                 </p>
               )}
 
@@ -193,8 +193,8 @@ export default function EntrarPage() {
                 Entrar al club
               </button>
               <p className="text-center text-xs font-semibold text-ink-soft">
-                Demo local: no hay contraseña ni correo. Código de ejemplo:{" "}
-                <strong className="text-ink">MATES-3A</strong>.
+                Usa el código que te compartió tu docente. Si no tienes uno,
+                puedes practicar sin cuenta.
               </p>
             </form>
           )}

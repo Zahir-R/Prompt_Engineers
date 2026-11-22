@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Compass,
   Flame,
   House,
   LayoutDashboard,
   LogIn,
   MessageCircle,
+  Route,
   Star,
   UserRound,
 } from "lucide-react";
@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { href: "/", label: "Inicio", icon: House },
-  { href: "/unidades", label: "Unidades", icon: Compass },
+  { href: "/hoja-de-ruta", label: "Ruta", icon: Route },
   { href: "/club", label: "La Fogata", icon: MessageCircle },
   { href: "/perfil", label: "Mi carnet", icon: UserRound },
 ];

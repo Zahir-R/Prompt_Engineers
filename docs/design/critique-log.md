@@ -70,3 +70,12 @@ header.
 
 Decisión: cosméticos sin ventajas académicas. Comprar descuenta chispas una
 sola vez.
+
+## 2026-11-22 — Hoja de ruta N0–N6
+
+Cambio aplicado: navegación “Ruta”, página `/hoja-de-ruta`, 7 niveles con 5
+ejercicios, compuertas críticas, meta diaria y figuras dinámicas en el desglose.
+También se reemplazaron textos de demo por microcopy de producto.
+
+Decisión: no copiar el prototipo HTML; portar solo camino, meta/racha, resumen
+de clase y diagnóstico. Las figuras React de Crismar se limpian y se integran.

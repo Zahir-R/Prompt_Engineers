@@ -144,12 +144,12 @@ export function CountingItem({
   className?: string;
   color?: string;
 }) {
-  if (tipo === "manzana") return <div className="relative inline-flex items-center justify-center"><ManzanaIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
-  if (tipo === "balon") return <div className="relative inline-flex items-center justify-center"><BalonIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
-  if (tipo === "lapiz") return <div className="relative inline-flex items-center justify-center"><LapizIcon className="h-6 w-14" />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
-  if (tipo === "conejo") return <div className="relative inline-flex items-center justify-center"><ConejoIcon className="h-12 w-8" />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
-  if (tipo === "casa") return <div className="relative inline-flex items-center justify-center"><CasaIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
-  if (tipo === "sol") return <div className="relative inline-flex items-center justify-center"><SolIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
+  if (tipo === "manzana") return <div className="relative inline-flex items-center justify-center" aria-hidden="true"><ManzanaIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
+  if (tipo === "balon") return <div className="relative inline-flex items-center justify-center" aria-hidden="true"><BalonIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
+  if (tipo === "lapiz") return <div className="relative inline-flex items-center justify-center" aria-hidden="true"><LapizIcon className="h-6 w-14" />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
+  if (tipo === "conejo") return <div className="relative inline-flex items-center justify-center" aria-hidden="true"><ConejoIcon className="h-12 w-8" />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
+  if (tipo === "casa") return <div className="relative inline-flex items-center justify-center" aria-hidden="true"><CasaIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
+  if (tipo === "sol") return <div className="relative inline-flex items-center justify-center" aria-hidden="true"><SolIcon className={className} />{numero && <span className="absolute -bottom-1 -right-1 rounded-md bg-ink px-1 text-[10px] font-bold text-white">{numero}</span>}</div>;
 
   const marbleColor = color === "orange"
     ? "bg-[radial-gradient(circle_at_35%_35%,#fb923c,#ea580c)]"

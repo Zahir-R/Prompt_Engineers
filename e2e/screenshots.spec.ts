@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 
 const routes = [
   { path: "/", name: "inicio" },
+  { path: "/hoja-de-ruta", name: "hoja-de-ruta" },
   { path: "/unidades", name: "unidades" },
   { path: "/unidad/unidad_sumas", name: "unidad" },
   { path: "/club", name: "club" },

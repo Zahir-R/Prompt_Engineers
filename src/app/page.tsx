@@ -20,6 +20,13 @@ import { PaperCard } from "@/components/brand/PaperCard";
 import { Sticker } from "@/components/brand/Sticker";
 import { useApp } from "@/context/AppProvider";
 import { getLevelInfo, getSolvedCount, getUnitProgress } from "@/lib/demo";
+import { cn } from "@/lib/utils";
+import { ROADMAP_LEVELS } from "@/data/roadmap";
+import {
+  getCurrentLevel,
+  getLevelProgress,
+  getTodaySolvedCount,
+} from "@/lib/roadmap";
 
 export default function Home() {
   const {
@@ -43,11 +50,19 @@ export default function Home() {
     );
   }
 
+  const currentLevel = getCurrentLevel(ROADMAP_LEVELS, units, progress);
+  const currentLevelUnits = units.filter(
+    (unit) => unit.levelId === currentLevel.id,
+  );
+  const currentLevelProgress = getLevelProgress(currentLevel, units, progress);
+  const todaySolved = getTodaySolvedCount(progress);
   const nextUnit =
-    units.find((unit) => {
+    currentLevelUnits.find((unit) => {
       const unitProgress = getUnitProgress(unit, progress);
       return !unitProgress.complete;
-    }) ?? units[0];
+    }) ??
+    currentLevelUnits[0] ??
+    units[0];
   const nextExerciseId =
     nextUnit?.exerciseIds.find((exerciseId) => !progress[exerciseId]?.solved) ??
     nextUnit?.exerciseIds[0];
@@ -215,35 +230,86 @@ export default function Home() {
                 “Puedes practicar sin cuenta. Si quieres, después eliges tu alias.”
               </p>
               <p className="mt-3 text-xs font-bold uppercase tracking-wide text-ink-soft">
-                Sin datos personales · Sin correos de menores
+                Solo tu alias y tu avatar. Sin correos.
               </p>
             </PaperCard>
           </div>
         </section>
       )}
 
+      <section className="mt-10">
+        <PaperCard className="p-5">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <Sticker tone="teal">
+                <Compass className="size-3.5" aria-hidden="true" />
+                Tu camino N0–N6
+              </Sticker>
+              <h2 className="mt-2 font-display text-2xl font-semibold text-ink">
+                {currentLevel.id} · {currentLevel.title}
+              </h2>
+              <p className="text-sm font-semibold text-ink-soft">
+                Hoy: {todaySolved} de 2 hojas · {currentLevelProgress.solved}/
+                {currentLevelProgress.total} del nivel
+              </p>
+            </div>
+            <Link
+              href="/hoja-de-ruta"
+              className="inline-flex items-center gap-1 text-sm font-black text-coral-deep underline decoration-2 underline-offset-4"
+            >
+              Ver mi ruta
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-7">
+            {ROADMAP_LEVELS.map((level) => {
+              const active = level.id === currentLevel.id;
+              return (
+                <Link
+                  key={level.id}
+                  href="/hoja-de-ruta"
+                  className={cn(
+                    "rounded-xl border-2 px-2 py-2 text-center transition-transform",
+                    active
+                      ? "-rotate-1 border-ink bg-mustard text-ink shadow-hard"
+                      : "border-ink/20 bg-paper-deep/40 text-ink-soft hover:border-ink",
+                  )}
+                >
+                  <span className="block font-display text-base font-black">
+                    {level.id}
+                  </span>
+                  <span className="block text-[10px] font-bold leading-tight">
+                    {level.title}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </PaperCard>
+      </section>
+
       <section className="mt-12">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="flex items-center gap-2 font-display text-3xl font-semibold text-ink">
               <Compass className="size-6 text-coral-deep" aria-hidden="true" />
-              Capítulos del cuaderno
+              Capítulos de {currentLevel.id}
             </h2>
             <p className="mt-1 font-hand text-xl font-bold text-ink-soft">
               elige por dónde seguir
             </p>
           </div>
           <Link
-            href="/unidades"
+            href="/hoja-de-ruta"
             className="font-black text-sky underline decoration-2 underline-offset-4 hover:text-ink"
           >
-            Ver todas →
+            Ver mi ruta →
           </Link>
         </div>
 
         <PaperCard className="mt-5 p-2 sm:p-3">
           <ul className="divide-y-2 divide-dashed divide-ink/15">
-            {units.map((unit) => {
+            {currentLevelUnits.map((unit) => {
               const unitProgress = getUnitProgress(unit, progress);
 
               return (
@@ -253,13 +319,13 @@ export default function Home() {
                     className="flex items-center gap-3 rounded-xl p-3 transition-colors hover:bg-paper-deep/50 sm:gap-4 sm:p-4"
                   >
                     <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-paper font-display text-lg font-black text-ink">
-                      {unit.order}
+                      {unit.levelId === "N0" ? "N0" : unit.order}
                     </span>
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
                         <Sticker tone={unit.accent}>
                           <BookOpen className="size-3.5" aria-hidden="true" />
-                          Capítulo {unit.order}
+                          {unit.levelId === "N0" ? "Primer paso" : `Capítulo ${unit.order}`}
                         </Sticker>
                         <span className="text-xs font-black text-sky">
                           {unitProgress.solved}/{unitProgress.total} hojas

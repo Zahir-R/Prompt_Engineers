@@ -51,7 +51,7 @@ export function StepVisualizer({ visual }: { visual?: VisualState | null }) {
           denominador={visual.denominador}
           numerador={visual.pintadas}
           color="purple"
-          interactivo={true}
+          interactivo={false}
         />
         <p className="mt-2 text-center text-sm font-bold text-purple-800">
           {visual.pintadas}/{visual.denominador} partes seleccionadas
@@ -82,6 +82,7 @@ export function StepVisualizer({ visual }: { visual?: VisualState | null }) {
           filas={visual.filas ?? 3}
           columnas={visual.columnas ?? 4}
           gruposReparto={visual.gruposReparto ?? 3}
+          objeto={visual.objeto ?? "canica"}
           color={visual.color === "yellow" ? "yellow" : visual.color || "blue"}
         />
       </div>
