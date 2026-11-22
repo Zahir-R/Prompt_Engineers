@@ -69,6 +69,22 @@ export function createSeedClassrooms(): Classroom[] {
 
 export const DEMO_UNITS: Unit[] = [
   {
+    id: "unidad_n0",
+    title: "Primeros pasos",
+    description:
+      "Cuenta, compara y resuelve tus primeras sumas y restas con objetos y figuras.",
+    order: 0,
+    exerciseIds: [
+      "ejercicio_math_006",
+      "ejercicio_math_007",
+      "ejercicio_math_008",
+      "ejercicio_math_009",
+      "ejercicio_math_010",
+    ],
+    accent: "sky",
+    levelId: "N0",
+  },
+  {
     id: "unidad_sumas",
     title: "Sumas que cruzan el 10",
     description:
@@ -76,29 +92,113 @@ export const DEMO_UNITS: Unit[] = [
     order: 1,
     exerciseIds: ["ejercicio_math_001", "ejercicio_math_003"],
     accent: "coral",
+    levelId: "N1",
   },
   {
     id: "unidad_restas",
     title: "Restas con préstamo",
     description:
       "Descubre cómo pedir prestada una decena para restar sin perderte.",
-    order: 2,
+    order: 1,
     exerciseIds: ["ejercicio_math_002", "ejercicio_math_004"],
     accent: "teal",
+    levelId: "N1",
   },
   {
     id: "unidad_reto",
     title: "El gran desafío",
     description:
       "Mezcla sumas y restas para demostrar todo lo que aprendiste en el cuaderno.",
-    order: 3,
+    order: 1,
     exerciseIds: [
       "ejercicio_math_001",
       "ejercicio_math_002",
       "ejercicio_math_003",
       "ejercicio_math_004",
+      "ejercicio_math_005",
     ],
     accent: "mustard",
+    levelId: "N1",
+  },
+  {
+    id: "unidad_n2",
+    title: "Multiplicar y repartir",
+    description:
+      "Aprende a multiplicar, dividir y entender la fracción como parte de un todo.",
+    order: 2,
+    exerciseIds: [
+      "ejercicio_math_011",
+      "ejercicio_math_012",
+      "ejercicio_math_013",
+      "ejercicio_math_014",
+      "ejercicio_math_015",
+    ],
+    accent: "teal",
+    levelId: "N2",
+  },
+  {
+    id: "unidad_n3",
+    title: "Números grandes y figuras",
+    description:
+      "Opera con números grandes, calcula perímetros y descubre el área de las figuras.",
+    order: 3,
+    exerciseIds: [
+      "ejercicio_math_016",
+      "ejercicio_math_017",
+      "ejercicio_math_018",
+      "ejercicio_math_019",
+      "ejercicio_math_020",
+    ],
+    accent: "mustard",
+    levelId: "N3",
+  },
+  {
+    id: "unidad_n4",
+    title: "Fracciones y decimales",
+    description:
+      "Suma decimales, encuentra fracciones equivalentes y convierte unidades.",
+    order: 4,
+    exerciseIds: [
+      "ejercicio_math_021",
+      "ejercicio_math_022",
+      "ejercicio_math_023",
+      "ejercicio_math_024",
+      "ejercicio_math_025",
+    ],
+    accent: "plum",
+    levelId: "N4",
+  },
+  {
+    id: "unidad_n5",
+    title: "Proporciones y divisibilidad",
+    description:
+      "Descubre el mcm, el mcd, las fracciones heterogéneas y las proporciones.",
+    order: 5,
+    exerciseIds: [
+      "ejercicio_math_026",
+      "ejercicio_math_027",
+      "ejercicio_math_028",
+      "ejercicio_math_029",
+      "ejercicio_math_030",
+    ],
+    accent: "coral",
+    levelId: "N5",
+  },
+  {
+    id: "unidad_n6",
+    title: "Enteros y potencias",
+    description:
+      "Trabaja con números enteros, potencias, porcentajes y datos.",
+    order: 6,
+    exerciseIds: [
+      "ejercicio_math_031",
+      "ejercicio_math_032",
+      "ejercicio_math_033",
+      "ejercicio_math_034",
+      "ejercicio_math_035",
+    ],
+    accent: "sky",
+    levelId: "N6",
   },
 ];
 

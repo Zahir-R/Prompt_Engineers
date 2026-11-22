@@ -73,15 +73,23 @@ export function MathProblemView({
         </p>
 
         <div className="mt-5 flex flex-wrap items-center gap-2">
-          <span className="rounded-[0.8rem_1rem_0.7rem_1.1rem] border-2 border-ink bg-[#d6e6f5] px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
-            {exercise.datos.num1}
-          </span>
-          <span className="rounded-full border-2 border-ink bg-mustard px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
-            {exercise.datos.operacion}
-          </span>
-          <span className="rounded-[1rem_0.7rem_1.1rem_0.8rem] border-2 border-ink bg-[#d6e6f5] px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
-            {exercise.datos.num2}
-          </span>
+          {exercise.datos.expresion ? (
+            <span className="rounded-[0.8rem_1rem_0.7rem_1.1rem] border-2 border-ink bg-[#d6e6f5] px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
+              {exercise.datos.expresion}
+            </span>
+          ) : (
+            <>
+              <span className="rounded-[0.8rem_1rem_0.7rem_1.1rem] border-2 border-ink bg-[#d6e6f5] px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
+                {exercise.datos.num1}
+              </span>
+              <span className="rounded-full border-2 border-ink bg-mustard px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
+                {exercise.datos.operacion}
+              </span>
+              <span className="rounded-[1rem_0.7rem_1.1rem_0.8rem] border-2 border-ink bg-[#d6e6f5] px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
+                {exercise.datos.num2}
+              </span>
+            </>
+          )}
         </div>
 
         {detectiveBonusReady && (

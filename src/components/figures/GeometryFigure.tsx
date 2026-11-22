@@ -46,10 +46,8 @@ export function GeometryFigure({
 
     return (
       <svg
-        width={anchoCanvas}
-        height={altoCanvas}
         viewBox={`0 0 ${anchoCanvas} ${altoCanvas}`}
-        className="overflow-visible"
+        className="h-auto w-full max-w-[400px] overflow-visible"
         role="img"
         aria-label={`${tipo === "square" ? "Cuadrado" : "Rectángulo"} de ${w} por ${h}`}
       >
@@ -179,10 +177,8 @@ export function GeometryFigure({
 
     return (
       <svg
-        width={anchoCanvas}
-        height={altoCanvas}
         viewBox={`0 0 ${anchoCanvas} ${altoCanvas}`}
-        className="overflow-visible"
+        className="h-auto w-full max-w-[400px] overflow-visible"
         role="img"
         aria-label="Triángulo"
       >
@@ -228,10 +224,8 @@ export function GeometryFigure({
 
   return (
     <svg
-      width={anchoCanvas}
-      height={altoCanvas}
       viewBox={`0 0 ${anchoCanvas} ${altoCanvas}`}
-      className="overflow-visible"
+      className="h-auto w-full max-w-[400px] overflow-visible"
       role="img"
       aria-label={`Polígono de ${sides} lados iguales de ${ladoUnidades} unidades`}
     >

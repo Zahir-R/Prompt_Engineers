@@ -20,6 +20,7 @@ pnpm exec playwright install chromium
    puerto 3000; no requiere `pnpm dev`.
 3. Revisar estas rutas:
    - `/`
+   - `/hoja-de-ruta`
    - `/unidades`
    - `/unidad/unidad_sumas`
    - `/club`
@@ -38,7 +39,9 @@ pnpm exec playwright install chromium
    - Solo cuentas de estudiante ganan XP y racha.
   - El reto del desglose muestra chispa, el sello aparece al terminar y el
     bonus de detective se suma al resolver.
-   - El carnet muestra racha, XP, insignias y capítulos.
+   - El carnet muestra racha, XP, insignias, chispas y pegatinas.
+   - La ruta muestra N0–N6 y cada nivel tiene 5 ejercicios.
+   - Las figuras de fracciones, geometría y objetos se ven bien en móvil.
    - El docente entra a `/panel`, crea alias y modera sin aparecer en la UI del
      estudiante.
    - El header del estudiante no muestra “Docente” ni diagnóstico.
@@ -50,6 +53,7 @@ pnpm exec playwright install chromium
 - ¿Hay filas de tres tarjetas idénticas? Si sí, rediseñar.
 - ¿Hay `backdrop-blur` o gradientes de fondo? Si sí, quitar.
 - ¿Los colores semánticos están solo en el desglose?
+- ¿La UI evita textos de demo/desarrollo?
 - ¿El texto tiene acentos y contraste suficiente?
 
 ## Accesibilidad

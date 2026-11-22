@@ -1,4 +1,5 @@
 import type { ProgressEntry } from "@/types/exercise";
+import type { RoadmapLevelId } from "@/types/roadmap";
 
 export type UserRole = "student" | "teacher";
 
@@ -31,6 +32,7 @@ export interface Unit {
   order: number;
   exerciseIds: string[];
   accent: "coral" | "mustard" | "teal" | "sky" | "plum";
+  levelId: RoadmapLevelId;
 }
 
 export interface ClubThread {

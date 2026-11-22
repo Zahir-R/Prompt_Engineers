@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BookOpen,
   CircleCheck,
+  Compass,
   Flame,
   LogIn,
   Star,
@@ -14,6 +15,7 @@ import { PaperCard } from "@/components/brand/PaperCard";
 import { Sticker } from "@/components/brand/Sticker";
 import { StarDoodle, SquiggleDoodle } from "@/components/brand/Doodle";
 import { useApp } from "@/context/AppProvider";
+import { ROADMAP_LEVELS } from "@/data/roadmap";
 import { getUnitProgress } from "@/lib/demo";
 
 export default function UnidadesPage() {
@@ -31,8 +33,7 @@ export default function UnidadesPage() {
   }
 
   const extraExercises = exercises.filter(
-    (exercise) =>
-      !units.some((unit) => unit.exerciseIds.includes(exercise.id)),
+    (exercise) => !units.some((unit) => unit.exerciseIds.includes(exercise.id)),
   );
 
   return (
@@ -44,9 +45,9 @@ export default function UnidadesPage() {
             Libres para explorar
           </Sticker>
           <h1 className="mt-4 font-display text-4xl font-semibold leading-none text-ink sm:text-5xl">
-            Capítulos del
+            Capítulos por
             <span className="relative ml-2 inline-block">
-              cuaderno
+              nivel
               <SquiggleDoodle className="absolute -bottom-2 left-0 w-full text-mustard" />
             </span>
           </h1>
@@ -54,15 +55,24 @@ export default function UnidadesPage() {
             Todos los capítulos están abiertos. Puedes practicar sin cuenta; si
             eliges un alias, guardas racha, XP y participas en La Fogata.
           </p>
-          {!activeProfile && (
+          <div className="mt-5 flex flex-wrap gap-2">
             <Link
-              href="/entrar"
-              className="mt-5 inline-flex items-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-[#cce9e3] px-4 py-2.5 text-sm font-black text-ink shadow-hard"
+              href="/hoja-de-ruta"
+              className="inline-flex items-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-mustard px-4 py-2.5 text-sm font-black text-ink shadow-hard"
             >
-              <LogIn className="size-4" aria-hidden="true" />
-              Elegir mi alias
+              <Compass className="size-4" aria-hidden="true" />
+              Ver mi ruta N0–N6
             </Link>
-          )}
+            {!activeProfile && (
+              <Link
+                href="/entrar"
+                className="inline-flex items-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-[#cce9e3] px-4 py-2.5 text-sm font-black text-ink shadow-hard"
+              >
+                <LogIn className="size-4" aria-hidden="true" />
+                Elegir mi alias
+              </Link>
+            )}
+          </div>
         </div>
         <div className="relative mx-auto">
           <Mascot className="size-40" />
@@ -83,73 +93,100 @@ export default function UnidadesPage() {
         </div>
       )}
 
-      <ol className="mt-8 space-y-5">
-        {units.map((unit, index) => {
-          const unitProgress = getUnitProgress(unit, progress);
-          const exercises = unit.exerciseIds.flatMap((exerciseId) => {
-            const exercise = getExercise(exerciseId);
-            return exercise ? [exercise] : [];
-          });
+      <div className="mt-8 space-y-10">
+        {ROADMAP_LEVELS.map((level) => {
+          const levelUnits = units.filter((unit) => unit.levelId === level.id);
+          if (levelUnits.length === 0) return null;
 
           return (
-            <li key={unit.id}>
-              <PaperCard
-                strong={unitProgress.complete}
-                className={index % 2 === 0 ? "-rotate-1 p-5 sm:p-6" : "rotate-1 p-5 sm:p-6"}
-              >
-                <div className="grid gap-4 sm:grid-cols-[5rem_1fr_auto] sm:items-center">
-                  <div className="relative flex size-16 items-center justify-center rounded-full border-2 border-ink bg-paper font-display text-2xl font-black text-ink shadow-hard">
-                    {unitProgress.complete ? (
-                      <CircleCheck className="size-8 text-teal" aria-hidden="true" />
-                    ) : (
-                      unit.order
-                    )}
-                  </div>
-
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Sticker tone={unit.accent}>
-                        Capítulo {unit.order}
-                      </Sticker>
-                      <span className="text-xs font-black uppercase tracking-wide text-ink-soft">
-                        {unitProgress.solved} de {unitProgress.total} hojas
-                      </span>
-                      {unitProgress.complete && (
-                        <span className="font-hand text-lg font-bold text-teal">
-                          ¡completado!
-                        </span>
-                      )}
-                    </div>
-                    <h2 className="mt-2 font-display text-2xl font-semibold leading-tight text-ink">
-                      {unit.title}
-                    </h2>
-                    <p className="mt-1 text-sm font-semibold text-ink-soft">
-                      {unit.description}
-                    </p>
-                    <p className="mt-2 line-clamp-1 text-xs font-bold text-ink-soft">
-                      {exercises.map((exercise) => exercise.titulo).join(" · ")}
-                    </p>
-                  </div>
-
-                  <Link
-                    href={`/unidad/${unit.id}`}
-                    className="flex items-center justify-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-mustard px-4 py-3 text-sm font-black text-ink shadow-hard"
-                  >
-                    {unitProgress.complete ? "Repasar" : "Abrir"}
-                    <ArrowRight className="size-4" aria-hidden="true" />
-                  </Link>
+            <section key={level.id}>
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <Sticker tone="paper">
+                    <Compass className="size-3.5" aria-hidden="true" />
+                    {level.id} · {level.title}
+                  </Sticker>
+                  <h2 className="mt-2 font-display text-2xl font-semibold text-ink">
+                    {level.focus}
+                  </h2>
                 </div>
-                <div className="mt-4 h-3 overflow-hidden rounded-full border-2 border-ink bg-paper-deep">
-                  <div
-                    className="h-full bg-teal transition-all"
-                    style={{ width: `${unitProgress.percent}%` }}
-                  />
-                </div>
-              </PaperCard>
-            </li>
+                <Link
+                  href="/hoja-de-ruta"
+                  className="text-sm font-black text-sky underline decoration-2 underline-offset-4"
+                >
+                  Ver esta parte de la ruta →
+                </Link>
+              </div>
+
+              <ol className="mt-4 space-y-4">
+                {levelUnits.map((unit, index) => {
+                  const unitProgress = getUnitProgress(unit, progress);
+                  const unitExercises = unit.exerciseIds.flatMap((exerciseId) => {
+                    const exercise = getExercise(exerciseId);
+                    return exercise ? [exercise] : [];
+                  });
+
+                  return (
+                    <li key={unit.id}>
+                      <PaperCard
+                        strong={unitProgress.complete}
+                        className={index % 2 === 0 ? "-rotate-1 p-5" : "rotate-1 p-5"}
+                      >
+                        <div className="grid gap-4 sm:grid-cols-[5rem_1fr_auto] sm:items-center">
+                          <div className="relative flex size-16 items-center justify-center rounded-full border-2 border-ink bg-paper font-display text-2xl font-black text-ink shadow-hard">
+                            {unitProgress.complete ? (
+                              <CircleCheck className="size-8 text-teal" aria-hidden="true" />
+                            ) : (
+                              unit.levelId === "N0" ? "N0" : unit.order
+                            )}
+                          </div>
+
+                          <div>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <Sticker tone={unit.accent}>
+                                {unit.levelId === "N0" ? "Primer paso" : `Capítulo ${unit.order}`}
+                              </Sticker>
+                              <span className="rounded-full bg-paper-deep px-2.5 py-1 text-xs font-black text-ink-soft">
+                                {unit.levelId}
+                              </span>
+                              <span className="text-xs font-black uppercase tracking-wide text-ink-soft">
+                                {unitProgress.solved} de {unitProgress.total} hojas
+                              </span>
+                            </div>
+                            <h3 className="mt-2 font-display text-xl font-semibold leading-tight text-ink">
+                              {unit.title}
+                            </h3>
+                            <p className="mt-1 text-sm font-semibold text-ink-soft">
+                              {unit.description}
+                            </p>
+                            <p className="mt-2 line-clamp-1 text-xs font-bold text-ink-soft">
+                              {unitExercises.map((exercise) => exercise.titulo).join(" · ")}
+                            </p>
+                          </div>
+
+                          <Link
+                            href={`/unidad/${unit.id}`}
+                            className="flex items-center justify-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-mustard px-4 py-3 text-sm font-black text-ink shadow-hard"
+                          >
+                            {unitProgress.complete ? "Repasar" : "Abrir"}
+                            <ArrowRight className="size-4" aria-hidden="true" />
+                          </Link>
+                        </div>
+                        <div className="mt-4 h-3 overflow-hidden rounded-full border-2 border-ink bg-paper-deep">
+                          <div
+                            className="h-full bg-teal transition-all"
+                            style={{ width: `${unitProgress.percent}%` }}
+                          />
+                        </div>
+                      </PaperCard>
+                    </li>
+                  );
+                })}
+              </ol>
+            </section>
           );
         })}
-      </ol>
+      </div>
 
       {extraExercises.length > 0 && (
         <section className="mt-10">

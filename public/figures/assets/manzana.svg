@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -55 120 110" width="120" height="110">
-  <!-- Manzana -->
-  <g id="Componente_Manzana">
-    <path d="M0,-30 C-40,-50 -60,0 -40,30 C-25,55 -5,40 0,35 C5,40 25,55 40,30 C60,0 40,-50 0,-30 Z" fill="#FF6B6B" stroke="#2D3436" stroke-width="3"/>
-    <line x1="0" y1="-30" x2="5" y2="-50" stroke="#8B5E3C" stroke-width="4" stroke-linecap="round"/>
-    <ellipse cx="18" cy="-46" rx="14" ry="7" fill="#1DD1A1" stroke="#2D3436" stroke-width="2" transform="rotate(-20 18 -46)"/>
-  </g>
-</svg>

@@ -31,6 +31,7 @@ export interface GeometryVisual {
 export interface MarbleVisual {
   tipo: "canicas";
   modo: "base10" | "multiplication" | "sharing" | "free";
+  objeto?: "canica" | "manzana" | "balon" | "lapiz" | "conejo" | "casa" | "sol";
   total?: number;
   filas?: number;
   columnas?: number;
@@ -67,6 +68,7 @@ export interface ExerciseData {
   num1: number;
   num2: number;
   operacion: string;
+  expresion?: string;
 }
 
 export interface Exercise {

@@ -359,5 +359,1987 @@
       }
     ],
     "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_005",
+    "categoria": "Adicion",
+    "nivel": "N1_Primaria",
+    "titulo": "La tienda de lápices",
+    "enunciado": "La tienda tenía 46 lápices y recibe 27 más. ¿Cuántos lápices hay ahora?",
+    "datos": {
+      "num1": 46,
+      "num2": 27,
+      "operacion": "+",
+      "expresion": "46 + 27"
+    },
+    "respuesta_correcta": 73,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 46 y 27.",
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "unidades": [
+            6,
+            7
+          ]
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Juntamos las cantidades con una suma.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Multiplicar los datos"
+          ],
+          "correcta": 0,
+          "pista": "Cuando algo se junta o aumenta, sumamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 46 + 27 = 73.",
+        "operacion_destacada": "46 + 27 = 73"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 73.",
+        "resultado_final": 73
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si a 73 le quitamos los 27 lápices que llegaron, vuelven a quedar 46.",
+        "operacion_destacada": "73 - 27 = 46"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_006",
+    "categoria": "Conteo",
+    "nivel": "N0_Primaria",
+    "titulo": "La canasta de manzanas",
+    "enunciado": "En la canasta hay 7 manzanas. ¿Cuántas manzanas hay?",
+    "datos": {
+      "num1": 7,
+      "num2": 0,
+      "operacion": "contar",
+      "expresion": "Cuenta las manzanas"
+    },
+    "respuesta_correcta": 7,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Observar",
+        "color_tag": "blue",
+        "explicacion": "Hay varias manzanas en la canasta. Vamos a contarlas.",
+        "visual_state": {
+          "tipo": "canicas",
+          "modo": "free",
+          "total": 7,
+          "objeto": "manzana"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Contar una por una",
+        "color_tag": "orange",
+        "explicacion": "Señala cada manzana y cuenta: 1, 2, 3, 4, 5, 6, 7.",
+        "reto": {
+          "pregunta": "¿Cómo sabemos cuántas hay?",
+          "opciones": [
+            "Contar una por una",
+            "Restar",
+            "Multiplicar"
+          ],
+          "correcta": 0,
+          "pista": "Señala cada objeto mientras cuentas."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "Contamos 7 manzanas.",
+        "resultado_final": 7
+      },
+      {
+        "paso": 4,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si vuelves a contar, obtienes otra vez 7."
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_007",
+    "categoria": "Comparacion",
+    "nivel": "N0_Primaria",
+    "titulo": "Más manzanas que peras",
+    "enunciado": "Hay 7 manzanas y 4 peras. ¿Cuántas manzanas más que peras hay?",
+    "datos": {
+      "num1": 7,
+      "num2": 4,
+      "operacion": "-",
+      "expresion": "7 - 4"
+    },
+    "respuesta_correcta": 3,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 7 y 4.",
+        "visual_state": {
+          "tipo": "canicas",
+          "modo": "free",
+          "total": 7,
+          "objeto": "manzana"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Quitamos una cantidad con una resta.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Repartir en grupos"
+          ],
+          "correcta": 1,
+          "pista": "Cuando algo se quita o disminuye, restamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 7 - 4 = 3.",
+        "operacion_destacada": "7 - 4 = 3"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 3.",
+        "resultado_final": 3
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si sumamos 3 + 4, volvemos a 7. La resta es correcta."
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_008",
+    "categoria": "Adicion",
+    "nivel": "N0_Primaria",
+    "titulo": "Juntar frutas",
+    "enunciado": "Lucas tiene 4 manzanas y encuentra 3 más. ¿Cuántas manzanas tiene ahora?",
+    "datos": {
+      "num1": 4,
+      "num2": 3,
+      "operacion": "+",
+      "expresion": "4 + 3"
+    },
+    "respuesta_correcta": 7,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 4 y 3.",
+        "visual_state": {
+          "tipo": "canicas",
+          "modo": "free",
+          "total": 7,
+          "objeto": "manzana"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Juntamos las cantidades con una suma.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Multiplicar los datos"
+          ],
+          "correcta": 0,
+          "pista": "Cuando algo se junta o aumenta, sumamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 4 + 3 = 7.",
+        "operacion_destacada": "4 + 3 = 7"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 7.",
+        "resultado_final": 7
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si al resultado le quitamos 3, volvemos a 4. La suma es correcta."
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_009",
+    "categoria": "Sustraccion",
+    "nivel": "N0_Primaria",
+    "titulo": "Globos que se van",
+    "enunciado": "Hay 9 globos y se escapan 2. ¿Cuántos globos quedan?",
+    "datos": {
+      "num1": 9,
+      "num2": 2,
+      "operacion": "-",
+      "expresion": "9 - 2"
+    },
+    "respuesta_correcta": 7,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 9 y 2.",
+        "visual_state": {
+          "tipo": "base10",
+          "decenas": [],
+          "unidades": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Quitamos una cantidad con una resta.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Repartir en grupos"
+          ],
+          "correcta": 1,
+          "pista": "Cuando algo se quita o disminuye, restamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 9 - 2 = 7.",
+        "operacion_destacada": "9 - 2 = 7"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 7.",
+        "resultado_final": 7
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si sumamos 7 + 2, volvemos a 9. La resta es correcta."
+      }
+    ],
+    "metafora_grafica": "objetos"
+  },
+  {
+    "id": "ejercicio_math_010",
+    "categoria": "Geometria",
+    "nivel": "N0_Primaria",
+    "titulo": "El triángulo del parque",
+    "enunciado": "Una señal tiene forma de triángulo. ¿Cuántos lados tiene?",
+    "datos": {
+      "num1": 3,
+      "num2": 0,
+      "operacion": "lados",
+      "expresion": "Lados de un triángulo"
+    },
+    "respuesta_correcta": 3,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Observar la figura",
+        "color_tag": "blue",
+        "explicacion": "La señal tiene forma de triángulo.",
+        "visual_state": {
+          "tipo": "geometria",
+          "figura": "triangle",
+          "ancho": 6,
+          "alto": 5,
+          "modo": "vertices"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Contar los lados",
+        "color_tag": "orange",
+        "explicacion": "Recorremos el borde y contamos: 1, 2, 3 lados.",
+        "reto": {
+          "pregunta": "¿Qué contamos en un triángulo?",
+          "opciones": [
+            "Los lados",
+            "Los colores",
+            "Las manzanas"
+          ],
+          "correcta": 0,
+          "pista": "Los lados son los bordes rectos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El triángulo tiene 3 lados.",
+        "resultado_final": 3
+      },
+      {
+        "paso": 4,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Un triángulo siempre tiene 3 lados y 3 vértices."
+      }
+    ],
+    "metafora_grafica": "figuras_geometricas"
+  },
+  {
+    "id": "ejercicio_math_011",
+    "categoria": "Multiplicacion",
+    "nivel": "N2_Primaria",
+    "titulo": "Cajas de lápices",
+    "enunciado": "Hay 3 cajas y cada una tiene 4 lápices. ¿Cuántos lápices hay en total?",
+    "datos": {
+      "num1": 3,
+      "num2": 4,
+      "operacion": "×",
+      "expresion": "3 × 4"
+    },
+    "respuesta_correcta": 12,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 3 y 4.",
+        "visual_state": {
+          "tipo": "canicas",
+          "modo": "multiplication",
+          "filas": 3,
+          "columnas": 4,
+          "objeto": "lapiz"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Repetimos grupos iguales con una multiplicación.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Multiplicar los datos",
+            "Restar los datos"
+          ],
+          "correcta": 1,
+          "pista": "Multiplicar es juntar grupos iguales."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 3 × 4 = 12.",
+        "operacion_destacada": "3 × 4 = 12"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 12.",
+        "resultado_final": 12
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si repartimos 12 en 3 grupos iguales, cada grupo tiene 4."
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_012",
+    "categoria": "Division",
+    "nivel": "N2_Primaria",
+    "titulo": "Galletas en platos",
+    "enunciado": "Hay 12 galletas para repartir en 3 platos iguales. ¿Cuántas galletas van en cada plato?",
+    "datos": {
+      "num1": 12,
+      "num2": 3,
+      "operacion": "÷",
+      "expresion": "12 ÷ 3"
+    },
+    "respuesta_correcta": 4,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 12 y 3.",
+        "visual_state": {
+          "tipo": "canicas",
+          "modo": "free",
+          "total": 12,
+          "objeto": "manzana"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Repartimos en grupos iguales con una división.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Multiplicar los datos",
+            "Repartir en grupos iguales",
+            "Sumar los datos"
+          ],
+          "correcta": 1,
+          "pista": "Dividir es repartir en partes iguales."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 12 ÷ 3 = 4.",
+        "operacion_destacada": "12 ÷ 3 = 4",
+        "visual_state": {
+          "tipo": "canicas",
+          "modo": "sharing",
+          "total": 12,
+          "gruposReparto": 3,
+          "objeto": "manzana"
+        }
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 4.",
+        "resultado_final": 4
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si multiplicamos 4 × 3, volvemos a 12. La división es correcta."
+      }
+    ],
+    "metafora_grafica": "reparto"
+  },
+  {
+    "id": "ejercicio_math_013",
+    "categoria": "Adicion",
+    "nivel": "N2_Primaria",
+    "titulo": "La biblioteca",
+    "enunciado": "La biblioteca tiene 245 libros de cuentos y 132 de ciencias. ¿Cuántos libros hay en total?",
+    "datos": {
+      "num1": 245,
+      "num2": 132,
+      "operacion": "+",
+      "expresion": "245 + 132"
+    },
+    "respuesta_correcta": 377,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 245 y 132."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Juntamos las cantidades con una suma.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Multiplicar los datos"
+          ],
+          "correcta": 0,
+          "pista": "Cuando algo se junta o aumenta, sumamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 245 + 132 = 377.",
+        "operacion_destacada": "245 + 132 = 377"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 377.",
+        "resultado_final": 377
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "377 - 132 = 245. La suma es correcta.",
+        "operacion_destacada": "377 - 132 = 245"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_014",
+    "categoria": "Sustraccion",
+    "nivel": "N2_Primaria",
+    "titulo": "Libros prestados",
+    "enunciado": "Había 486 libros y se prestaron 153. ¿Cuántos libros quedan?",
+    "datos": {
+      "num1": 486,
+      "num2": 153,
+      "operacion": "-",
+      "expresion": "486 - 153"
+    },
+    "respuesta_correcta": 333,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 486 y 153."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Quitamos una cantidad con una resta.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Repartir en grupos"
+          ],
+          "correcta": 1,
+          "pista": "Cuando algo se quita o disminuye, restamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 486 - 153 = 333.",
+        "operacion_destacada": "486 - 153 = 333"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 333.",
+        "resultado_final": 333
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "333 + 153 = 486. La resta es correcta.",
+        "operacion_destacada": "333 + 153 = 486"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_015",
+    "categoria": "Fraccion",
+    "nivel": "N2_Primaria",
+    "titulo": "La mitad de la pizza",
+    "enunciado": "Una pizza tiene 8 porciones. ¿Cuántas porciones son la mitad?",
+    "datos": {
+      "num1": 1,
+      "num2": 2,
+      "operacion": "fraccion",
+      "expresion": "1/2 de 8"
+    },
+    "respuesta_correcta": 4,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Entender la fracción",
+        "color_tag": "blue",
+        "explicacion": "La mitad se escribe 1/2: una parte de dos partes iguales.",
+        "visual_state": {
+          "tipo": "fraccion",
+          "numerador": 1,
+          "denominador": 2,
+          "pintadas": 1,
+          "forma": "circulo"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Dividir en partes iguales",
+        "color_tag": "orange",
+        "explicacion": "Dividimos 8 porciones en 2 grupos iguales.",
+        "reto": {
+          "pregunta": "¿Qué significa 1/2?",
+          "opciones": [
+            "Una de dos partes iguales",
+            "Dos partes de tres",
+            "El total completo"
+          ],
+          "correcta": 0,
+          "pista": "El denominador indica en cuántas partes se divide."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "8 ÷ 2 = 4. Cada mitad tiene 4 porciones.",
+        "operacion_destacada": "8 ÷ 2 = 4"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "La mitad de la pizza son 4 porciones.",
+        "resultado_final": 4
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "4 + 4 = 8. Las dos mitades juntas forman la pizza completa.",
+        "operacion_destacada": "4 + 4 = 8"
+      }
+    ],
+    "metafora_grafica": "fracciones"
+  },
+  {
+    "id": "ejercicio_math_016",
+    "categoria": "Adicion",
+    "nivel": "N3_Primaria",
+    "titulo": "La cosecha",
+    "enunciado": "Un agricultor cosechó 1,250 papas y luego 1,340 más. ¿Cuántas papas cosechó en total?",
+    "datos": {
+      "num1": 1250,
+      "num2": 1340,
+      "operacion": "+",
+      "expresion": "1,250 + 1,340"
+    },
+    "respuesta_correcta": 2590,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 1250 y 1340."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Juntamos las cantidades con una suma.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Multiplicar los datos"
+          ],
+          "correcta": 0,
+          "pista": "Cuando algo se junta o aumenta, sumamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 1,250 + 1,340 = 2590.",
+        "operacion_destacada": "1,250 + 1,340 = 2590"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 2590.",
+        "resultado_final": 2590
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "2,590 - 1,340 = 1,250. La suma es correcta.",
+        "operacion_destacada": "2,590 - 1,340 = 1,250"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_017",
+    "categoria": "Sustraccion",
+    "nivel": "N3_Primaria",
+    "titulo": "El depósito",
+    "enunciado": "Había 4,532 litros de agua y se usaron 1,278. ¿Cuántos litros quedan?",
+    "datos": {
+      "num1": 4532,
+      "num2": 1278,
+      "operacion": "-",
+      "expresion": "4,532 - 1,278"
+    },
+    "respuesta_correcta": 3254,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 4532 y 1278."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Quitamos una cantidad con una resta.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Repartir en grupos"
+          ],
+          "correcta": 1,
+          "pista": "Cuando algo se quita o disminuye, restamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 4,532 - 1,278 = 3254.",
+        "operacion_destacada": "4,532 - 1,278 = 3254"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 3254.",
+        "resultado_final": 3254
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "3,254 + 1,278 = 4,532. La resta es correcta.",
+        "operacion_destacada": "3,254 + 1,278 = 4,532"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_018",
+    "categoria": "Multiplicacion",
+    "nivel": "N3_Primaria",
+    "titulo": "Las sillas del teatro",
+    "enunciado": "Hay 23 filas con 4 sillas cada una. ¿Cuántas sillas hay?",
+    "datos": {
+      "num1": 23,
+      "num2": 4,
+      "operacion": "×",
+      "expresion": "23 × 4"
+    },
+    "respuesta_correcta": 92,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 23 y 4."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Repetimos grupos iguales con una multiplicación.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Multiplicar los datos",
+            "Restar los datos"
+          ],
+          "correcta": 1,
+          "pista": "Multiplicar es juntar grupos iguales."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 23 × 4 = 92.",
+        "operacion_destacada": "23 × 4 = 92"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 92.",
+        "resultado_final": 92
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si repartimos 92 en 23 grupos iguales, cada grupo tiene 4."
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_019",
+    "categoria": "Geometria",
+    "nivel": "N3_Primaria",
+    "titulo": "El huerto rectangular",
+    "enunciado": "Un huerto mide 8 metros de largo y 5 metros de ancho. ¿Cuál es su área?",
+    "datos": {
+      "num1": 8,
+      "num2": 5,
+      "operacion": "×",
+      "expresion": "8 × 5"
+    },
+    "respuesta_correcta": 40,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar la figura",
+        "color_tag": "blue",
+        "explicacion": "El huerto es un rectángulo de 8 m por 5 m.",
+        "visual_state": {
+          "tipo": "geometria",
+          "figura": "rectangle",
+          "ancho": 8,
+          "alto": 5,
+          "modo": "perimeter"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Recordar la fórmula",
+        "color_tag": "orange",
+        "explicacion": "El área de un rectángulo es largo × ancho.",
+        "reto": {
+          "pregunta": "¿Cómo calculamos el área?",
+          "opciones": [
+            "Largo × ancho",
+            "Largo + ancho",
+            "Largo - ancho"
+          ],
+          "correcta": 0,
+          "pista": "Multiplicamos las dos medidas."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "8 × 5 = 40.",
+        "operacion_destacada": "8 × 5 = 40",
+        "visual_state": {
+          "tipo": "geometria",
+          "figura": "rectangle",
+          "ancho": 8,
+          "alto": 5,
+          "modo": "area"
+        }
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El área del huerto es 40 metros cuadrados.",
+        "resultado_final": 40
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Contamos los cuadrados de la cuadrícula: hay 40."
+      }
+    ],
+    "metafora_grafica": "figuras_geometricas"
+  },
+  {
+    "id": "ejercicio_math_020",
+    "categoria": "Geometria",
+    "nivel": "N3_Primaria",
+    "titulo": "El perímetro del triángulo",
+    "enunciado": "Un triángulo tiene lados de 6 cm, 6 cm y 4 cm. ¿Cuál es su perímetro?",
+    "datos": {
+      "num1": 6,
+      "num2": 4,
+      "operacion": "+",
+      "expresion": "6 + 6 + 4"
+    },
+    "respuesta_correcta": 16,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los lados",
+        "color_tag": "blue",
+        "explicacion": "El triángulo tiene tres lados: 6 cm, 6 cm y 4 cm.",
+        "visual_state": {
+          "tipo": "geometria",
+          "figura": "triangle",
+          "ancho": 6,
+          "alto": 4,
+          "modo": "perimeter"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Sumar los lados",
+        "color_tag": "orange",
+        "explicacion": "El perímetro es la suma de todos los lados.",
+        "reto": {
+          "pregunta": "¿Qué es el perímetro?",
+          "opciones": [
+            "La suma de los lados",
+            "El espacio de adentro",
+            "La cantidad de vértices"
+          ],
+          "correcta": 0,
+          "pista": "Recorremos todo el borde."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "6 + 6 + 4 = 16.",
+        "operacion_destacada": "6 + 6 + 4 = 16"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El perímetro es 16 cm.",
+        "resultado_final": 16
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "16 cm es la distancia alrededor del triángulo."
+      }
+    ],
+    "metafora_grafica": "figuras_geometricas"
+  },
+  {
+    "id": "ejercicio_math_021",
+    "categoria": "Decimales",
+    "nivel": "N4_Primaria",
+    "titulo": "La compra del mercado",
+    "enunciado": "Ana gasta 2.5 bolivianos en fruta y 1.75 en pan. ¿Cuánto gasta en total?",
+    "datos": {
+      "num1": 2.5,
+      "num2": 1.75,
+      "operacion": "+",
+      "expresion": "2.5 + 1.75"
+    },
+    "respuesta_correcta": 4.25,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 2.5 y 1.75."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Juntamos las cantidades con una suma.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Multiplicar los datos"
+          ],
+          "correcta": 0,
+          "pista": "Cuando algo se junta o aumenta, sumamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 2.5 + 1.75 = 4.25.",
+        "operacion_destacada": "2.5 + 1.75 = 4.25"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 4.25.",
+        "resultado_final": 4.25
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "4.25 - 1.75 = 2.5. La suma es correcta.",
+        "operacion_destacada": "4.25 - 1.75 = 2.5"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_022",
+    "categoria": "Decimales",
+    "nivel": "N4_Primaria",
+    "titulo": "El vuelto",
+    "enunciado": "Pagas con 5.0 bolivianos y gastas 2.75. ¿Cuánto vuelto recibes?",
+    "datos": {
+      "num1": 5,
+      "num2": 2.75,
+      "operacion": "-",
+      "expresion": "5.0 - 2.75"
+    },
+    "respuesta_correcta": 2.25,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 5 y 2.75."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Quitamos una cantidad con una resta.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Repartir en grupos"
+          ],
+          "correcta": 1,
+          "pista": "Cuando algo se quita o disminuye, restamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 5.0 - 2.75 = 2.25.",
+        "operacion_destacada": "5.0 - 2.75 = 2.25"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 2.25.",
+        "resultado_final": 2.25
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "2.25 + 2.75 = 5.0. La resta es correcta.",
+        "operacion_destacada": "2.25 + 2.75 = 5.0"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_023",
+    "categoria": "Fraccion",
+    "nivel": "N4_Primaria",
+    "titulo": "La pizza compartida",
+    "enunciado": "Comes 1/2 de una pizza y luego 1/4 más. ¿Qué parte de la pizza comiste? Escribe el resultado como decimal.",
+    "datos": {
+      "num1": 2,
+      "num2": 4,
+      "operacion": "fraccion",
+      "expresion": "1/2 + 1/4"
+    },
+    "respuesta_correcta": 0.75,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Leer las fracciones",
+        "color_tag": "blue",
+        "explicacion": "Tenemos 1/2 y 1/4 de la misma pizza.",
+        "visual_state": {
+          "tipo": "fraccion",
+          "numerador": 1,
+          "denominador": 4,
+          "pintadas": 2,
+          "forma": "barra"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Buscar el mismo denominador",
+        "color_tag": "orange",
+        "explicacion": "1/2 es lo mismo que 2/4. Ahora sumamos cuartos.",
+        "reto": {
+          "pregunta": "¿Cuántos cuartos son 1/2?",
+          "opciones": [
+            "1/4",
+            "2/4",
+            "3/4"
+          ],
+          "correcta": 1,
+          "pista": "La mitad de 4 partes son 2 partes."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Sumar",
+        "color_tag": "green",
+        "explicacion": "2/4 + 1/4 = 3/4.",
+        "operacion_destacada": "2/4 + 1/4 = 3/4",
+        "visual_state": {
+          "tipo": "fraccion",
+          "numerador": 3,
+          "denominador": 4,
+          "pintadas": 3,
+          "forma": "barra"
+        }
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "3/4 es igual a 0.75.",
+        "resultado_final": 0.75
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "3/4 de la pizza está pintado; falta 1/4."
+      }
+    ],
+    "metafora_grafica": "fracciones"
+  },
+  {
+    "id": "ejercicio_math_024",
+    "categoria": "Fraccion",
+    "nivel": "N4_Primaria",
+    "titulo": "Fracciones equivalentes",
+    "enunciado": "Si 2/4 es equivalente a una fracción con denominador 8, ¿qué número va arriba?",
+    "datos": {
+      "num1": 2,
+      "num2": 4,
+      "operacion": "fraccion",
+      "expresion": "2/4 = ?/8"
+    },
+    "respuesta_correcta": 4,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Entender la equivalencia",
+        "color_tag": "blue",
+        "explicacion": "2/4 y ?/8 deben representar la misma parte.",
+        "visual_state": {
+          "tipo": "fraccion",
+          "numerador": 2,
+          "denominador": 4,
+          "pintadas": 2,
+          "forma": "circulo"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Multiplicar numerador y denominador",
+        "color_tag": "orange",
+        "explicacion": "4 × 2 = 8. Hacemos lo mismo con el numerador: 2 × 2.",
+        "reto": {
+          "pregunta": "¿Qué hacemos con el numerador?",
+          "opciones": [
+            "Multiplicarlo por 2",
+            "Sumarle 2",
+            "Dejarlo igual"
+          ],
+          "correcta": 0,
+          "pista": "Si el denominador se multiplica por 2, el numerador también."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "2 × 2 = 4.",
+        "operacion_destacada": "2 × 2 = 4",
+        "visual_state": {
+          "tipo": "fraccion",
+          "numerador": 4,
+          "denominador": 8,
+          "pintadas": 4,
+          "forma": "circulo"
+        }
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "La fracción equivalente es 4/8.",
+        "resultado_final": 4
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "4/8 también es la mitad. ¡La equivalencia funciona!"
+      }
+    ],
+    "metafora_grafica": "fracciones"
+  },
+  {
+    "id": "ejercicio_math_025",
+    "categoria": "Medidas",
+    "nivel": "N4_Primaria",
+    "titulo": "Convertir metros",
+    "enunciado": "Una cuerda mide 1.5 metros. ¿Cuántos centímetros mide?",
+    "datos": {
+      "num1": 1.5,
+      "num2": 100,
+      "operacion": "×",
+      "expresion": "1.5 × 100"
+    },
+    "respuesta_correcta": 150,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar la unidad",
+        "color_tag": "blue",
+        "explicacion": "1 metro tiene 100 centímetros."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la conversión",
+        "color_tag": "orange",
+        "explicacion": "Para pasar de metros a centímetros multiplicamos por 100.",
+        "reto": {
+          "pregunta": "¿Qué hacemos para pasar de metros a centímetros?",
+          "opciones": [
+            "Multiplicar por 100",
+            "Dividir entre 100",
+            "Sumar 100"
+          ],
+          "correcta": 0,
+          "pista": "Un metro es más grande que un centímetro."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "1.5 × 100 = 150.",
+        "operacion_destacada": "1.5 × 100 = 150"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "La cuerda mide 150 centímetros.",
+        "resultado_final": 150
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "150 cm ÷ 100 = 1.5 m. La conversión es correcta."
+      }
+    ],
+    "metafora_grafica": "medidas"
+  },
+  {
+    "id": "ejercicio_math_026",
+    "categoria": "Divisibilidad",
+    "nivel": "N5_Primaria",
+    "titulo": "El mcm de 6 y 8",
+    "enunciado": "¿Cuál es el mínimo común múltiplo de 6 y 8?",
+    "datos": {
+      "num1": 6,
+      "num2": 8,
+      "operacion": "mcm",
+      "expresion": "mcm(6, 8)"
+    },
+    "respuesta_correcta": 24,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Escribir múltiplos",
+        "color_tag": "blue",
+        "explicacion": "Múltiplos de 6: 6, 12, 18, 24… Múltiplos de 8: 8, 16, 24…"
+      },
+      {
+        "paso": 2,
+        "titulo": "Buscar el primero común",
+        "color_tag": "orange",
+        "explicacion": "El primer múltiplo que aparece en ambas listas es el mcm.",
+        "reto": {
+          "pregunta": "¿Qué buscamos?",
+          "opciones": [
+            "El múltiplo común más pequeño",
+            "El divisor común",
+            "La suma"
+          ],
+          "correcta": 0,
+          "pista": "mcm significa mínimo común múltiplo."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Encontrar",
+        "color_tag": "green",
+        "explicacion": "24 aparece en las dos listas.",
+        "operacion_destacada": "mcm(6, 8) = 24"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El mcm es 24.",
+        "resultado_final": 24
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "24 ÷ 6 = 4 y 24 ÷ 8 = 3. Es divisible por ambos."
+      }
+    ],
+    "metafora_grafica": "divisibilidad"
+  },
+  {
+    "id": "ejercicio_math_027",
+    "categoria": "Divisibilidad",
+    "nivel": "N5_Primaria",
+    "titulo": "El mcd de 18 y 24",
+    "enunciado": "¿Cuál es el máximo común divisor de 18 y 24?",
+    "datos": {
+      "num1": 18,
+      "num2": 24,
+      "operacion": "mcd",
+      "expresion": "mcd(18, 24)"
+    },
+    "respuesta_correcta": 6,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Buscar divisores",
+        "color_tag": "blue",
+        "explicacion": "Divisores de 18: 1, 2, 3, 6, 9, 18. Divisores de 24: 1, 2, 3, 4, 6, 8, 12, 24."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir el mayor común",
+        "color_tag": "orange",
+        "explicacion": "Buscamos el divisor más grande que comparten.",
+        "reto": {
+          "pregunta": "¿Qué buscamos?",
+          "opciones": [
+            "El divisor común más grande",
+            "El múltiplo común",
+            "La suma"
+          ],
+          "correcta": 0,
+          "pista": "mcd significa máximo común divisor."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Encontrar",
+        "color_tag": "green",
+        "explicacion": "6 divide a 18 y a 24.",
+        "operacion_destacada": "mcd(18, 24) = 6"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El mcd es 6.",
+        "resultado_final": 6
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "18 ÷ 6 = 3 y 24 ÷ 6 = 4. No hay un divisor común mayor."
+      }
+    ],
+    "metafora_grafica": "divisibilidad"
+  },
+  {
+    "id": "ejercicio_math_028",
+    "categoria": "Fraccion",
+    "nivel": "N5_Primaria",
+    "titulo": "Sumar medios y tercios",
+    "enunciado": "1/2 + 1/3 = ?/6. ¿Qué número va en el numerador?",
+    "datos": {
+      "num1": 1,
+      "num2": 3,
+      "operacion": "fraccion",
+      "expresion": "1/2 + 1/3 = ?/6"
+    },
+    "respuesta_correcta": 5,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Buscar denominador común",
+        "color_tag": "blue",
+        "explicacion": "El denominador común de 2 y 3 es 6.",
+        "visual_state": {
+          "tipo": "fraccion",
+          "numerador": 1,
+          "denominador": 6,
+          "pintadas": 0,
+          "forma": "circulo"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Convertir las fracciones",
+        "color_tag": "orange",
+        "explicacion": "1/2 = 3/6 y 1/3 = 2/6.",
+        "reto": {
+          "pregunta": "¿Cuánto es 1/2 en sextos?",
+          "opciones": [
+            "2/6",
+            "3/6",
+            "4/6"
+          ],
+          "correcta": 1,
+          "pista": "Multiplica numerador y denominador por 3."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Sumar",
+        "color_tag": "green",
+        "explicacion": "3/6 + 2/6 = 5/6.",
+        "operacion_destacada": "3/6 + 2/6 = 5/6",
+        "visual_state": {
+          "tipo": "fraccion",
+          "numerador": 5,
+          "denominador": 6,
+          "pintadas": 5,
+          "forma": "circulo"
+        }
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El numerador es 5.",
+        "resultado_final": 5
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "5/6 es casi un entero; tiene sentido con 1/2 + 1/3."
+      }
+    ],
+    "metafora_grafica": "fracciones"
+  },
+  {
+    "id": "ejercicio_math_029",
+    "categoria": "Proporcionalidad",
+    "nivel": "N5_Primaria",
+    "titulo": "Lápices y bolivianos",
+    "enunciado": "Si 3 lápices cuestan 6 bolivianos, ¿cuánto cuestan 5 lápices?",
+    "datos": {
+      "num1": 3,
+      "num2": 6,
+      "operacion": "proporción",
+      "expresion": "3 → 6; 5 → ?"
+    },
+    "respuesta_correcta": 10,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con 3 y 6."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Primero encontramos el valor de uno y luego multiplicamos.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Encontrar el valor de uno y multiplicar",
+            "Restar los datos",
+            "Contar uno por uno"
+          ],
+          "correcta": 0,
+          "pista": "Si 3 cuestan 6, uno cuesta 2."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: 3 → 6; 5 → ? = 10.",
+        "operacion_destacada": "3 → 6; 5 → ? = 10"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 10.",
+        "resultado_final": 10
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Si 5 lápices cuestan 10, cada uno cuesta 2. La proporción es correcta.",
+        "operacion_destacada": "10 ÷ 5 = 2"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_030",
+    "categoria": "Geometria",
+    "nivel": "N5_Primaria",
+    "titulo": "El jardín",
+    "enunciado": "Un jardín rectangular mide 6 m por 4 m. ¿Cuál es su área?",
+    "datos": {
+      "num1": 6,
+      "num2": 4,
+      "operacion": "×",
+      "expresion": "6 × 4"
+    },
+    "respuesta_correcta": 24,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar la figura",
+        "color_tag": "blue",
+        "explicacion": "El jardín es un rectángulo de 6 m por 4 m.",
+        "visual_state": {
+          "tipo": "geometria",
+          "figura": "rectangle",
+          "ancho": 6,
+          "alto": 4,
+          "modo": "perimeter"
+        }
+      },
+      {
+        "paso": 2,
+        "titulo": "Recordar la fórmula",
+        "color_tag": "orange",
+        "explicacion": "El área se calcula multiplicando largo por ancho.",
+        "reto": {
+          "pregunta": "¿Cómo calculamos el área?",
+          "opciones": [
+            "Largo × ancho",
+            "Largo + ancho",
+            "Largo - ancho"
+          ],
+          "correcta": 0,
+          "pista": "Multiplicamos las dos medidas."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "6 × 4 = 24.",
+        "operacion_destacada": "6 × 4 = 24",
+        "visual_state": {
+          "tipo": "geometria",
+          "figura": "rectangle",
+          "ancho": 6,
+          "alto": 4,
+          "modo": "area"
+        }
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El área es 24 metros cuadrados.",
+        "resultado_final": 24
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "La cuadrícula tiene 24 cuadrados de 1 m²."
+      }
+    ],
+    "metafora_grafica": "figuras_geometricas"
+  },
+  {
+    "id": "ejercicio_math_031",
+    "categoria": "Enteros",
+    "nivel": "N6_Primaria",
+    "titulo": "Bajo cero",
+    "enunciado": "La temperatura era -5 °C y subió 8 °C. ¿Cuál es la temperatura ahora?",
+    "datos": {
+      "num1": -5,
+      "num2": 8,
+      "operacion": "+",
+      "expresion": "(-5) + 8"
+    },
+    "respuesta_correcta": 3,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Trabajamos con -5 y 8."
+      },
+      {
+        "paso": 2,
+        "titulo": "Elegir la estrategia",
+        "color_tag": "orange",
+        "explicacion": "Juntamos las cantidades con una suma.",
+        "reto": {
+          "pregunta": "¿Qué debemos hacer para resolver?",
+          "opciones": [
+            "Sumar los datos",
+            "Restar los datos",
+            "Multiplicar los datos"
+          ],
+          "correcta": 0,
+          "pista": "Cuando algo se junta o aumenta, sumamos."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Resolver",
+        "color_tag": "green",
+        "explicacion": "Realizamos la operación: (-5) + 8 = 3.",
+        "operacion_destacada": "(-5) + 8 = 3"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "El resultado es 3.",
+        "resultado_final": 3
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "3 - 8 = -5. El entero es correcto.",
+        "operacion_destacada": "3 - 8 = -5"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_032",
+    "categoria": "Potencias",
+    "nivel": "N6_Primaria",
+    "titulo": "La potencia",
+    "enunciado": "¿Cuánto es 2 elevado a la 3?",
+    "datos": {
+      "num1": 2,
+      "num2": 3,
+      "operacion": "^",
+      "expresion": "2³"
+    },
+    "respuesta_correcta": 8,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar base y exponente",
+        "color_tag": "blue",
+        "explicacion": "La base es 2 y el exponente es 3."
+      },
+      {
+        "paso": 2,
+        "titulo": "Escribir la multiplicación",
+        "color_tag": "orange",
+        "explicacion": "2³ significa 2 × 2 × 2.",
+        "reto": {
+          "pregunta": "¿Qué significa 2³?",
+          "opciones": [
+            "2 × 3",
+            "2 × 2 × 2",
+            "2 + 3"
+          ],
+          "correcta": 1,
+          "pista": "El exponente indica cuántas veces se multiplica la base."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Multiplicar",
+        "color_tag": "green",
+        "explicacion": "2 × 2 = 4 y 4 × 2 = 8.",
+        "operacion_destacada": "2 × 2 × 2 = 8"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "2³ = 8.",
+        "resultado_final": 8
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Multiplicamos la base tres veces y obtuvimos 8."
+      }
+    ],
+    "metafora_grafica": "potencias"
+  },
+  {
+    "id": "ejercicio_math_033",
+    "categoria": "Porcentaje",
+    "nivel": "N6_Primaria",
+    "titulo": "El descuento",
+    "enunciado": "Una mochila cuesta 80 bolivianos y tiene 25% de descuento. ¿Cuántos bolivianos se descuentan?",
+    "datos": {
+      "num1": 25,
+      "num2": 80,
+      "operacion": "%",
+      "expresion": "25% de 80"
+    },
+    "respuesta_correcta": 20,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Entender el porcentaje",
+        "color_tag": "blue",
+        "explicacion": "25% es 25 de cada 100, o una cuarta parte."
+      },
+      {
+        "paso": 2,
+        "titulo": "Calcular una parte",
+        "color_tag": "orange",
+        "explicacion": "25% es lo mismo que 1/4. Dividimos 80 entre 4.",
+        "reto": {
+          "pregunta": "¿Qué parte del total es 25%?",
+          "opciones": [
+            "La mitad",
+            "Una cuarta parte",
+            "El total"
+          ],
+          "correcta": 1,
+          "pista": "25 de 100 es un cuarto."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "80 ÷ 4 = 20.",
+        "operacion_destacada": "80 ÷ 4 = 20"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El descuento es 20 bolivianos.",
+        "resultado_final": 20
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "20 × 4 = 80. El 25% del total es 20."
+      }
+    ],
+    "metafora_grafica": "porcentajes"
+  },
+  {
+    "id": "ejercicio_math_034",
+    "categoria": "Geometria",
+    "nivel": "N6_Primaria",
+    "titulo": "El cubo",
+    "enunciado": "Un cubo tiene 3 cm de lado. ¿Cuál es su volumen?",
+    "datos": {
+      "num1": 3,
+      "num2": 3,
+      "operacion": "volumen",
+      "expresion": "3 × 3 × 3"
+    },
+    "respuesta_correcta": 27,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar las medidas",
+        "color_tag": "blue",
+        "explicacion": "El cubo tiene largo, ancho y alto de 3 cm."
+      },
+      {
+        "paso": 2,
+        "titulo": "Usar la fórmula",
+        "color_tag": "orange",
+        "explicacion": "El volumen del cubo es lado × lado × lado.",
+        "reto": {
+          "pregunta": "¿Cómo calculamos el volumen de un cubo?",
+          "opciones": [
+            "Lado × lado × lado",
+            "Lado + lado",
+            "Lado × 2"
+          ],
+          "correcta": 0,
+          "pista": "Un cubo tiene tres dimensiones iguales."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Calcular",
+        "color_tag": "green",
+        "explicacion": "3 × 3 × 3 = 27.",
+        "operacion_destacada": "3 × 3 × 3 = 27"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "El volumen es 27 centímetros cúbicos.",
+        "resultado_final": 27
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "El cubo contiene 27 cubitos de 1 cm³."
+      }
+    ],
+    "metafora_grafica": "figuras_geometricas"
+  },
+  {
+    "id": "ejercicio_math_035",
+    "categoria": "Estadistica",
+    "nivel": "N6_Primaria",
+    "titulo": "La moda de los datos",
+    "enunciado": "Las notas de un equipo son 2, 4, 4 y 6. ¿Cuál es la moda?",
+    "datos": {
+      "num1": 4,
+      "num2": 0,
+      "operacion": "moda",
+      "expresion": "Datos: 2, 4, 4, 6"
+    },
+    "respuesta_correcta": 4,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Observar los datos",
+        "color_tag": "blue",
+        "explicacion": "Los datos son 2, 4, 4 y 6."
+      },
+      {
+        "paso": 2,
+        "titulo": "Contar repeticiones",
+        "color_tag": "orange",
+        "explicacion": "El 4 aparece dos veces; los demás aparecen una vez.",
+        "reto": {
+          "pregunta": "¿Qué es la moda?",
+          "opciones": [
+            "El dato que más se repite",
+            "El dato más grande",
+            "La suma de los datos"
+          ],
+          "correcta": 0,
+          "pista": "Moda viene de “más repetido”."
+        }
+      },
+      {
+        "paso": 3,
+        "titulo": "Elegir el dato",
+        "color_tag": "green",
+        "explicacion": "El dato que más se repite es 4.",
+        "operacion_destacada": "moda = 4"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado",
+        "color_tag": "purple",
+        "explicacion": "La moda es 4.",
+        "resultado_final": 4
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar",
+        "color_tag": "yellow",
+        "explicacion": "Ningún otro dato aparece dos veces."
+      }
+    ],
+    "metafora_grafica": "estadistica"
   }
 ]

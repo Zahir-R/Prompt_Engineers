@@ -74,8 +74,14 @@ export function UnitDetail({ unitId }: { unitId: string }) {
         <div>
           <Sticker tone={unit.accent}>
             <BookOpen className="size-3.5" aria-hidden="true" />
-            Capítulo {unit.order}
+            {unit.levelId === "N0" ? "Primer paso" : `Capítulo ${unit.order}`}
           </Sticker>
+          <Link
+            href="/hoja-de-ruta"
+            className="ml-2 inline-flex rounded-lg border-2 border-ink/20 bg-paper px-2 py-1 text-xs font-black text-ink-soft hover:text-ink"
+          >
+            Ruta {unit.levelId}
+          </Link>
           <h1 className="mt-3 font-display text-4xl font-semibold leading-none text-ink sm:text-5xl">
             {unit.title}
           </h1>

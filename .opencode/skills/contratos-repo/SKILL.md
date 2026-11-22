@@ -13,11 +13,15 @@ Cambios aditivos y coordinados:
 - `src/types/demo.ts`
 - `src/types/anatomy.ts`
 - `src/types/cosmetics.ts`
+- `src/types/roadmap.ts`
 - `src/data/exercises.json`
 - `src/data/demo.ts`
+- `src/data/roadmap.ts`
 - `src/context/AppProvider.tsx`
 - `src/lib/constants.ts`
 - `src/lib/demo.ts`
+- `src/lib/roadmap.ts`
+- `src/components/figures/`
 - `src/app/ejercicio/[id]/page.tsx`
 - `src/app/unidad/[id]/page.tsx`
 - `src/app/club/[threadId]/page.tsx`
@@ -57,7 +61,7 @@ decide cuándo abrir el desglose. No otorgar XP a invitados.
 
 ## Rutas
 
-- `/`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`
+- `/`, `/hoja-de-ruta`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`
 - `/club`, `/club/[threadId]`
 - `/entrar`, `/perfil`
 - `/panel`, `/docente`
@@ -90,4 +94,5 @@ pnpm build
 pnpm test:e2e
 ```
 
-Revisar cursos públicos, invitado, alias, carnet, La Fogata y panel backstage.
+Revisar cursos públicos, invitado, alias, carnet, La Fogata, panel backstage,
+hoja de ruta N0–N6 y figuras del desglose.

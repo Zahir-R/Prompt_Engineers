@@ -287,8 +287,8 @@ export function ThreadDetail({ threadId }: { threadId: string }) {
         <Shield className="mt-0.5 size-5 shrink-0 text-teal" aria-hidden="true" />
         <p className="text-xs font-semibold leading-relaxed text-ink-soft">
           <Sparkles className="mr-1 inline size-3.5 text-mustard" aria-hidden="true" />
-          La Fogata de demostración se guarda solo en este navegador. No escribas
-          datos personales. Si algo te incomoda, usa “Reportar”.
+          La Fogata se guarda en este navegador. Comparte pistas, no datos
+          personales. Si algo te incomoda, usa “Reportar”.
         </p>
       </div>
     </div>

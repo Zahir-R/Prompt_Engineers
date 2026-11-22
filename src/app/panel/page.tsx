@@ -9,6 +9,7 @@ import {
   Copy,
   EyeOff,
   Flag,
+  Flame,
   GraduationCap,
   LayoutDashboard,
   LogOut,
@@ -18,6 +19,8 @@ import {
   Users,
 } from "lucide-react";
 import { Avatar } from "@/components/brand/Avatar";
+import { DiagnosisModal } from "@/components/companion/DiagnosisModal";
+import { TeacherCreatorForm } from "@/components/teacher/TeacherCreatorForm";
 import { Mascot } from "@/components/brand/Mascot";
 import { PaperCard } from "@/components/brand/PaperCard";
 import { Sticker } from "@/components/brand/Sticker";
@@ -54,6 +57,10 @@ export default function PanelPage() {
   const [avatar, setAvatar] = useState<AvatarId>("sky");
   const [studentMessage, setStudentMessage] = useState("");
   const [copied, setCopied] = useState(false);
+  const [view, setView] = useState<"clase" | "crear">("clase");
+  const [diagnosisProfileId, setDiagnosisProfileId] = useState<string | null>(
+    null,
+  );
 
   if (!ready) {
     return (
@@ -81,8 +88,7 @@ export default function PanelPage() {
             Panel de guía
           </h1>
           <p className="mx-auto mt-2 max-w-md font-semibold text-ink-soft">
-            Este espacio es solo para docentes. Los estudiantes no lo ven en su
-            navegación.
+            Espacio para docentes y guías de la clase.
           </p>
           {teacher ? (
             <button
@@ -91,7 +97,7 @@ export default function PanelPage() {
               className="mt-5 inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-plum px-4 py-2.5 text-sm font-black text-paper shadow-hard"
             >
               <GraduationCap className="size-4" aria-hidden="true" />
-              Entrar como {teacher.alias} (demo)
+              Entrar como {teacher.alias}
             </button>
           ) : (
             <Link
@@ -111,6 +117,24 @@ export default function PanelPage() {
     (profile) =>
       profile.role === "student" && profile.classId === activeProfile.classId,
   );
+  const totalAttempts = students.reduce(
+    (total, student) =>
+      total +
+      Object.values(getProfileProgress(student.id)).reduce(
+        (sum, entry) => sum + entry.attempts,
+        0,
+      ),
+    0,
+  );
+  const totalSolved = students.reduce(
+    (total, student) => total + getSolvedCount(getProfileProgress(student.id)),
+    0,
+  );
+  const accuracy = totalAttempts > 0 ? Math.round((totalSolved / totalAttempts) * 100) : 0;
+  const averageStreak = students.length
+    ? (students.reduce((total, student) => total + student.streakCurrent, 0) / students.length).toFixed(1)
+    : "0";
+
   const moderationThreads = [...club.threads].sort((a, b) => {
     if (a.reported !== b.reported) return Number(b.reported) - Number(a.reported);
     if (a.hidden !== b.hidden) return Number(a.hidden) - Number(b.hidden);
@@ -164,13 +188,14 @@ export default function PanelPage() {
               <Copy className="size-4" aria-hidden="true" />
               {copied ? "Copiado" : "Copiar código"}
             </button>
-            <Link
-              href="/docente"
+            <button
+              type="button"
+              onClick={() => setView("crear")}
               className="flex items-center gap-1 rounded-xl border-2 border-paper/30 bg-paper/10 px-3 py-2 text-sm font-black"
             >
               <BookOpen className="size-4" aria-hidden="true" />
               Crear actividad
-            </Link>
+            </button>
             <button
               type="button"
               onClick={logout}
@@ -184,6 +209,51 @@ export default function PanelPage() {
         <Mascot className="mx-auto size-36" />
       </section>
 
+      <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="rounded-xl border-2 border-ink bg-paper p-3 text-center shadow-hard">
+          <Users className="mx-auto size-4 text-teal" aria-hidden="true" />
+          <p className="font-display text-xl font-black text-ink">{students.length}</p>
+          <p className="text-xs font-bold text-ink-soft">estudiantes</p>
+        </div>
+        <div className="rounded-xl border-2 border-ink bg-paper p-3 text-center shadow-hard">
+          <BookOpen className="mx-auto size-4 text-sky" aria-hidden="true" />
+          <p className="font-display text-xl font-black text-ink">
+            {new Set(units.flatMap((unit) => unit.exerciseIds)).size}
+          </p>
+          <p className="text-xs font-bold text-ink-soft">hojas del club</p>
+        </div>
+        <div className="rounded-xl border-2 border-ink bg-paper p-3 text-center shadow-hard">
+          <CircleCheck className="mx-auto size-4 text-teal" aria-hidden="true" />
+          <p className="font-display text-xl font-black text-ink">{accuracy}%</p>
+          <p className="text-xs font-bold text-ink-soft">aciertos</p>
+        </div>
+        <div className="rounded-xl border-2 border-ink bg-paper p-3 text-center shadow-hard">
+          <Flame className="mx-auto size-4 text-coral-deep" aria-hidden="true" />
+          <p className="font-display text-xl font-black text-ink">{averageStreak}</p>
+          <p className="text-xs font-bold text-ink-soft">racha media</p>
+        </div>
+      </section>
+
+      <div className="mt-5 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => setView("clase")}
+          className={`rounded-xl border-2 px-4 py-2 text-sm font-black ${view === "clase" ? "border-ink bg-mustard text-ink shadow-hard" : "border-ink/20 bg-paper text-ink-soft"}`}
+        >
+          Mi clase
+        </button>
+        <button
+          type="button"
+          onClick={() => setView("crear")}
+          className={`rounded-xl border-2 px-4 py-2 text-sm font-black ${view === "crear" ? "border-ink bg-mustard text-ink shadow-hard" : "border-ink/20 bg-paper text-ink-soft"}`}
+        >
+          Crear reto
+        </button>
+      </div>
+
+      {view === "crear" ? (
+        <TeacherCreatorForm embedded />
+      ) : (
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         <section>
           <h2 className="flex items-center gap-2 font-display text-2xl font-semibold text-ink">
@@ -231,8 +301,17 @@ export default function PanelPage() {
                           racha {student.streakCurrent}
                         </p>
                       </div>
-                      <div className="rounded-xl border-2 border-ink bg-paper-deep px-3 py-1.5 text-sm font-black text-ink">
-                        {student.xp} XP
+                      <div className="flex flex-col items-end gap-1">
+                        <div className="rounded-xl border-2 border-ink bg-paper-deep px-3 py-1.5 text-sm font-black text-ink">
+                          {student.xp} XP
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setDiagnosisProfileId(student.id)}
+                          className="text-xs font-black text-sky underline decoration-2 underline-offset-2"
+                        >
+                          Ver resumen
+                        </button>
                       </div>
                     </div>
                   </PaperCard>
@@ -247,8 +326,8 @@ export default function PanelPage() {
                 Crear alias de estudiante
               </h3>
               <p className="mt-1 text-sm font-semibold text-ink-soft">
-                El estudiante no necesita correo. Entra con el código de la clase
-                y el alias.
+                Comparte el código de clase. Cada estudiante entra con su alias,
+                sin correo.
               </p>
               <div className="mt-3 flex flex-col gap-3 sm:flex-row">
                 <input
@@ -293,7 +372,7 @@ export default function PanelPage() {
             Moderar La Fogata
           </h2>
           <p className="mt-1 font-hand text-xl font-bold text-ink-soft">
-            sin aparecer como aula
+            acompaña y modera las dudas del club
           </p>
           <ul className="mt-3 space-y-3">
             {moderationThreads.map((thread) => {
@@ -368,17 +447,24 @@ export default function PanelPage() {
           <button
             type="button"
             onClick={() => {
-              if (window.confirm("¿Reiniciar todos los datos de la demo?")) {
+              if (window.confirm("¿Borrar el avance guardado en este navegador y empezar de nuevo?")) {
                 resetDemo();
               }
             }}
             className="mt-4 flex items-center gap-2 rounded-xl border-2 border-ink bg-paper px-3 py-2 text-xs font-black text-ink shadow-hard"
           >
             <RotateCcw className="size-3.5" aria-hidden="true" />
-            Reiniciar demo
+            Reiniciar datos
           </button>
         </section>
       </div>
+      )}
+
+      <DiagnosisModal
+        open={Boolean(diagnosisProfileId)}
+        profileId={diagnosisProfileId ?? undefined}
+        onClose={() => setDiagnosisProfileId(null)}
+      />
     </div>
   );
 }
