@@ -8,8 +8,8 @@ import {
   GraduationCap,
   House,
   Route,
-  Sparkles,
 } from "lucide-react";
+import { Mascot } from "@/components/brand/Mascot";
 import { DiagnosisModal } from "@/components/companion/DiagnosisModal";
 import { cn } from "@/lib/utils";
 
@@ -25,18 +25,16 @@ export function AppHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
+      <header className="sticky top-0 z-40 border-b-2 border-ink bg-paper/95">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-1 px-4 py-2 sm:gap-3">
           <Link href="/" className="flex items-center gap-2">
-            <span className="flex size-10 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-sm">
-              <Sparkles className="size-5" aria-hidden="true" />
-            </span>
-            <span className="leading-tight">
-              <span className="block font-display text-xl font-semibold text-slate-900">
+            <Mascot className="size-14 shrink-0" />
+            <span className="leading-none">
+              <span className="block font-display text-2xl font-semibold text-ink">
                 Mates
               </span>
-              <span className="block text-xs font-semibold uppercase tracking-wide text-blue-600">
-                Modo Desglose
+              <span className="mt-0.5 block font-hand text-lg font-bold text-coral-deep">
+                cuaderno de aventuras
               </span>
             </span>
           </Link>
@@ -50,15 +48,16 @@ export function AppHeader() {
                 <Link
                   key={href}
                   href={href}
+                  aria-label={label}
                   className={cn(
-                    "flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold transition-colors",
+                    "flex flex-col items-center gap-0.5 rounded-[0.8rem_1rem_0.7rem_1.1rem] border-2 px-2 py-1.5 text-[11px] font-black leading-none transition-transform sm:flex-row sm:gap-2 sm:px-3 sm:py-2 sm:text-sm",
                     active
-                      ? "bg-blue-100 text-blue-700"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                      ? "-rotate-1 border-ink bg-mustard/60 text-ink shadow-hard"
+                      : "border-transparent text-ink-soft hover:-rotate-1 hover:border-ink hover:bg-paper-deep hover:text-ink",
                   )}
                 >
                   <Icon className="size-4" aria-hidden="true" />
-                  <span className="hidden sm:inline">{label}</span>
+                  <span>{label}</span>
                 </Link>
               );
             })}
@@ -67,11 +66,11 @@ export function AppHeader() {
           <button
             type="button"
             onClick={() => setDiagnosisOpen(true)}
-            className="flex items-center gap-2 rounded-xl bg-amber-100 px-3 py-2 text-sm font-bold text-amber-900 transition-colors hover:bg-amber-200"
+            className="flex items-center gap-2 rounded-[1rem_0.7rem_1.1rem_0.8rem] border-2 border-ink bg-[#cce9e3] px-3 py-2 text-sm font-black text-ink shadow-hard transition-transform hover:rotate-1"
           >
             <ClipboardList className="size-4" aria-hidden="true" />
-            <span className="hidden sm:inline">Ver Diagnóstico para Acompañante</span>
-            <span className="sm:hidden">Diagnóstico</span>
+            <span className="hidden md:inline">Ver diagnóstico</span>
+            <span className="md:hidden">Diagnóstico</span>
           </button>
         </div>
       </header>

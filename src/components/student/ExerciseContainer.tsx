@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, Blocks, Lightbulb, Sparkles } from "lucide-react";
 import { DeconstructionModal } from "@/components/anatomy/DeconstructionModal";
+import { Mascot } from "@/components/brand/Mascot";
+import { Sticker } from "@/components/brand/Sticker";
 import {
   MathProblemView,
   type Feedback,
@@ -21,7 +23,9 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
   if (!ready) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center">
-        <p className="font-bold text-slate-600">Cargando el reto...</p>
+        <p className="font-hand text-2xl font-bold text-ink-soft">
+          Abriendo el cuaderno...
+        </p>
       </div>
     );
   }
@@ -29,15 +33,16 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
   if (!exercise) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center">
-        <h1 className="font-display text-3xl font-semibold text-slate-900">
+        <Mascot className="mx-auto size-40" />
+        <h1 className="mt-4 font-display text-3xl font-semibold text-ink">
           No encontramos ese ejercicio
         </h1>
-        <p className="mt-2 font-semibold text-slate-600">
-          Revisa la ruta de aprendizaje para elegir otro reto.
+        <p className="mt-2 font-semibold text-ink-soft">
+          Revisa la ruta de aprendizaje para elegir otra hoja.
         </p>
         <Link
           href="/ruta"
-          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 font-bold text-white"
+          className="mt-6 inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-mustard px-4 py-2.5 font-black text-ink shadow-hard"
         >
           <ArrowLeft className="size-4" aria-hidden="true" />
           Volver a la ruta
@@ -56,7 +61,7 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
     if (!answer.trim() || !Number.isFinite(parsed)) {
       setFeedback({
         type: "wrong",
-        message: "Escribe un numero para que podamos comprobar tu respuesta.",
+        message: "Escribe un número para que podamos comprobar tu respuesta.",
       });
       return;
     }
@@ -77,7 +82,7 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
       message:
         result.attempts >= 2
           ? "No pasa nada, los errores ayudan a aprender. Abrimos el Modo Desglose para descubrir juntos dónde está el detalle."
-          : "Todavía no es la respuesta. Revisa con calma y vuelve a intentarlo; no hay castigos por error.",
+          : "Todavía no es la respuesta. Revisa con calma y vuelve a intentarlo; aquí no hay castigos por error.",
     });
 
     if (result.attempts >= 2) {
@@ -89,7 +94,7 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
     <div className="mx-auto max-w-5xl px-4 py-8">
       <Link
         href="/ruta"
-        className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-slate-600 transition-colors hover:bg-white hover:text-slate-900"
+        className="inline-flex items-center gap-2 rounded-xl border-2 border-transparent px-3 py-2 text-sm font-black text-ink-soft transition-colors hover:border-ink hover:bg-paper hover:text-ink"
       >
         <ArrowLeft className="size-4" aria-hidden="true" />
         Volver a la ruta
@@ -107,56 +112,66 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
           onOpenAnatomy={() => setAnatomyOpen(true)}
         />
 
-        <aside className="space-y-4">
-          <div className="rounded-3xl border border-blue-200 bg-blue-50 p-5">
-            <p className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-blue-700">
-              <Lightbulb className="size-4" aria-hidden="true" />
-              Pista amable
+        <aside className="space-y-5">
+          <div className="paper-note relative rotate-1 p-5">
+            <div className="tape -top-3 right-8" aria-hidden="true" />
+            <p className="flex items-center gap-2 font-hand text-xl font-bold text-ink">
+              <Lightbulb className="size-5 text-coral-deep" aria-hidden="true" />
+              pista amable
             </p>
-            <p className="mt-2 text-sm font-semibold leading-relaxed text-blue-900">
+            <p className="mt-1 text-sm font-semibold leading-relaxed text-ink-soft">
               Puedes abrir el Modo Desglose cuando quieras. Si fallas dos veces,
               se abrirá automáticamente para acompañarte paso a paso.
             </p>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-5">
-            <p className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-slate-500">
-              <Blocks className="size-4" aria-hidden="true" />
-              ¿Qué es el Modo Desglose?
-            </p>
-            <ul className="mt-3 space-y-2 text-sm font-semibold text-slate-700">
-              <li className="flex gap-2">
-                <span className="mt-1 size-2 shrink-0 rounded-full bg-blue-500" />
-                Azul: datos iniciales.
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1 size-2 shrink-0 rounded-full bg-orange-500" />
-                Naranja: operación.
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1 size-2 shrink-0 rounded-full bg-emerald-500" />
-                Verde: agrupación o resultado intermedio.
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1 size-2 shrink-0 rounded-full bg-purple-500" />
-                Violeta: respuesta final.
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1 size-2 shrink-0 rounded-full bg-amber-500" />
-                Amarillo: verificación.
-              </li>
-            </ul>
+          <div className="relative -rotate-1">
+            <div className="tape -top-3 left-8" aria-hidden="true" />
+            <div className="rounded-[1rem_1.3rem_0.9rem_1.2rem] border-2 border-ink bg-paper p-5 shadow-hard">
+              <p className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-ink-soft">
+                <Blocks className="size-4 text-teal" aria-hidden="true" />
+                Los cinco colores
+              </p>
+              <ul className="mt-3 space-y-2 text-sm font-semibold text-ink-soft">
+                <li className="flex gap-2">
+                  <span className="mt-1 size-2.5 shrink-0 rounded-full bg-blue-500" />
+                  Azul: datos iniciales.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 size-2.5 shrink-0 rounded-full bg-orange-500" />
+                  Naranja: operación.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 size-2.5 shrink-0 rounded-full bg-emerald-500" />
+                  Verde: agrupación o resultado intermedio.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 size-2.5 shrink-0 rounded-full bg-purple-500" />
+                  Violeta: respuesta final.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 size-2.5 shrink-0 rounded-full bg-amber-500" />
+                  Amarillo: verificación.
+                </li>
+              </ul>
+            </div>
           </div>
 
-          <div className="rounded-3xl border border-amber-200 bg-amber-50 p-5">
-            <p className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-amber-800">
-              <Sparkles className="size-4" aria-hidden="true" />
-              Recuerda
-            </p>
-            <p className="mt-2 text-sm font-semibold leading-relaxed text-amber-900">
-              Equivocarse es parte de aprender. Aquí no perdemos puntos: cada
-              intento nos ayuda a encontrar el primer paso que necesita apoyo.
-            </p>
+          <div className="rounded-[1.2rem_0.8rem_1.4rem_0.9rem] border-2 border-ink bg-[#cce9e3] p-5 shadow-hard">
+            <div className="flex items-start gap-3">
+              <Mascot className="size-20 shrink-0" />
+              <div>
+                <Sticker tone="teal">
+                  <Sparkles className="size-3.5" aria-hidden="true" />
+                  Recuerda
+                </Sticker>
+                <p className="mt-2 text-sm font-semibold leading-relaxed text-ink">
+                  Equivocarse es parte de aprender. Aquí no perdemos puntos:
+                  cada intento nos ayuda a encontrar el primer paso que necesita
+                  apoyo.
+                </p>
+              </div>
+            </div>
           </div>
         </aside>
       </div>

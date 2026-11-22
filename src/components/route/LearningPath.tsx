@@ -8,6 +8,10 @@ import {
   Route,
   Sparkles,
 } from "lucide-react";
+import { Mascot } from "@/components/brand/Mascot";
+import { PaperCard } from "@/components/brand/PaperCard";
+import { Sticker } from "@/components/brand/Sticker";
+import { StarDoodle, SquiggleDoodle } from "@/components/brand/Doodle";
 import { useApp } from "@/context/AppProvider";
 import { DEFAULT_PATH_IDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -18,7 +22,9 @@ export function LearningPath() {
   if (!ready) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center">
-        <p className="font-bold text-slate-600">Cargando la ruta...</p>
+        <p className="font-hand text-2xl font-bold text-ink-soft">
+          Abriendo el cuaderno...
+        </p>
       </div>
     );
   }
@@ -36,70 +42,86 @@ export function LearningPath() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
-      <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-600 p-6 text-white shadow-lg sm:p-8">
-        <p className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-blue-100">
-          <Route className="size-4" aria-hidden="true" />
-          Ruta por defecto
-        </p>
-        <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">
-          Tu camino de nivelación
-        </h1>
-        <p className="mt-2 max-w-2xl font-semibold text-blue-100">
-          Avanza con retos cortos. Cada ejercicio incluye un Modo Desglose para
-          entender el procedimiento sin miedo a equivocarte.
-        </p>
-      </div>
+      <section className="relative grid gap-6 rounded-[1.4rem_1rem_1.6rem_1.1rem] border-2 border-ink bg-paper-deep/60 p-6 shadow-hard sm:grid-cols-[1fr_auto] sm:items-center sm:p-8">
+        <div>
+          <Sticker tone="teal">
+            <Route className="size-3.5" aria-hidden="true" />
+            Ruta por defecto
+          </Sticker>
+          <h1 className="mt-4 font-display text-4xl font-semibold leading-none text-ink sm:text-5xl">
+            Tu camino de
+            <span className="relative ml-2 inline-block">
+              aventuras
+              <SquiggleDoodle className="absolute -bottom-2 left-0 w-full text-mustard" />
+            </span>
+          </h1>
+          <p className="mt-5 max-w-xl text-base font-semibold leading-relaxed text-ink-soft">
+            Avanza casilla por casilla. Cada reto es corto y siempre puedes abrir
+            el Modo Desglose para entender el procedimiento.
+          </p>
+        </div>
+        <div className="relative mx-auto">
+          <Mascot className="size-40" label="Tinta te acompaña en la ruta" />
+          <StarDoodle className="absolute -right-4 top-0 rotate-12 text-mustard" />
+        </div>
+      </section>
 
-      <ol className="mt-6 space-y-3">
+      <ol className="relative mt-8 space-y-4">
+        <div
+          className="absolute bottom-8 left-[2.35rem] top-8 hidden w-1 border-l-4 border-dashed border-ink/25 sm:block"
+          aria-hidden="true"
+        />
         {defaultPath.map((exercise, index) => {
           const entry = progress[exercise.id];
           const solved = entry?.solved ?? false;
           const attempts = entry?.attempts ?? 0;
+          const rotate = index % 2 === 0 ? "sm:-rotate-1" : "sm:rotate-1";
 
           return (
             <li
               key={exercise.id}
-              className="flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center"
+              className={cn(
+                "relative grid gap-4 sm:grid-cols-[5rem_1fr_auto] sm:items-center",
+                rotate,
+              )}
             >
-              <span
-                className={cn(
-                  "flex size-12 shrink-0 items-center justify-center rounded-2xl font-display text-xl font-black",
-                  solved
-                    ? "bg-emerald-100 text-emerald-700"
-                    : "bg-blue-100 text-blue-700",
-                )}
-              >
+              <div className="relative z-10 flex size-16 items-center justify-center rounded-full border-2 border-ink bg-paper font-display text-2xl font-black text-ink shadow-hard">
                 {solved ? (
-                  <CircleCheck className="size-6" aria-hidden="true" />
+                  <CircleCheck className="size-8 text-teal" aria-hidden="true" />
                 ) : (
                   index + 1
                 )}
-              </span>
+              </div>
 
-              <div className="min-w-0 flex-1">
+              <PaperCard className="p-4 sm:p-5">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600">
+                  <Sticker tone={solved ? "teal" : "paper"}>
                     {exercise.categoria}
-                  </span>
-                  <span className="text-xs font-bold text-slate-400">
+                  </Sticker>
+                  <span className="text-xs font-black uppercase tracking-wide text-ink-soft">
                     {exercise.nivel.replaceAll("_", " ")}
                   </span>
+                  {solved && (
+                    <span className="font-hand text-lg font-bold text-teal">
+                      ¡completado!
+                    </span>
+                  )}
                 </div>
-                <h2 className="mt-1 truncate font-display text-xl font-semibold text-slate-900">
+                <h2 className="mt-2 font-display text-2xl font-semibold leading-tight text-ink">
                   {exercise.titulo}
                 </h2>
-                <p className="text-sm font-semibold text-slate-500">
+                <p className="mt-1 text-sm font-semibold text-ink-soft">
                   {solved
-                    ? "Completado"
+                    ? "Puedes repasarlo cuando quieras."
                     : attempts > 0
                       ? `En práctica · ${attempts} intento${attempts === 1 ? "" : "s"}`
-                      : "Pendiente"}
+                      : "Pendiente · todavía no lo intentaste."}
                 </p>
-              </div>
+              </PaperCard>
 
               <Link
                 href={`/ejercicio/${exercise.id}`}
-                className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-black text-white transition-colors hover:bg-blue-700"
+                className="flex items-center justify-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-mustard px-4 py-3 text-sm font-black text-ink shadow-hard transition-transform hover:-rotate-1"
               >
                 <Play className="size-4" aria-hidden="true" />
                 {solved ? "Repasar" : attempts > 0 ? "Continuar" : "Empezar"}
@@ -111,27 +133,30 @@ export function LearningPath() {
       </ol>
 
       {extraExercises.length > 0 && (
-        <section className="mt-8">
-          <h2 className="flex items-center gap-2 font-display text-2xl font-semibold text-slate-900">
-            <Sparkles className="size-5 text-amber-500" aria-hidden="true" />
-            Ejercicios extra
+        <section className="mt-12">
+          <h2 className="flex items-center gap-2 font-display text-2xl font-semibold text-ink">
+            <Sparkles className="size-5 text-coral-deep" aria-hidden="true" />
+            Hojas extra
           </h2>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            {extraExercises.map((exercise) => (
+          <p className="mt-1 font-hand text-xl font-bold text-ink-soft">
+            creadas por docentes o agregadas al cuaderno
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {extraExercises.map((exercise, index) => (
               <Link
                 key={exercise.id}
                 href={`/ejercicio/${exercise.id}`}
-                className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+                className={index % 2 === 0 ? "rotate-1" : "-rotate-1"}
               >
-                <p className="text-xs font-black uppercase tracking-wide text-amber-600">
-                  {exercise.categoria}
-                </p>
-                <p className="mt-1 font-display text-lg font-semibold text-slate-900">
-                  {exercise.titulo}
-                </p>
-                <p className="mt-1 text-sm font-semibold text-slate-500">
-                  {exercise.enunciado}
-                </p>
+                <PaperCard className="h-full p-5 transition-transform hover:-translate-y-1">
+                  <Sticker tone="plum">{exercise.categoria}</Sticker>
+                  <p className="mt-3 font-display text-xl font-semibold text-ink">
+                    {exercise.titulo}
+                  </p>
+                  <p className="mt-1 line-clamp-2 text-sm font-semibold text-ink-soft">
+                    {exercise.enunciado}
+                  </p>
+                </PaperCard>
               </Link>
             ))}
           </div>

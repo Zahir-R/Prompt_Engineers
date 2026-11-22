@@ -15,7 +15,9 @@ export default function ExercisePage({
     <Suspense
       fallback={
         <div className="mx-auto max-w-3xl px-4 py-16 text-center">
-          <p className="font-bold text-slate-600">Cargando el reto...</p>
+          <p className="font-hand text-2xl font-bold text-ink-soft">
+            Abriendo el cuaderno...
+          </p>
         </div>
       }
     >

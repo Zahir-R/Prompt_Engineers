@@ -1,19 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #1e293b;
-  --brand: #2563eb;
-  --brand-soft: #dbeafe;
+  --background: #f5ecd9;
+  --paper: #fbf6ea;
+  --paper-deep: #efe2c8;
+  --foreground: #2c2733;
+  --ink: #2c2733;
+  --ink-soft: #5b5264;
+  --coral: #e26352;
+  --coral-deep: #b83f30;
+  --mustard: #e8a73a;
+  --teal: #24887b;
+  --sky: #3c77b4;
+  --plum: #7052a3;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
   --color-foreground: var(--foreground);
-  --color-brand: var(--brand);
-  --color-brand-soft: var(--brand-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-coral: var(--coral);
+  --color-coral-deep: var(--coral-deep);
+  --color-mustard: var(--mustard);
+  --color-teal: var(--teal);
+  --color-sky: var(--sky);
+  --color-plum: var(--plum);
   --font-sans: var(--font-nunito);
   --font-display: var(--font-fredoka);
+  --font-hand: var(--font-caveat);
+  --shadow-hard: 4px 4px 0 rgba(44, 39, 51, 0.18);
+  --shadow-hard-lg: 6px 6px 0 rgba(44, 39, 51, 0.22);
 }
 
 html {
@@ -21,22 +40,60 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, #dbeafe 0, transparent 32rem),
-    radial-gradient(circle at top right, #fef3c7 0, transparent 30rem),
-    var(--background);
-  color: var(--foreground);
+  background-color: var(--paper);
+  background-image: radial-gradient(
+    circle,
+    rgba(44, 39, 51, 0.13) 1px,
+    transparent 1.4px
+  );
+  background-size: 22px 22px;
+  color: var(--ink);
   font-family: var(--font-nunito), Arial, Helvetica, sans-serif;
 }
 
 ::selection {
-  background: #bfdbfe;
-  color: #1e3a8a;
+  background: #f1cf86;
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 3px dashed var(--sky);
   outline-offset: 3px;
+}
+
+.paper-card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 1.25rem 0.8rem 1.5rem 1rem;
+  box-shadow: 4px 4px 0 rgba(44, 39, 51, 0.18);
+}
+
+.paper-card-strong {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 1.5rem 0.9rem 1.75rem 1rem;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.paper-note {
+  background: #fff4c9;
+  border: 2px solid var(--ink);
+  border-radius: 0.6rem 1.4rem 0.7rem 1.2rem;
+  box-shadow: 3px 3px 0 rgba(44, 39, 51, 0.16);
+}
+
+.tape {
+  position: absolute;
+  width: 5.5rem;
+  height: 1.5rem;
+  background: rgba(232, 167, 58, 0.55);
+  border-left: 1px dashed rgba(44, 39, 51, 0.2);
+  border-right: 1px dashed rgba(44, 39, 51, 0.2);
+  transform: rotate(-3deg);
+}
+
+.dotted-line {
+  border-bottom: 3px dashed var(--ink-soft);
 }
 
 @media (prefers-reduced-motion: reduce) {

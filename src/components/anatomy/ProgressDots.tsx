@@ -22,9 +22,11 @@ export function ProgressDots({ steps, current, onSelect }: ProgressDotsProps) {
             aria-label={`Ir al paso ${step.paso}: ${step.titulo}`}
             aria-current={index === current ? "step" : undefined}
             className={cn(
-              "h-2.5 rounded-full transition-all",
-              index === current ? cn("w-8", meta.dot) : "w-2.5 bg-slate-300",
-              onSelect ? "cursor-pointer hover:bg-slate-400" : "cursor-default",
+              "h-3 rounded-full border-2 border-ink transition-all",
+              index === current
+                ? cn("w-9 shadow-hard", meta.dot)
+                : "w-3 bg-paper-deep",
+              onSelect ? "cursor-pointer hover:bg-mustard" : "cursor-default",
             )}
           />
         );

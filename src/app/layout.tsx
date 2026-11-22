@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fredoka, Nunito } from "next/font/google";
+import { Caveat, Fredoka, Nunito } from "next/font/google";
 import type { ReactNode } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { AppProvider } from "@/context/AppProvider";
@@ -17,8 +17,14 @@ const fredoka = Fredoka({
   display: "swap",
 });
 
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Mates | Aprende con el Modo Desglose",
+  title: "Mates | Cuaderno de aventuras matemáticas",
   description:
     "Plataforma de nivelación matemática para primaria con explicaciones visuales paso a paso.",
 };
@@ -27,13 +33,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="es"
-      className={`${nunito.variable} ${fredoka.variable} h-full antialiased`}
+      className={`${nunito.variable} ${fredoka.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <AppProvider>
           <AppHeader />
           <main className="flex-1">{children}</main>
-          <footer className="border-t border-slate-200 bg-white/70 px-4 py-6 text-center text-sm text-slate-500">
+          <footer className="mt-10 border-t-2 border-ink/80 bg-paper-deep/70 px-4 py-6 text-center text-sm font-bold text-ink-soft">
             Abstracthon 2026 · Educación · Modo Desglose
           </footer>
         </AppProvider>

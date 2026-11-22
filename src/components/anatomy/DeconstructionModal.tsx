@@ -36,7 +36,7 @@ export function DeconstructionModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/40 backdrop-blur-sm sm:items-center sm:p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-ink/50 p-0 sm:items-center sm:p-4"
       role="presentation"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();

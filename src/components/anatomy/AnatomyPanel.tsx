@@ -12,6 +12,7 @@ import { OperationHighlight } from "@/components/anatomy/OperationHighlight";
 import { ProgressDots } from "@/components/anatomy/ProgressDots";
 import { StepColorBadge } from "@/components/anatomy/StepColorBadge";
 import { StepVisualizer } from "@/components/anatomy/StepVisualizer";
+import { Sticker } from "@/components/brand/Sticker";
 import { clampStepIndex, getOrderedSteps, getStepMeta } from "@/lib/desglose";
 import type { Exercise } from "@/types/exercise";
 import { cn } from "@/lib/utils";
@@ -40,15 +41,15 @@ export function AnatomyPanel({
 
   if (!step) {
     return (
-      <div className="rounded-3xl bg-white p-6 text-center">
-        <p className="font-bold text-slate-700">
+      <div className="paper-card-strong p-6 text-center">
+        <p className="font-hand text-2xl font-bold text-ink-soft">
           Este ejercicio todavía no tiene pasos de desglose.
         </p>
         {onClose && (
           <button
             type="button"
             onClick={onClose}
-            className="mt-4 rounded-xl bg-blue-600 px-4 py-2 font-bold text-white"
+            className="mt-4 rounded-xl border-2 border-ink bg-mustard px-4 py-2 font-black text-ink shadow-hard"
           >
             Volver al reto
           </button>
@@ -72,22 +73,22 @@ export function AnatomyPanel({
       className={cn(
         "w-full",
         mode === "modal"
-          ? "max-h-[90vh] overflow-y-auto rounded-t-3xl bg-white p-5 shadow-2xl sm:rounded-3xl sm:p-6"
-          : "rounded-3xl border border-slate-200 bg-white p-4 shadow-sm",
+          ? "max-h-[90vh] overflow-y-auto rounded-[1.4rem_1rem_1.6rem_1.1rem] border-2 border-ink bg-paper p-5 shadow-hard-lg sm:p-6"
+          : "rounded-[1.2rem_0.8rem_1.4rem_0.9rem] border-2 border-ink bg-paper p-4 shadow-hard",
       )}
       aria-label={`Modo desglose de ${exercise.titulo}`}
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wide text-blue-600">
-            <Lightbulb className="size-4" aria-hidden="true" />
-            {mode === "preview" ? "Vista previa del desglose" : "Modo Desglose"}
+          <p className="flex items-center gap-1.5 font-hand text-xl font-bold text-coral-deep">
+            <Lightbulb className="size-5" aria-hidden="true" />
+            {mode === "preview" ? "así se verá el desglose" : "mi cuaderno de pistas"}
           </p>
-          <h2 className="mt-1 font-display text-2xl font-semibold leading-tight text-slate-900">
+          <h2 className="mt-1 font-display text-2xl font-semibold leading-tight text-ink">
             {exercise.titulo}
           </h2>
-          <p className="mt-1 text-sm font-semibold text-slate-500">
-            Paso {index + 1} de {steps.length}
+          <p className="mt-1 font-hand text-lg font-bold text-ink-soft">
+            paso {index + 1} de {steps.length}
           </p>
         </div>
 
@@ -96,7 +97,7 @@ export function AnatomyPanel({
             type="button"
             onClick={onClose}
             autoFocus
-            className="rounded-xl p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+            className="rounded-xl border-2 border-ink bg-paper p-2 text-ink shadow-hard transition-transform hover:rotate-6"
             aria-label="Cerrar Modo Desglose"
           >
             <X className="size-5" aria-hidden="true" />
@@ -110,23 +111,26 @@ export function AnatomyPanel({
 
       <div
         key={step.paso}
-        className={cn("mt-5 rounded-2xl border p-4 sm:p-5", meta.panel)}
+        className={cn(
+          "mt-5 rounded-[1rem_1.3rem_0.9rem_1.2rem] border-2 border-ink p-4 shadow-hard sm:p-5",
+          meta.panel,
+        )}
         aria-live="polite"
       >
         <StepColorBadge color={step.color_tag} paso={step.paso} />
-        <h3 className="mt-3 font-display text-xl font-semibold text-slate-900">
+        <h3 className="mt-3 font-display text-xl font-semibold text-ink">
           {step.titulo}
         </h3>
-        <p className="mt-2 text-base font-semibold leading-relaxed text-slate-700">
+        <p className="mt-2 text-base font-semibold leading-relaxed text-ink">
           {step.explicacion}
         </p>
         <OperationHighlight text={step.operacion_destacada} />
         <StepVisualizer visual={step.visual_state} />
 
         {typeof step.resultado_final === "number" && (
-          <div className="mt-4 rounded-2xl bg-white/80 p-4 text-center">
-            <p className="text-xs font-black uppercase tracking-wide text-purple-600">
-              Resultado final
+          <div className="mt-4 rounded-[0.8rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-paper p-4 text-center shadow-hard">
+            <p className="font-hand text-xl font-bold text-purple-700">
+              respuesta final
             </p>
             <p className="font-display text-4xl font-black text-purple-700">
               {step.resultado_final}
@@ -140,7 +144,7 @@ export function AnatomyPanel({
           type="button"
           onClick={() => setIndex(index - 1)}
           disabled={index === 0}
-          className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+          className="flex items-center gap-1.5 rounded-[0.8rem_1.1rem_0.7rem_1rem] border-2 border-ink bg-paper px-4 py-2.5 text-sm font-black text-ink shadow-hard transition-transform hover:-rotate-1 disabled:cursor-not-allowed disabled:opacity-40"
         >
           <ChevronLeft className="size-4" aria-hidden="true" />
           Anterior
@@ -151,8 +155,10 @@ export function AnatomyPanel({
           onClick={goNext}
           disabled={isLast && mode === "preview"}
           className={cn(
-            "flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-black text-white transition-colors disabled:cursor-not-allowed disabled:opacity-60",
-            isLast ? "bg-emerald-600 hover:bg-emerald-700" : "bg-blue-600 hover:bg-blue-700",
+            "flex items-center gap-1.5 rounded-[1rem_0.7rem_1.2rem_0.8rem] border-2 border-ink px-4 py-2.5 text-sm font-black shadow-hard transition-transform disabled:cursor-not-allowed disabled:opacity-60",
+            isLast
+              ? "bg-teal text-paper hover:rotate-1"
+              : "bg-coral-deep text-paper hover:rotate-1",
           )}
         >
           {isLast ? (
@@ -168,6 +174,16 @@ export function AnatomyPanel({
           )}
         </button>
       </div>
+
+      {mode === "modal" && (
+        <div className="mt-4 text-center">
+          <Sticker tone="paper" className="rotate-0 normal-case tracking-normal">
+            <span className="font-hand text-base font-bold">
+              puedes volver a este paso cuando quieras
+            </span>
+          </Sticker>
+        </div>
+      )}
     </section>
   );
 }

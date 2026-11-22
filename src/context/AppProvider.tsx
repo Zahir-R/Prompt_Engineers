@@ -7,7 +7,6 @@ import {
   useEffect,
   useMemo,
   useState,
-  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import { SEED_EXERCISES } from "@/lib/exercises";
@@ -35,16 +34,6 @@ export interface AppContextValue {
 
 const AppContext = createContext<AppContextValue | null>(null);
 
-const subscribeToClient = () => () => {};
-
-function useIsClient(): boolean {
-  return useSyncExternalStore(
-    subscribeToClient,
-    () => true,
-    () => false,
-  );
-}
-
 function readStorage<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
 
@@ -67,7 +56,7 @@ function writeStorage(key: string, value: unknown): void {
 }
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const isClient = useIsClient();
+  const [ready, setReady] = useState(false);
   const [customExercises, setCustomExercises] = useState<Exercise[]>(() =>
     readStorage<Exercise[]>(CUSTOM_EXERCISES_STORAGE_KEY, []),
   );
@@ -76,14 +65,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
-    if (!isClient) return;
-    writeStorage(CUSTOM_EXERCISES_STORAGE_KEY, customExercises);
-  }, [customExercises, isClient]);
+    setReady(true);
+  }, []);
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!ready) return;
+    writeStorage(CUSTOM_EXERCISES_STORAGE_KEY, customExercises);
+  }, [customExercises, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
     writeStorage(PROGRESS_STORAGE_KEY, progress);
-  }, [progress, isClient]);
+  }, [progress, ready]);
 
   const exercises = useMemo(() => {
     const byId = new Map<string, Exercise>();
@@ -155,7 +148,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     () => ({
       exercises,
       progress,
-      ready: isClient,
+      ready,
       getExercise,
       addExercise,
       recordAttempt,
@@ -165,7 +158,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [
       exercises,
       progress,
-      isClient,
+      ready,
       getExercise,
       addExercise,
       recordAttempt,

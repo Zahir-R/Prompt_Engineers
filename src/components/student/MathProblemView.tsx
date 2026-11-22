@@ -8,6 +8,9 @@ import {
   Sparkles,
   Star,
 } from "lucide-react";
+import { PaperCard } from "@/components/brand/PaperCard";
+import { Sticker } from "@/components/brand/Sticker";
+import { StarDoodle } from "@/components/brand/Doodle";
 import type { Exercise } from "@/types/exercise";
 import { cn } from "@/lib/utils";
 
@@ -38,120 +41,123 @@ export function MathProblemView({
   onOpenAnatomy,
 }: MathProblemViewProps) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-lg sm:p-7">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-black uppercase tracking-wide text-blue-700">
-          {exercise.categoria}
-        </span>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
-          {exercise.nivel.replaceAll("_", " ")}
-        </span>
-        {solved && (
-          <span className="flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-black text-emerald-700">
-            <CircleCheck className="size-3.5" aria-hidden="true" />
-            Completado
-          </span>
-        )}
-      </div>
+    <div className="relative">
+      <div className="tape -top-3 left-10" aria-hidden="true" />
+      <PaperCard strong className="relative p-5 pt-7 sm:p-7">
+        <StarDoodle className="absolute -right-3 -top-4 rotate-12 text-mustard" />
 
-      <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-slate-900">
-        {exercise.titulo}
-      </h1>
-      <p className="mt-3 text-lg font-semibold leading-relaxed text-slate-700">
-        {exercise.enunciado}
-      </p>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        <span className="rounded-2xl bg-blue-50 px-4 py-2 font-mono text-lg font-black text-blue-800">
-          {exercise.datos.num1}
-        </span>
-        <span className="rounded-2xl bg-orange-50 px-4 py-2 font-mono text-lg font-black text-orange-700">
-          {exercise.datos.operacion}
-        </span>
-        <span className="rounded-2xl bg-blue-50 px-4 py-2 font-mono text-lg font-black text-blue-800">
-          {exercise.datos.num2}
-        </span>
-      </div>
-
-      <form
-        className="mt-6"
-        onSubmit={(event) => {
-          event.preventDefault();
-          onSubmit();
-        }}
-      >
-        <label
-          htmlFor="respuesta"
-          className="block text-sm font-black uppercase tracking-wide text-slate-600"
-        >
-          Tu respuesta
-        </label>
-        <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <input
-            id="respuesta"
-            name="respuesta"
-            type="text"
-            inputMode="numeric"
-            autoComplete="off"
-            value={value}
-            onChange={(event) => onChange(event.target.value)}
-            placeholder="Escribe el resultado"
-            className="h-14 flex-1 rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 text-xl font-black text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-blue-600 px-6 text-lg font-black text-white shadow-sm transition-colors hover:bg-blue-700"
-          >
-            Comprobar
-            <ArrowRight className="size-5" aria-hidden="true" />
-          </button>
-        </div>
-      </form>
-
-      {feedback.type !== "idle" && (
-        <div
-          className={cn(
-            "mt-4 rounded-2xl border-2 p-4 text-base font-bold",
-            feedback.type === "correct"
-              ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-              : "border-amber-200 bg-amber-50 text-amber-900",
+        <div className="flex flex-wrap items-center gap-2">
+          <Sticker tone="coral">{exercise.categoria}</Sticker>
+          <Sticker tone="paper">
+            {exercise.nivel.replaceAll("_", " ")}
+          </Sticker>
+          {solved && (
+            <Sticker tone="teal">
+              <CircleCheck className="size-3.5" aria-hidden="true" />
+              Completado
+            </Sticker>
           )}
-          role="status"
-          aria-live="polite"
-        >
-          {feedback.message}
         </div>
-      )}
 
-      {solved && (
-        <Link
-          href="/ruta"
-          className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-black text-white transition-colors hover:bg-emerald-700"
-        >
-          <Star className="size-4" aria-hidden="true" />
-          Volver a la ruta
-        </Link>
-      )}
+        <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+          {exercise.titulo}
+        </h1>
+        <p className="mt-3 text-lg font-semibold leading-relaxed text-ink-soft">
+          {exercise.enunciado}
+        </p>
 
-      <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-4">
-        <button
-          type="button"
-          onClick={onOpenAnatomy}
-          className="flex items-center gap-2 rounded-xl bg-amber-100 px-4 py-2.5 text-sm font-black text-amber-900 transition-colors hover:bg-amber-200"
-        >
-          <Lightbulb className="size-4" aria-hidden="true" />
-          Ver Modo Desglose
-        </button>
-        <span className="text-sm font-semibold text-slate-500">
-          Intentos: {attempts}
-        </span>
-        {attempts >= 2 && !solved && (
-          <span className="flex items-center gap-1 text-sm font-bold text-amber-700">
-            <Sparkles className="size-4" aria-hidden="true" />
-            El desglose se abre solo después de 2 intentos.
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <span className="rounded-[0.8rem_1rem_0.7rem_1.1rem] border-2 border-ink bg-[#d6e6f5] px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
+            {exercise.datos.num1}
           </span>
+          <span className="rounded-full border-2 border-ink bg-mustard px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
+            {exercise.datos.operacion}
+          </span>
+          <span className="rounded-[1rem_0.7rem_1.1rem_0.8rem] border-2 border-ink bg-[#d6e6f5] px-4 py-2 font-mono text-xl font-black text-ink shadow-hard">
+            {exercise.datos.num2}
+          </span>
+        </div>
+
+        <form
+          className="mt-7"
+          onSubmit={(event) => {
+            event.preventDefault();
+            onSubmit();
+          }}
+        >
+          <label
+            htmlFor="respuesta"
+            className="font-hand text-2xl font-bold text-ink"
+          >
+            Mi respuesta es...
+          </label>
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+            <input
+              id="respuesta"
+              name="respuesta"
+              type="text"
+              inputMode="numeric"
+              autoComplete="off"
+              value={value}
+              onChange={(event) => onChange(event.target.value)}
+              placeholder="escribe el número"
+              className="h-14 flex-1 rounded-[0.8rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-paper-deep/40 px-4 text-xl font-black text-ink placeholder:font-hand placeholder:text-lg placeholder:font-bold placeholder:text-ink-soft/70 focus:border-sky focus:bg-paper focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="flex h-14 items-center justify-center gap-2 rounded-[1rem_0.7rem_1.2rem_0.8rem] border-2 border-ink bg-coral-deep px-6 text-lg font-black text-paper shadow-hard transition-transform hover:-rotate-1"
+            >
+              Comprobar
+              <ArrowRight className="size-5" aria-hidden="true" />
+            </button>
+          </div>
+        </form>
+
+        {feedback.type !== "idle" && (
+          <div
+            className={cn(
+              "mt-5 rounded-[0.8rem_1.3rem_0.9rem_1.1rem] border-2 p-4 text-base font-bold",
+              feedback.type === "correct"
+                ? "border-teal bg-[#cce9e3] text-ink"
+                : "border-mustard bg-[#fbe7b8] text-ink",
+            )}
+            role="status"
+            aria-live="polite"
+          >
+            {feedback.message}
+          </div>
         )}
-      </div>
-    </section>
+
+        {solved && (
+          <Link
+            href="/ruta"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-teal px-4 py-2.5 text-sm font-black text-paper shadow-hard"
+          >
+            <Star className="size-4" aria-hidden="true" />
+            Volver a la ruta
+          </Link>
+        )}
+
+        <div className="mt-6 flex flex-wrap items-center gap-3 border-t-2 border-dashed border-ink/25 pt-4">
+          <button
+            type="button"
+            onClick={onOpenAnatomy}
+            className="flex items-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-[#fbe7b8] px-4 py-2.5 text-sm font-black text-ink shadow-hard transition-transform hover:rotate-1"
+          >
+            <Lightbulb className="size-4" aria-hidden="true" />
+            Ver Modo Desglose
+          </button>
+          <span className="font-hand text-xl font-bold text-ink-soft">
+            intentos: {attempts}
+          </span>
+          {attempts >= 2 && !solved && (
+            <span className="flex items-center gap-1 font-hand text-lg font-bold text-coral-deep">
+              <Sparkles className="size-4" aria-hidden="true" />
+              el desglose se abre solito después de 2 intentos
+            </span>
+          )}
+        </div>
+      </PaperCard>
+    </div>
   );
 }
