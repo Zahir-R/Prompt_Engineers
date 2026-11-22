@@ -66,8 +66,10 @@ test("el docente ve el formulario y la vista previa", async ({ page }) => {
   await page.getByLabel("Enunciado").fill("Ana tiene 12 manzanas y recibe 8 más.");
   await page.getByLabel("Número 1").fill("12");
   await page.getByLabel("Número 2").fill("8");
-  await page.getByLabel("Respuesta correcta").fill("20");
+  await expect(page.getByText(/Respuesta correcta calculada: 20/i)).toBeVisible();
   await expect(page.getByText(/vista previa en tiempo real/i)).toBeVisible();
+  await page.getByText(/Editar explicaciones de los pasos/i).click();
+  await expect(page.getByRole("textbox", { name: /Paso 1:/i })).toBeVisible();
 });
 
 test("el panel de guía está detrás del telón", async ({ page }) => {
@@ -192,4 +194,44 @@ test("el panel docente crea retos y abre el resumen de un estudiante", async ({
   await expect(dialog).toBeVisible();
   await dialog.getByRole("button", { name: /Cerrar diagnóstico/i }).click();
   await expect(dialog).toBeHidden();
+});
+
+
+test("un educador entra con correo y clave", async ({ page }) => {
+  await page.goto("/entrar");
+  await page.getByRole("tab", { name: /Soy educador/i }).click();
+  await page.getByLabel(/Correo docente/i).fill("ana@mates.club");
+  await page.getByLabel(/Clave/i).fill("mates2026");
+  await page.getByRole("button", { name: /Entrar al panel de guía/i }).click();
+  await expect(page).toHaveURL(/\/panel$/);
+  await expect(page.getByText(/Estudiantes del club/i)).toBeVisible();
+});
+
+test("el estudiante construye con bloques Base10", async ({ page }) => {
+  await page.goto("/ejercicio/ejercicio_math_001");
+  for (let i = 0; i < 3; i += 1) {
+    await page.getByRole("button", { name: "Agregar una decena" }).click();
+  }
+  for (let i = 0; i < 2; i += 1) {
+    await page.getByRole("button", { name: "Agregar una unidad" }).click();
+  }
+  await expect(page.getByLabel(/Mi respuesta es/i)).toHaveValue("32");
+  await page.getByRole("button", { name: /Comprobar/i }).click();
+  await expect(page.getByText(/¡Muy bien!/i)).toBeVisible();
+});
+
+test("el estudiante avanza en la recta numérica", async ({ page }) => {
+  await page.goto("/ejercicio/ejercicio_math_031");
+  for (let i = 0; i < 3; i += 1) {
+    await page.getByRole("button", { name: "Avanzar 1" }).click();
+  }
+  await expect(page.getByLabel(/Mi respuesta es/i)).toHaveValue("3");
+});
+
+test("el estudiante pinta una fracción", async ({ page }) => {
+  await page.goto("/ejercicio/ejercicio_math_023");
+  await page.getByRole("button", { name: "Parte 1" }).click();
+  await page.getByRole("button", { name: "Parte 2" }).click();
+  await page.getByRole("button", { name: "Parte 3" }).click();
+  await expect(page.getByLabel(/Mi respuesta es/i)).toHaveValue("0.75");
 });

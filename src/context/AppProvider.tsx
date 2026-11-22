@@ -137,6 +137,7 @@ export interface AppContextValue {
   equipSticker: (stickerId: CosmeticId | null) => { ok: boolean; error?: string };
   resetProgress: () => void;
   enterClass: (code: string, alias: string, avatar: AvatarId) => EnterClassResult;
+  enterTeacher: (email: string, password: string) => EnterClassResult;
   createStudentAlias: (
     code: string,
     alias: string,
@@ -515,6 +516,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return { ok: true, profileId: profile.id, imported };
     },
     [classrooms, importGuestProgress, profiles],
+  );
+
+  const enterTeacher = useCallback(
+    (email: string, password: string): EnterClassResult => {
+      const cleanEmail = email.trim().toLocaleLowerCase("es");
+      const teacher = profiles.find(
+        (profile) =>
+          profile.role === "teacher" &&
+          profile.email?.toLocaleLowerCase("es") === cleanEmail &&
+          profile.password === password,
+      );
+
+      if (!teacher) {
+        return { ok: false, error: "El correo o la clave no coinciden." };
+      }
+
+      setSession({ profileId: teacher.id });
+      return { ok: true, profileId: teacher.id };
+    },
+    [profiles],
   );
 
   const createStudentAlias = useCallback(
@@ -1064,6 +1085,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       equipSticker,
       resetProgress,
       enterClass,
+      enterTeacher,
       createStudentAlias,
       switchProfile,
       logout,
@@ -1111,6 +1133,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       equipSticker,
       resetProgress,
       enterClass,
+      enterTeacher,
       createStudentAlias,
       switchProfile,
       logout,

@@ -76,7 +76,11 @@
         "resultado_final": 32
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 99
+    }
   },
   {
     "id": "ejercicio_math_002",
@@ -172,7 +176,11 @@
         }
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 99
+    }
   },
   {
     "id": "ejercicio_math_003",
@@ -258,7 +266,11 @@
         "operacion_destacada": "43 - 15 = 28"
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 99
+    }
   },
   {
     "id": "ejercicio_math_004",
@@ -358,7 +370,11 @@
         }
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 99
+    }
   },
   {
     "id": "ejercicio_math_005",
@@ -431,7 +447,11 @@
         "operacion_destacada": "73 - 27 = 46"
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 99
+    }
   },
   {
     "id": "ejercicio_math_006",
@@ -554,7 +574,11 @@
         "explicacion": "Si sumamos 3 + 4, volvemos a 7. La resta es correcta."
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 20
+    }
   },
   {
     "id": "ejercicio_math_008",
@@ -619,7 +643,11 @@
         "explicacion": "Si al resultado le quitamos 3, volvemos a 4. La suma es correcta."
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 20
+    }
   },
   {
     "id": "ejercicio_math_009",
@@ -693,7 +721,11 @@
         "explicacion": "Si sumamos 7 + 2, volvemos a 9. La resta es correcta."
       }
     ],
-    "metafora_grafica": "objetos"
+    "metafora_grafica": "objetos",
+    "interaccion": {
+      "tipo": "base10",
+      "max": 20
+    }
   },
   {
     "id": "ejercicio_math_010",
@@ -818,7 +850,13 @@
         "explicacion": "Si repartimos 12 en 3 grupos iguales, cada grupo tiene 4."
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "recta",
+      "min": 0,
+      "max": 20,
+      "paso": 4
+    }
   },
   {
     "id": "ejercicio_math_012",
@@ -1588,7 +1626,12 @@
         "explicacion": "3/4 de la pizza está pintado; falta 1/4."
       }
     ],
-    "metafora_grafica": "fracciones"
+    "metafora_grafica": "fracciones",
+    "interaccion": {
+      "tipo": "fraccion",
+      "denominador": 4,
+      "salida": "decimal"
+    }
   },
   {
     "id": "ejercicio_math_024",
@@ -1661,7 +1704,12 @@
         "explicacion": "4/8 también es la mitad. ¡La equivalencia funciona!"
       }
     ],
-    "metafora_grafica": "fracciones"
+    "metafora_grafica": "fracciones",
+    "interaccion": {
+      "tipo": "fraccion",
+      "denominador": 8,
+      "salida": "numerador"
+    }
   },
   {
     "id": "ejercicio_math_025",
@@ -1911,7 +1959,12 @@
         "explicacion": "5/6 es casi un entero; tiene sentido con 1/2 + 1/3."
       }
     ],
-    "metafora_grafica": "fracciones"
+    "metafora_grafica": "fracciones",
+    "interaccion": {
+      "tipo": "fraccion",
+      "denominador": 6,
+      "salida": "numerador"
+    }
   },
   {
     "id": "ejercicio_math_029",
@@ -2104,7 +2157,13 @@
         "operacion_destacada": "3 - 8 = -5"
       }
     ],
-    "metafora_grafica": "bloques_base_10"
+    "metafora_grafica": "bloques_base_10",
+    "interaccion": {
+      "tipo": "recta",
+      "min": -10,
+      "max": 10,
+      "paso": 1
+    }
   },
   {
     "id": "ejercicio_math_032",

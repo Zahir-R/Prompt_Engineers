@@ -79,3 +79,12 @@ También se reemplazaron textos de demo por microcopy de producto.
 
 Decisión: no copiar el prototipo HTML; portar solo camino, meta/racha, resumen
 de clase y diagnóstico. Las figuras React de Crismar se limpian y se integran.
+
+## 2026-11-22 — Acceso docente e interactividad
+
+Cambio aplicado: pestaña “Soy educador” en `/entrar`, renombre a “Mi perfil”,
+plantillas docentes de cinco pasos con explicaciones editables y espacios
+interactivos Base10, recta numérica y fracciones.
+
+Decisión: la interactividad debe hacer pensar y no solo tocar. El input numérico
+sigue siendo la comprobación final y los interactivos funcionan con teclado.

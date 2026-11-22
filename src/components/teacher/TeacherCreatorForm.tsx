@@ -9,95 +9,67 @@ import { PaperCard } from "@/components/brand/PaperCard";
 import { Sticker } from "@/components/brand/Sticker";
 import { SquiggleDoodle } from "@/components/brand/Doodle";
 import { useApp } from "@/context/AppProvider";
-import type { Exercise } from "@/types/exercise";
+import { ROADMAP_LEVELS } from "@/data/roadmap";
+import {
+  buildExerciseFromTemplate,
+  TEMPLATE_OPTIONS,
+  type ExerciseTemplateType,
+} from "@/lib/exerciseTemplates";
+import type { RoadmapLevelId } from "@/types/roadmap";
 import { createId } from "@/lib/utils";
 
 interface FormValues {
+  type: ExerciseTemplateType;
+  levelId: RoadmapLevelId;
   titulo: string;
   enunciado: string;
   num1: string;
   num2: string;
-  operacion: "+" | "-";
-  respuesta: string;
 }
 
 const initialValues: FormValues = {
+  type: "suma",
+  levelId: "N1",
   titulo: "",
   enunciado: "",
   num1: "",
   num2: "",
-  operacion: "+",
-  respuesta: "",
 };
 
 const inputClass =
   "mt-1 h-12 w-full rounded-[0.7rem_1rem_0.8rem_1.1rem] border-2 border-ink bg-paper-deep/35 px-3 font-semibold text-ink focus:border-sky focus:bg-paper focus:outline-none";
 
-function tens(value: number): number[] {
-  const count = Math.max(0, Math.min(10, Math.floor(value / 10)));
-  return Array.from({ length: count }, () => 10);
-}
-
-function buildExercise(values: FormValues, id: string): Exercise | null {
-  const num1 = Number(values.num1);
-  const num2 = Number(values.num2);
-  const respuesta = Number(values.respuesta);
-
-  if (
-    !values.titulo.trim() ||
-    !values.enunciado.trim() ||
-    !Number.isFinite(num1) ||
-    !Number.isFinite(num2) ||
-    !Number.isFinite(respuesta)
-  ) {
-    return null;
-  }
-
-  return {
-    id,
-    categoria: values.operacion === "+" ? "Adicion" : "Sustraccion",
-    nivel: "Personalizado",
-    titulo: values.titulo.trim(),
-    enunciado: values.enunciado.trim(),
-    datos: { num1, num2, operacion: values.operacion },
-    respuesta_correcta: respuesta,
-    desglose_pasos: [
-      {
-        paso: 1,
-        titulo: "Identificar los datos",
-        color_tag: "blue",
-        explicacion: `Trabajamos con los números ${num1} y ${num2}.`,
-        visual_state: {
-          tipo: "base10",
-          decenas: [...tens(num1), ...tens(num2)],
-          unidades: [num1 % 10, num2 % 10],
-        },
-      },
-      {
-        paso: 2,
-        titulo: "Resolver la operación",
-        color_tag: "orange",
-        explicacion: `Realizamos la operación ${num1} ${values.operacion} ${num2}.`,
-        operacion_destacada: `${num1} ${values.operacion} ${num2} = ${respuesta}`,
-      },
-      {
-        paso: 3,
-        titulo: "Respuesta final",
-        color_tag: "purple",
-        explicacion: `El resultado del ejercicio es ${respuesta}.`,
-        resultado_final: respuesta,
-      },
-    ],
-    metafora_grafica: "bloques_base_10",
-  };
+function numberLabels(type: ExerciseTemplateType) {
+  if (type === "geometria") return ["Largo", "Ancho"];
+  if (type === "fraccion") return ["Numerador", "Denominador"];
+  if (type === "division") return ["Total a repartir", "Cantidad de grupos"];
+  return ["Número 1", "Número 2"];
 }
 
 export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean }) {
   const { addExercise } = useApp();
   const [values, setValues] = useState<FormValues>(initialValues);
+  const [explanations, setExplanations] = useState<string[]>([]);
   const [createdId, setCreatedId] = useState<string | null>(null);
   const [error, setError] = useState("");
-  const preview = useMemo(() => buildExercise(values, "preview_custom"), [values]);
+  const draft = useMemo(
+    () =>
+      buildExerciseFromTemplate(
+        {
+          type: values.type,
+          levelId: values.levelId,
+          titulo: values.titulo,
+          enunciado: values.enunciado,
+          num1: Number(values.num1),
+          num2: Number(values.num2),
+        },
+        "preview_custom",
+        explanations,
+      ),
+    [values, explanations],
+  );
+  const preview = draft.exercise;
+  const labels = numberLabels(values.type);
 
   const update = <Key extends keyof FormValues,>(
     key: Key,
@@ -106,21 +78,46 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
     setValues((current) => ({ ...current, [key]: value }));
     setCreatedId(null);
     setError("");
+    if (["type", "levelId", "num1", "num2"].includes(key)) {
+      setExplanations([]);
+    }
+  };
+
+  const updateExplanation = (index: number, value: string) => {
+    const base = preview?.desglose_pasos.map((step) => step.explicacion) ?? [];
+    setExplanations((current) =>
+      Array.from({ length: 5 }, (_, i) => current[i] ?? base[i] ?? "").map(
+        (text, i) => (i === index ? value : text),
+      ),
+    );
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setError("");
     const id = createId("custom");
-    const exercise = buildExercise(values, id);
+    const result = buildExerciseFromTemplate(
+      {
+        type: values.type,
+        levelId: values.levelId,
+        titulo: values.titulo,
+        enunciado: values.enunciado,
+        num1: Number(values.num1),
+        num2: Number(values.num2),
+      },
+      id,
+      explanations,
+    );
 
-    if (!exercise) {
-      setError("Completa el título, el enunciado, los números y la respuesta.");
+    if (!result.exercise) {
+      setError(result.error ?? "Completa los datos del ejercicio.");
       return;
     }
 
-    addExercise(exercise);
+    addExercise(result.exercise);
     setCreatedId(id);
     setValues(initialValues);
+    setExplanations([]);
   };
 
   return (
@@ -149,8 +146,9 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
             </span>
           </h1>
           <p className="mt-5 max-w-xl text-base font-semibold leading-relaxed text-ink">
-            Completa los datos y revisa el Modo Desglose antes de guardarlo. No
-            necesitas escribir código.
+            Elige un tipo de ejercicio y completa los datos. La app genera los
+            cinco pasos del desglose, el reto y la verificación; tú puedes ajustar
+            las explicaciones.
           </p>
         </div>
         <Mascot className="mx-auto size-36" label="Tinta revisa tu nueva hoja" />
@@ -160,7 +158,8 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
         <div className="mb-4">
           <h2 className="font-display text-2xl font-semibold text-ink">Crear un reto</h2>
           <p className="mt-1 text-sm font-semibold text-ink-soft">
-            Completa los datos y revisa la vista previa del Modo Desglose antes de guardarlo.
+            La app arma los cinco pasos y tú ajustas las explicaciones antes de
+            guardar.
           </p>
         </div>
       )}
@@ -169,7 +168,7 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
         <div className="paper-note mt-5 flex flex-wrap items-center gap-3 p-4">
           <span className="flex items-center gap-2 font-bold text-ink">
             <CircleCheck className="size-5 text-teal" aria-hidden="true" />
-            Ejercicio guardado en el cuaderno.
+            Ejercicio guardado y publicado en los capítulos.
           </span>
           <Link
             href={`/ejercicio/${createdId}`}
@@ -193,13 +192,52 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
               <Plus className="size-5 text-coral-deep" aria-hidden="true" />
               Datos de la ficha
             </h2>
-            <span className="font-hand text-lg font-bold text-ink-soft">
-              sin código
-            </span>
+            <span className="font-hand text-lg font-bold text-ink-soft">sin código</span>
           </div>
 
           <form onSubmit={handleSubmit} className="mt-4">
             <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="nivel" className="text-sm font-black text-ink">
+                    Nivel
+                  </label>
+                  <select
+                    id="nivel"
+                    value={values.levelId}
+                    onChange={(event) =>
+                      update("levelId", event.target.value as RoadmapLevelId)
+                    }
+                    className={inputClass}
+                  >
+                    {ROADMAP_LEVELS.map((level) => (
+                      <option key={level.id} value={level.id}>
+                        {level.id} · {level.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="tipo" className="text-sm font-black text-ink">
+                    Tipo
+                  </label>
+                  <select
+                    id="tipo"
+                    value={values.type}
+                    onChange={(event) =>
+                      update("type", event.target.value as ExerciseTemplateType)
+                    }
+                    className={inputClass}
+                  >
+                    {TEMPLATE_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <div>
                 <label htmlFor="titulo" className="text-sm font-black text-ink">
                   Título
@@ -227,10 +265,10 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label htmlFor="num1" className="text-sm font-black text-ink">
-                    Número 1
+                    {labels[0]}
                   </label>
                   <input
                     id="num1"
@@ -238,28 +276,12 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
                     value={values.num1}
                     onChange={(event) => update("num1", event.target.value)}
                     placeholder="17"
-                    className={`${inputClass} font-black`}
+                    className={inputClass}
                   />
                 </div>
                 <div>
-                  <label htmlFor="operacion" className="text-sm font-black text-ink">
-                    Operación
-                  </label>
-                  <select
-                    id="operacion"
-                    value={values.operacion}
-                    onChange={(event) =>
-                      update("operacion", event.target.value === "-" ? "-" : "+")
-                    }
-                    className={`${inputClass} font-black`}
-                  >
-                    <option value="+">Suma (+)</option>
-                    <option value="-">Resta (-)</option>
-                  </select>
-                </div>
-                <div>
                   <label htmlFor="num2" className="text-sm font-black text-ink">
-                    Número 2
+                    {labels[1]}
                   </label>
                   <input
                     id="num2"
@@ -267,24 +289,48 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
                     value={values.num2}
                     onChange={(event) => update("num2", event.target.value)}
                     placeholder="15"
-                    className={`${inputClass} font-black`}
+                    className={inputClass}
                   />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="respuesta" className="text-sm font-black text-ink">
-                  Respuesta correcta
-                </label>
-                <input
-                  id="respuesta"
-                  inputMode="numeric"
-                  value={values.respuesta}
-                  onChange={(event) => update("respuesta", event.target.value)}
-                  placeholder="32"
-                  className={`${inputClass} font-black`}
-                />
-              </div>
+              {preview && (
+                <p className="rounded-xl border-2 border-teal bg-[#cce9e3] p-3 text-sm font-bold text-ink">
+                  Respuesta correcta calculada: {preview.respuesta_correcta}. Los
+                  pasos y la verificación se generan automáticamente.
+                </p>
+              )}
+
+              {preview && (
+                <details className="rounded-xl border-2 border-ink/20 bg-paper-deep/40 p-3">
+                  <summary className="cursor-pointer text-sm font-black text-ink">
+                    Editar explicaciones de los pasos
+                  </summary>
+                  <div className="mt-3 space-y-3">
+                    {preview.desglose_pasos.map((step, index) => (
+                      <div key={step.paso}>
+                        <label
+                          htmlFor={`explicacion-${index}`}
+                          className="text-xs font-black uppercase tracking-wide text-ink-soft"
+                        >
+                          Paso {step.paso}: {step.titulo}
+                        </label>
+                        <textarea
+                          id={`explicacion-${index}`}
+                          value={
+                            explanations[index] ?? step.explicacion
+                          }
+                          onChange={(event) =>
+                            updateExplanation(index, event.target.value)
+                          }
+                          rows={2}
+                          className="mt-1 w-full rounded-xl border-2 border-ink/30 bg-paper px-3 py-2 text-sm font-semibold text-ink focus:border-sky focus:outline-none"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )}
             </div>
 
             {error && (
@@ -295,7 +341,8 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
 
             <button
               type="submit"
-              className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-coral-deep px-4 text-base font-black text-paper shadow-hard transition-transform hover:-rotate-1"
+              disabled={!preview}
+              className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-coral-deep px-4 text-base font-black text-paper shadow-hard transition-transform hover:-rotate-1 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Plus className="size-5" aria-hidden="true" />
               Guardar ejercicio
@@ -317,8 +364,8 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
           ) : (
             <div className="flex h-full min-h-64 items-center justify-center rounded-[1.3rem_0.9rem_1.5rem_1rem] border-2 border-dashed border-ink/40 bg-paper/60 p-8 text-center">
               <p className="max-w-sm font-hand text-2xl font-bold leading-tight text-ink-soft">
-                Completa el título, el enunciado, los números y la respuesta para
-                ver la vista previa.
+                Completa el título, el enunciado y los números para ver la vista
+                previa.
               </p>
             </div>
           )}

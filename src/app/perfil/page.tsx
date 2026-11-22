@@ -58,7 +58,7 @@ export default function PerfilPage() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center">
         <p className="font-hand text-2xl font-bold text-ink-soft">
-          Abriendo tu carnet...
+          Abriendo tu perfil...
         </p>
       </div>
     );
@@ -78,7 +78,7 @@ export default function PerfilPage() {
               Modo visitante
             </Sticker>
             <h1 className="mt-4 font-display text-4xl font-semibold leading-none text-ink">
-              Tu carnet está en blanco
+              Tu perfil está en blanco
             </h1>
             <p className="mt-3 font-semibold leading-relaxed text-ink-soft">
               Puedes seguir practicando sin cuenta. El alias solo desbloquea
@@ -103,7 +103,7 @@ export default function PerfilPage() {
             {guestSolved > 0 && (
               <p className="mt-4 rounded-xl border-2 border-mustard bg-[#fbe7b8] p-3 text-sm font-bold text-ink">
                 Ya practicaste {guestSolved} hoja{guestSolved === 1 ? "" : "s"} en
-                este navegador. Elige un alias para guardarlas en tu carnet.
+                este navegador. Elige un alias para guardarlas en tu perfil.
               </p>
             )}
           </PaperCard>
@@ -290,7 +290,7 @@ export default function PerfilPage() {
                       "mx-auto flex size-8 items-center justify-center rounded-full border-2 border-ink text-xs font-black",
                       day.active
                         ? "bg-mustard text-ink"
-                        : "bg-paper-deep text-ink-soft/60",
+                        : "bg-paper-deep text-ink-soft",
                       day.today && "ring-2 ring-sky ring-offset-1",
                     )}
                   >
@@ -335,7 +335,7 @@ export default function PerfilPage() {
               Pegatinas de Tinta
             </h2>
             <p className="mt-1 text-sm font-semibold text-ink-soft">
-              Canjea chispas por pegatinas y equípalas en tu carnet.
+              Canjea chispas por pegatinas y equípalas en tu perfil.
             </p>
             <div className="mt-3 space-y-2">
               {COSMETIC_STICKERS.map((sticker) => {

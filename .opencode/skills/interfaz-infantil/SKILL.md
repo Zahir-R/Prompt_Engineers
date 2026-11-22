@@ -114,3 +114,8 @@ social, racha y XP.
 No mostrar textos de demo/desarrollo como “Demo local”, “no hay contraseña” o
 “Reiniciar demo”. Usar frases útiles: “aprende sin cuenta”, “tu avance se guarda
 en este navegador”, “elige tu alias”.
+
+## Navegación
+
+Usar “Mi perfil”, no “Mi carnet”. El acceso de educador vive en `/entrar` y no
+se enlaza desde la navegación del estudiante.

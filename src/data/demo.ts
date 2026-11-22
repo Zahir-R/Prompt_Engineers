@@ -28,6 +28,8 @@ export function createSeedProfiles(): UserProfile[] {
       streakCurrent: 0,
       streakBest: 0,
       lastActivityDate: null,
+      email: "ana@mates.club",
+      password: "mates2026",
     },
     {
       id: "profile_sofia",

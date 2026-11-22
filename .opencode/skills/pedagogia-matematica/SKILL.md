@@ -80,3 +80,9 @@ Antes de cerrar un ejercicio:
 La hoja de ruta N0–N6 tiene 5 ejercicios por nivel. Cada nivel debe cubrir
 entrada, práctica y verificación; no llenar con ejercicios repetidos sin
 progresión.
+
+## Plantillas docentes
+
+Todo ejercicio creado por docente debe usar cinco pasos: datos, estrategia,
+resolución, resultado y verificación. La respuesta se calcula automáticamente y
+el docente solo puede editar explicaciones, no romper la estructura.
