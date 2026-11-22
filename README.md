@@ -4,6 +4,11 @@ Aplicación web para estudiantes de primaria (6–13 años) que explica matemát
 básica paso a paso. Al fallar o pedir ayuda, el **Modo Desglose** descompone el
 procedimiento en pasos con colores, explicaciones cortas y apoyo visual.
 
+Los cursos son **públicos y abiertos sin cuenta**. Un alias opcional desbloquea
+racha, XP, el carnet y la escritura en **La Fogata**, el club de dudas por
+unidad. El docente trabaja solo en backstage: no aparece en la navegación del
+estudiante.
+
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
 **Especificación completa:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md)
@@ -78,13 +83,24 @@ El resultado de las capturas queda en `test-results/capturas/`.
 
 | Ruta | Propósito |
 | :--- | :--- |
-| `/` | Inicio, presentación y ejercicios de práctica |
-| `/ruta` | Ruta de aprendizaje por defecto + ejercicios extra |
+| `/` | Inicio del estudiante: aventura de hoy, racha y capítulos |
+| `/unidades` | Mapa de capítulos abierto a todos |
+| `/unidad/[id]` | Ficha de unidad, hojas y acceso a La Fogata |
 | `/ejercicio/[id]` | Reto activo del estudiante |
+| `/club` | La Fogata: dudas y pistas por unidad |
+| `/club/[threadId]` | Hilo y respuestas |
+| `/entrar` | Código de clase + alias opcional |
+| `/perfil` | Carnet de aventuras |
+| `/panel` | Backstage docente, sin enlace en la navegación del estudiante |
 | `/docente` | Creador de actividades sin código |
 
-El botón **“Ver diagnóstico”** del encabezado abre el resumen para
-tutores/padres.
+`/ruta` redirige a `/unidades` por compatibilidad.
+
+### Cuenta de demo
+
+- Código de clase: **MATES-3A**
+- Perfiles semilla: Profe Ana (guía), Sofía y Mateo.
+- No hay contraseñas, correos de estudiantes ni backend real.
 
 ## Estructura
 
@@ -93,16 +109,21 @@ src/
 ├── app/                      Rutas y layout global
 ├── components/
 │   ├── anatomy/              Modo Desglose (motor visual)
-│   ├── brand/                Mascota, doodles, papel y stickers
+│   ├── brand/                Mascota, avatares, doodles y papel
+│   ├── club/                 La Fogata
 │   ├── companion/            Diagnóstico para acompañante
 │   ├── layout/               Encabezado
-│   ├── route/                Ruta de aprendizaje
+│   ├── route/                Unidades y detalle de capítulo
 │   ├── student/              Reto activo del estudiante
 │   └── teacher/              Creador de actividades
-├── context/AppProvider.tsx   Estado global y persistencia
-├── data/exercises.json       Ejercicios semilla
-├── lib/                      Selectores, colores y utilidades
-└── types/exercise.ts         Contratos compartidos
+├── context/AppProvider.tsx   Estado global, sesión demo y persistencia
+├── data/
+│   ├── demo.ts               Clase, perfiles, unidades y club semilla
+│   └── exercises.json        Ejercicios semilla
+├── lib/                      Gamificación, selectores y utilidades
+└── types/
+    ├── demo.ts               Perfiles, unidades y club
+    └── exercise.ts           Contratos del ejercicio
 
 .opencode/
 ├── skills/                   Skills del proyecto
@@ -122,10 +143,14 @@ aditivos.
 
 - `src/types/exercise.ts`: `Exercise`, `DesgloseStep`, `VisualState`,
   `ProgressEntry`.
-- `src/context/AppProvider.tsx`: ejercicios, progreso, intentos, alta de
-  ejercicios y reinicio de progreso.
+- `src/types/demo.ts`: `UserProfile`, `Classroom`, `Unit`, `ClubThread`,
+  `ClubReply`, `DemoSession`.
+- `src/context/AppProvider.tsx`: ejercicios, progreso por perfil, sesión de
+  invitado/estudiante/docente, XP, racha, La Fogata y persistencia.
 - `src/data/exercises.json`: ejercicios semilla.
-- `src/lib/constants.ts`: `DEFAULT_PATH_IDS` y claves de `localStorage`.
+- `src/data/demo.ts`: clase, perfiles, unidades y club semilla.
+- `src/lib/demo.ts`: reglas de XP, niveles, racha y avatares.
+- `src/lib/constants.ts`: claves de `localStorage`.
 
 ### Modo Desglose
 
@@ -164,10 +189,17 @@ datos de menores.
 ## Persistencia
 
 `AppProvider` combina los ejercicios semilla con los creados por docentes y
-guarda en `localStorage`:
+guarda la demo en `localStorage`:
 
-- `mates:progress:v1`
+- `mates:demo:profiles:v1`
+- `mates:demo:classrooms:v1`
+- `mates:demo:session:v1`
+- `mates:demo:progress:v1`
+- `mates:demo:xp-awards:v1`
+- `mates:demo:club:v1`
 - `mates:custom-exercises:v1`
+
+El progreso de invitado se guarda aparte y se puede importar al elegir alias.
 
 ## Equipo y responsabilidades
 
@@ -190,13 +222,14 @@ guarda en `localStorage`:
 
 ## Flujo de demo
 
-1. `/` → “Empezar la ruta”.
-2. `/ruta` → abrir el primer ejercicio.
+1. `/` → explorar sin cuenta.
+2. `/unidades` → abrir un capítulo y una hoja.
 3. Fallar dos veces → el Modo Desglose se abre solo.
 4. Navegar los pasos con Anterior/Siguiente.
 5. Responder correctamente → progreso actualizado.
-6. Abrir “Ver diagnóstico”.
-7. En `/docente`, crear un ejercicio y probarlo en `/ruta`.
+6. `/entrar` → código **MATES-3A** + alias → carnet, XP y racha.
+7. `/club` → leer La Fogata; con alias, abrir una duda.
+8. `/panel` → entrar como Profe Ana y revisar estudiantes/moderación.
 
 ## Despliegue
 

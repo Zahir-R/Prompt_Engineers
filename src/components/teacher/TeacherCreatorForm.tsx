@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState, type FormEvent } from "react";
-import { CircleCheck, GraduationCap, Plus, Sparkles } from "lucide-react";
+import { ArrowLeft, CircleCheck, GraduationCap, Plus, Sparkles } from "lucide-react";
 import { AnatomyPanel } from "@/components/anatomy/AnatomyPanel";
 import { Mascot } from "@/components/brand/Mascot";
 import { PaperCard } from "@/components/brand/PaperCard";
@@ -125,7 +125,15 @@ export function TeacherCreatorForm() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
-      <section className="relative grid gap-5 rounded-[1.4rem_1rem_1.6rem_1.1rem] border-2 border-ink bg-[#cce9e3] p-6 shadow-hard sm:grid-cols-[1fr_auto] sm:items-center sm:p-8">
+      <Link
+        href="/panel"
+        className="inline-flex items-center gap-2 rounded-xl border-2 border-transparent px-3 py-2 text-sm font-black text-ink-soft hover:border-ink hover:bg-paper hover:text-ink"
+      >
+        <ArrowLeft className="size-4" aria-hidden="true" />
+        Volver al panel de guía
+      </Link>
+
+      <section className="relative mt-2 grid gap-5 rounded-[1.4rem_1rem_1.6rem_1.1rem] border-2 border-ink bg-[#cce9e3] p-6 shadow-hard sm:grid-cols-[1fr_auto] sm:items-center sm:p-8">
         <div>
           <Sticker tone="paper">
             <GraduationCap className="size-3.5" aria-hidden="true" />
