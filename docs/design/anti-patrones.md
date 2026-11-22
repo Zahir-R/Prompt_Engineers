@@ -30,3 +30,14 @@
 
 Usar `interfaz-infantil` antes de rediseñar y `qa-visual-playwright` antes de
 cerrar.
+
+## LMS escolar
+
+- “Docente” o “Mi clase” en la navegación del estudiante.
+- Panel de clase o diagnóstico visible en el header.
+- Foro que se siente como tarea escolar.
+- Mostrar nombres reales o correos de menores.
+- Leaderboards públicos y castigos por error.
+
+La app debe sentirse como un club de aventuras; el docente existe detrás del
+telón.

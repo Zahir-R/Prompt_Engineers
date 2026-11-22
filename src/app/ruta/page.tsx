@@ -1,5 +1,5 @@
-import { LearningPath } from "@/components/route/LearningPath";
+import { redirect } from "next/navigation";
 
 export default function RutaPage() {
-  return <LearningPath />;
+  redirect("/unidades");
 }

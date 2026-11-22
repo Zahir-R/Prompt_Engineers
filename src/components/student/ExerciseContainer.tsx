@@ -13,12 +13,23 @@ import {
 import { useApp } from "@/context/AppProvider";
 
 export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
-  const { getExercise, progress, recordAttempt, markCompleted, ready } = useApp();
+  const {
+    activeProfile,
+    getExercise,
+    getUnitForExercise,
+    progress,
+    recordAttempt,
+    markCompleted,
+    ready,
+  } = useApp();
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState<Feedback>({ type: "idle", message: "" });
   const [anatomyOpen, setAnatomyOpen] = useState(false);
 
   const exercise = getExercise(exerciseId);
+  const unit = getUnitForExercise(exerciseId);
+  const backHref = unit ? `/unidad/${unit.id}` : "/unidades";
+  const backLabel = unit ? "Volver al capítulo" : "Volver a unidades";
 
   if (!ready) {
     return (
@@ -38,14 +49,14 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
           No encontramos ese ejercicio
         </h1>
         <p className="mt-2 font-semibold text-ink-soft">
-          Revisa la ruta de aprendizaje para elegir otra hoja.
+          Revisa los capítulos para elegir otra hoja.
         </p>
         <Link
-          href="/ruta"
+          href="/unidades"
           className="mt-6 inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-mustard px-4 py-2.5 font-black text-ink shadow-hard"
         >
           <ArrowLeft className="size-4" aria-hidden="true" />
-          Volver a la ruta
+          Volver a unidades
         </Link>
       </div>
     );
@@ -72,7 +83,10 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
       markCompleted(exercise.id);
       setFeedback({
         type: "correct",
-        message: "¡Muy bien! Encontraste la respuesta. Puedes ver el desglose para repasar el procedimiento.",
+        message:
+          activeProfile?.role === "student"
+            ? "¡Muy bien! Encontraste la respuesta. Tu XP y tu racha ya se actualizaron."
+            : "¡Muy bien! Encontraste la respuesta. Puedes ver el desglose para repasar el procedimiento.",
       });
       return;
     }
@@ -93,11 +107,11 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <Link
-        href="/ruta"
+        href={backHref}
         className="inline-flex items-center gap-2 rounded-xl border-2 border-transparent px-3 py-2 text-sm font-black text-ink-soft transition-colors hover:border-ink hover:bg-paper hover:text-ink"
       >
         <ArrowLeft className="size-4" aria-hidden="true" />
-        Volver a la ruta
+        {backLabel}
       </Link>
 
       <div className="mt-4 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
@@ -110,6 +124,8 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
           attempts={attempts}
           solved={solved}
           onOpenAnatomy={() => setAnatomyOpen(true)}
+          backHref={backHref}
+          backLabel={backLabel}
         />
 
         <aside className="space-y-5">
@@ -156,6 +172,24 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
               </ul>
             </div>
           </div>
+
+          {!activeProfile && (
+            <div className="rounded-[0.9rem_1.2rem_0.7rem_1rem] border-2 border-ink bg-[#fbe7b8] p-5 shadow-hard">
+              <p className="font-hand text-xl font-bold text-ink">
+                Estás practicando como visitante
+              </p>
+              <p className="mt-1 text-sm font-semibold text-ink-soft">
+                Tu avance se guarda en este navegador. Si eliges un alias, también
+                guardas racha, XP y puedes entrar a La Fogata.
+              </p>
+              <Link
+                href="/entrar"
+                className="mt-3 inline-flex text-sm font-black text-coral-deep underline decoration-2 underline-offset-4"
+              >
+                Elegir mi alias
+              </Link>
+            </div>
+          )}
 
           <div className="rounded-[1.2rem_0.8rem_1.4rem_0.9rem] border-2 border-ink bg-[#cce9e3] p-5 shadow-hard">
             <div className="flex items-start gap-3">

@@ -1,6 +1,6 @@
 ---
 name: qa-visual-playwright
-description: Use before closing any visual change or demo. Runs Playwright and axe checks, captures screenshots at mobile and desktop sizes, and verifies the anatomy modal, progress, and hydration.
+description: Use before closing any visual change or demo. Runs Playwright and axe checks, captures mobile and desktop screenshots, and verifies public courses, alias access, La Fogata, profile, and the backstage panel.
 ---
 
 # QA visual con Playwright
@@ -16,46 +16,47 @@ pnpm exec playwright install chromium
 ## Flujo
 
 1. Ejecutar `pnpm lint`, `pnpm typecheck`, `pnpm build`.
-2. Levantar `pnpm dev` en una terminal.
+2. Ejecutar `pnpm test:e2e`. Este comando compila y sirve producción en el
+   puerto 3000; no requiere `pnpm dev`.
 3. Revisar estas rutas:
    - `/`
-   - `/ruta`
-   - `/docente`
+   - `/unidades`
+   - `/unidad/unidad_sumas`
+   - `/club`
+   - `/entrar`
+   - `/perfil`
    - `/ejercicio/ejercicio_math_001`
-   - `/ejercicio/ejercicio_math_002`
+   - `/panel`
 4. Capturar en dos tamaños:
-   - móvil: 360×800
+   - móvil: Pixel 7
    - escritorio: 1440×900
 5. Verificar:
-   - El Modo Desglose abre con el botón.
-   - Fallar dos veces abre el desglose automáticamente.
-   - Anterior/Siguiente/Terminar funcionan.
-   - `Escape` cierra el modal.
-   - El diagnóstico del acompañante abre y cierra.
-   - El docente guarda un ejercicio y aparece en la ruta.
-   - No hay errores de hidratación en consola.
+   - Un invitado puede abrir unidades y ejercicios sin cuenta.
+   - Un invitado puede leer La Fogata pero no publicar.
+   - Código `MATES-3A` + alias crea/entra a un perfil.
+   - El progreso de invitado se importa al entrar.
+   - Solo cuentas de estudiante ganan XP y racha.
+   - El carnet muestra racha, XP, insignias y capítulos.
+   - El docente entra a `/panel`, crea alias y modera sin aparecer en la UI del
+     estudiante.
+   - El header del estudiante no muestra “Docente” ni diagnóstico.
 
 ## Revisión visual
 
-- ¿Se ve como cuaderno y no como plantilla?
-- ¿Hay una mascota o doodle propio?
-- ¿Los colores semánticos están solo en el desglose?
-- ¿Hay tres tarjetas idénticas? Si sí, rediseñar.
+- ¿Se ve como cuaderno y no como LMS?
+- ¿El docente está fuera de la navegación del estudiante?
+- ¿Hay filas de tres tarjetas idénticas? Si sí, rediseñar.
 - ¿Hay `backdrop-blur` o gradientes de fondo? Si sí, quitar.
-- ¿El texto tiene acentos y se lee con claridad?
-- ¿El foco es visible?
+- ¿Los colores semánticos están solo en el desglose?
+- ¿El texto tiene acentos y contraste suficiente?
 
-## Accesibilidad automatizada
+## Accesibilidad
 
-Usar `@axe-core/playwright` en las rutas principales y revisar:
-
-- contraste,
-- nombres accesibles,
-- landmarks,
-- orden de encabezados,
-- botones sin texto accesible.
+Usar `@axe-core/playwright` en las rutas principales. El test falla solo en
+`critical`/`serious`: contraste, nombres accesibles, landmarks, encabezados y
+botones sin texto accesible.
 
 ## Cierre
 
-Adjuntar capturas en `docs/design/critique-log.md` o en el PR. No cerrar un
-cambio visual sin haber revisado móvil y escritorio.
+Adjuntar capturas en `docs/design/screenshots/` o en el PR. No cerrar un cambio
+visual sin revisar móvil y escritorio.

@@ -21,7 +21,8 @@ Hipótesis de trabajo:
 ## Restricciones
 
 - No se ingresan datos de menores.
-- Como máximo habrá cuentas de docentes.
+- Estudiantes usan alias y avatar; sin correo ni nombre real.
+- El docente trabaja en backstage.
 - No se usa LLM dentro del producto.
 
 ## Validación pendiente

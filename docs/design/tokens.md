@@ -9,10 +9,10 @@
 | `ink` | `#2c2733` | Texto, bordes y sombras |
 | `ink-soft` | `#5b5264` | Texto secundario |
 | `coral` | `#e26352` | Acentos y energía |
-| `coral-deep` | `#b83f30` | Acción principal |
+| `coral-deep` | `#a93628` | Acción principal |
 | `mustard` | `#e8a73a` | Pistas y énfasis |
-| `teal` | `#24887b` | Progreso y logros |
-| `sky` | `#3c77b4` | Enlaces y foco |
+| `teal` | `#1d6f66` | Progreso y logros |
+| `sky` | `#32689f` | Enlaces y foco |
 | `plum` | `#7052a3` | Respuesta final |
 | `blue`, `orange`, `green`, `purple`, `yellow` | Tailwind | Solo Modo Desglose |
 

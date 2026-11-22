@@ -95,5 +95,109 @@
       }
     ],
     "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_003",
+    "categoria": "Adicion",
+    "nivel": "Tercero_Primaria",
+    "titulo": "El puesto de frutas",
+    "enunciado": "En el puesto de frutas, Elena tiene 28 naranjas y recibe 15 más. ¿Cuántas naranjas tiene ahora?",
+    "datos": {
+      "num1": 28,
+      "num2": 15,
+      "operacion": "+"
+    },
+    "respuesta_correcta": 43,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Elena empieza con 28 naranjas y recibe 15. Debemos sumar ambos números.",
+        "visual_state": { "tipo": "base10", "decenas": [10, 10], "unidades": [8, 5] }
+      },
+      {
+        "paso": 2,
+        "titulo": "Sumar las unidades",
+        "color_tag": "orange",
+        "explicacion": "Sumamos 8 + 5 = 13 unidades. Formamos 1 nueva decena y quedan 3 unidades sueltas.",
+        "operacion_destacada": "8 + 5 = 13",
+        "visual_state": { "tipo": "agrupacion", "grupos": 1, "sobrantes": 3 }
+      },
+      {
+        "paso": 3,
+        "titulo": "Sumar las decenas",
+        "color_tag": "green",
+        "explicacion": "Sumamos las 2 decenas de 28, la decena de 15 y la decena que llevamos: 2 + 1 + 1 = 4 decenas.",
+        "operacion_destacada": "2 + 1 + 1 = 4"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "Juntamos 4 decenas y 3 unidades. Elena tiene 43 naranjas.",
+        "resultado_final": 43
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar la respuesta",
+        "color_tag": "yellow",
+        "explicacion": "Si al resultado le quitamos las 15 naranjas que llegaron, recuperamos las 28 iniciales: 43 - 15 = 28. ¡La suma es correcta!",
+        "operacion_destacada": "43 - 15 = 28"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_004",
+    "categoria": "Sustraccion",
+    "nivel": "Tercero_Primaria",
+    "titulo": "La mesa de la biblioteca",
+    "enunciado": "En la biblioteca hay 53 libros en una mesa y se prestan 27. ¿Cuántos libros quedan en la mesa?",
+    "datos": {
+      "num1": 53,
+      "num2": 27,
+      "operacion": "-"
+    },
+    "respuesta_correcta": 26,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Hay 53 libros y se prestan 27. Para saber cuántos quedan debemos restar.",
+        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10, 10, 10], "unidades": [1, 1, 1] }
+      },
+      {
+        "paso": 2,
+        "titulo": "Pedir prestada una decena",
+        "color_tag": "orange",
+        "explicacion": "No podemos restar 7 unidades a 3. Pedimos prestada 1 decena: 3 + 10 = 13 unidades. Ahora sí podemos restar 13 - 7 = 6.",
+        "operacion_destacada": "13 - 7 = 6",
+        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10, 10], "unidades": [10, 1, 1, 1] }
+      },
+      {
+        "paso": 3,
+        "titulo": "Restar las decenas",
+        "color_tag": "green",
+        "explicacion": "Quedan 4 decenas y restamos 2 decenas: 4 - 2 = 2 decenas.",
+        "operacion_destacada": "4 - 2 = 2"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "Juntamos 2 decenas y 6 unidades. Quedan 26 libros en la mesa.",
+        "resultado_final": 26
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar la respuesta",
+        "color_tag": "yellow",
+        "explicacion": "Si sumamos los libros que quedan y los que se prestaron recuperamos el total: 26 + 27 = 53. ¡La resta es correcta!",
+        "operacion_destacada": "26 + 27 = 53"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
   }
 ]
