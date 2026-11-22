@@ -1,0 +1,99 @@
+[
+  {
+    "id": "ejercicio_math_001",
+    "categoria": "Adicion",
+    "nivel": "Tercero_Primaria",
+    "titulo": "Ayuda a juntar las manzanas",
+    "enunciado": "Lucas tiene 17 manzanas y Maria le regala 15 mas. ¿Cuantas manzanas tiene Lucas en total?",
+    "datos": {
+      "num1": 17,
+      "num2": 15,
+      "operacion": "+"
+    },
+    "respuesta_correcta": 32,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Lucas empieza con 17 y recibe 15. Debemos sumar ambos numeros.",
+        "visual_state": { "tipo": "base10", "decenas": [10, 10], "unidades": [7, 5] }
+      },
+      {
+        "paso": 2,
+        "titulo": "Sumar las Unidades",
+        "color_tag": "orange",
+        "explicacion": "Sumamos 7 + 5 = 12 unidades. Como 12 es mayor a 9, se forma 1 nueva decena (10) y quedan 2 unidades sueltas.",
+        "operacion_destacada": "7 + 5 = 12",
+        "visual_state": { "tipo": "agrupacion", "grupos": 1, "sobrantes": 2 }
+      },
+      {
+        "paso": 3,
+        "titulo": "Sumar las Decenas",
+        "color_tag": "green",
+        "explicacion": "Sumamos la decena de 17 (1), la decena de 15 (1) y la nueva decena que llevamos (1). 1 + 1 + 1 = 3 decenas.",
+        "operacion_destacada": "1 + 1 + 1 = 3"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado Final",
+        "color_tag": "purple",
+        "explicacion": "Juntamos 3 decenas y 2 unidades. El resultado es 32 manzanas.",
+        "resultado_final": 32
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  },
+  {
+    "id": "ejercicio_math_002",
+    "categoria": "Sustraccion",
+    "nivel": "Tercero_Primaria",
+    "titulo": "Ayuda a repartir los caramelos",
+    "enunciado": "Ana tiene 42 caramelos y regala 17 a sus amigos. ¿Cuantos caramelos le quedan?",
+    "datos": {
+      "num1": 42,
+      "num2": 17,
+      "operacion": "-"
+    },
+    "respuesta_correcta": 25,
+    "desglose_pasos": [
+      {
+        "paso": 1,
+        "titulo": "Identificar los datos",
+        "color_tag": "blue",
+        "explicacion": "Ana tiene 42 caramelos y regala 17. Para saber cuantos le quedan debemos restar.",
+        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10, 10], "unidades": [1, 1] }
+      },
+      {
+        "paso": 2,
+        "titulo": "Prestar una decena",
+        "color_tag": "orange",
+        "explicacion": "No podemos restar 7 unidades a 2. Pedimos prestada 1 decena: 2 + 10 = 12 unidades. Ahora si podemos restar 12 - 7 = 5.",
+        "operacion_destacada": "12 - 7 = 5",
+        "visual_state": { "tipo": "base10", "decenas": [10, 10, 10], "unidades": [10, 1, 1] }
+      },
+      {
+        "paso": 3,
+        "titulo": "Restar las decenas",
+        "color_tag": "green",
+        "explicacion": "Quedan 3 decenas y restamos 1 decena: 3 - 1 = 2 decenas.",
+        "operacion_destacada": "3 - 1 = 2"
+      },
+      {
+        "paso": 4,
+        "titulo": "Resultado final",
+        "color_tag": "purple",
+        "explicacion": "Juntamos 2 decenas y 5 unidades. A Ana le quedan 25 caramelos.",
+        "resultado_final": 25
+      },
+      {
+        "paso": 5,
+        "titulo": "Comprobar la respuesta",
+        "color_tag": "yellow",
+        "explicacion": "Si sumamos el resultado y lo que Ana regalo recuperamos el total: 25 + 17 = 42. ¡La resta es correcta!",
+        "operacion_destacada": "25 + 17 = 42"
+      }
+    ],
+    "metafora_grafica": "bloques_base_10"
+  }
+]
