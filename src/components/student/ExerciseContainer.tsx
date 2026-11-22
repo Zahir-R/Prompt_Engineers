@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeft, Blocks, Lightbulb, Sparkles } from "lucide-react";
 import { DeconstructionModal } from "@/components/anatomy/DeconstructionModal";
@@ -11,13 +12,18 @@ import {
   type Feedback,
 } from "@/components/student/MathProblemView";
 import { useApp } from "@/context/AppProvider";
+import { ROADMAP_LEVELS } from "@/data/roadmap";
+import { getNextExerciseId } from "@/lib/roadmap";
+import { getNextRouteExerciseId } from "@/lib/teacherRoutes";
 
 export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
   const {
     activeProfile,
     getAnatomyProgress,
     getExercise,
+    getTeacherRoute,
     getUnitForExercise,
+    units,
     progress,
     recordAttempt,
     markCompleted,
@@ -30,10 +36,40 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
     "manual",
   );
 
+  const searchParams = useSearchParams();
+  const routeId = searchParams.get("ruta");
+  const teacherRoute = routeId ? getTeacherRoute(routeId) : undefined;
   const exercise = getExercise(exerciseId);
   const unit = getUnitForExercise(exerciseId);
-  const backHref = unit ? `/unidad/${unit.id}` : "/unidades";
-  const backLabel = unit ? "Volver al capítulo" : "Volver a unidades";
+  const officialNextId = getNextExerciseId(
+    exerciseId,
+    units,
+    ROADMAP_LEVELS,
+  );
+  const routeNextId = teacherRoute
+    ? getNextRouteExerciseId(teacherRoute, exerciseId)
+    : undefined;
+  const nextId = teacherRoute ? routeNextId : officialNextId;
+  const backHref = teacherRoute
+    ? `/ruta/${teacherRoute.id}`
+    : unit
+      ? `/unidad/${unit.id}`
+      : "/unidades";
+  const backLabel = teacherRoute
+    ? "Volver a la ruta"
+    : unit
+      ? "Volver al capítulo"
+      : "Volver a unidades";
+  const nextHref = nextId
+    ? `/ejercicio/${nextId}${teacherRoute ? `?ruta=${teacherRoute.id}` : ""}`
+    : teacherRoute
+      ? `/ruta/${teacherRoute.id}`
+      : "/hoja-de-ruta";
+  const nextLabel = nextId
+    ? teacherRoute
+      ? "Siguiente actividad"
+      : "Siguiente reto"
+    : "Volver a mi ruta";
 
   if (!ready) {
     return (
@@ -138,6 +174,8 @@ export function ExerciseContainer({ exerciseId }: { exerciseId: string }) {
           detectiveBonusReady={detectiveReady}
           backHref={backHref}
           backLabel={backLabel}
+          nextHref={nextHref}
+          nextLabel={nextLabel}
         />
 
         <aside className="space-y-5">

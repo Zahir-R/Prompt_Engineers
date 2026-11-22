@@ -15,6 +15,7 @@ import {
   TEMPLATE_OPTIONS,
   type ExerciseTemplateType,
 } from "@/lib/exerciseTemplates";
+import type { Exercise } from "@/types/exercise";
 import type { RoadmapLevelId } from "@/types/roadmap";
 import { createId } from "@/lib/utils";
 
@@ -46,7 +47,15 @@ function numberLabels(type: ExerciseTemplateType) {
   return ["Número 1", "Número 2"];
 }
 
-export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean }) {
+export function TeacherCreatorForm({
+  embedded = false,
+  context = "catalog",
+  onCreated,
+}: {
+  embedded?: boolean;
+  context?: "catalog" | "route";
+  onCreated?: (exercise: Exercise) => void;
+}) {
   const { addExercise } = useApp();
   const [values, setValues] = useState<FormValues>(initialValues);
   const [explanations, setExplanations] = useState<string[]>([]);
@@ -114,7 +123,11 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
       return;
     }
 
-    addExercise(result.exercise);
+    if (onCreated) {
+      onCreated(result.exercise);
+    } else {
+      addExercise(result.exercise);
+    }
     setCreatedId(id);
     setValues(initialValues);
     setExplanations([]);
@@ -168,7 +181,9 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
         <div className="paper-note mt-5 flex flex-wrap items-center gap-3 p-4">
           <span className="flex items-center gap-2 font-bold text-ink">
             <CircleCheck className="size-5 text-teal" aria-hidden="true" />
-            Ejercicio guardado y publicado en los capítulos.
+            {context === "route"
+              ? "Actividad agregada a la ruta."
+              : "Ejercicio guardado y publicado en los capítulos."}
           </span>
           <Link
             href={`/ejercicio/${createdId}`}
@@ -176,12 +191,14 @@ export function TeacherCreatorForm({ embedded = false }: { embedded?: boolean })
           >
             Probar ejercicio
           </Link>
-          <Link
-            href="/unidades"
-            className="rounded-xl border-2 border-ink bg-paper px-3 py-2 text-sm font-black text-ink shadow-hard"
-          >
-            Ver en los capítulos
-          </Link>
+          {context === "catalog" && (
+            <Link
+              href="/unidades"
+              className="rounded-xl border-2 border-ink bg-paper px-3 py-2 text-sm font-black text-ink shadow-hard"
+            >
+              Ver en los capítulos
+            </Link>
+          )}
         </div>
       )}
 

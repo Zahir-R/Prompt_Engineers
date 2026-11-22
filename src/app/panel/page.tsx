@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { Avatar } from "@/components/brand/Avatar";
 import { DiagnosisModal } from "@/components/companion/DiagnosisModal";
-import { TeacherCreatorForm } from "@/components/teacher/TeacherCreatorForm";
+import { TeacherRouteBuilder } from "@/components/teacher/TeacherRouteBuilder";
 import { Mascot } from "@/components/brand/Mascot";
 import { PaperCard } from "@/components/brand/PaperCard";
 import { Sticker } from "@/components/brand/Sticker";
@@ -57,7 +57,7 @@ export default function PanelPage() {
   const [avatar, setAvatar] = useState<AvatarId>("sky");
   const [studentMessage, setStudentMessage] = useState("");
   const [copied, setCopied] = useState(false);
-  const [view, setView] = useState<"clase" | "crear">("clase");
+  const [view, setView] = useState<"clase" | "rutas">("clase");
   const [diagnosisProfileId, setDiagnosisProfileId] = useState<string | null>(
     null,
   );
@@ -190,11 +190,11 @@ export default function PanelPage() {
             </button>
             <button
               type="button"
-              onClick={() => setView("crear")}
+              onClick={() => setView("rutas")}
               className="flex items-center gap-1 rounded-xl border-2 border-paper/30 bg-paper/10 px-3 py-2 text-sm font-black"
             >
               <BookOpen className="size-4" aria-hidden="true" />
-              Crear actividad
+              Gestionar rutas
             </button>
             <button
               type="button"
@@ -244,15 +244,15 @@ export default function PanelPage() {
         </button>
         <button
           type="button"
-          onClick={() => setView("crear")}
-          className={`rounded-xl border-2 px-4 py-2 text-sm font-black ${view === "crear" ? "border-ink bg-mustard text-ink shadow-hard" : "border-ink/20 bg-paper text-ink-soft"}`}
+          onClick={() => setView("rutas")}
+          className={`rounded-xl border-2 px-4 py-2 text-sm font-black ${view === "rutas" ? "border-ink bg-mustard text-ink shadow-hard" : "border-ink/20 bg-paper text-ink-soft"}`}
         >
-          Crear reto
+          Mis rutas
         </button>
       </div>
 
-      {view === "crear" ? (
-        <TeacherCreatorForm embedded />
+      {view === "rutas" ? (
+        <TeacherRouteBuilder />
       ) : (
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         <section>

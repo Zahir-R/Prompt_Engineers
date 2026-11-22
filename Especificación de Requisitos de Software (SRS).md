@@ -1,11 +1,18 @@
 # Especificación de Requisitos de Software (SRS)
 ## Proyecto: Plataforma de Nivelación Matemática con "Modo Desglose"
-**Versión:** 1.3 — acceso docente e interactividad  
+**Versión:** 1.4 — rutas docentes, siguiente reto y arrastre  
 **Evento:** Abstracthon 2026 (MLSA - University Community, Bolivia)  
 **Track Principal:** Educación  
 **Público Objetivo:** Estudiantes de nivel primario (6 a 13 años), Docentes y Tutores/Padres.  
 **Fecha Límite de Entrega:** Domingo 22 de Noviembre de 2026, 16:30 (Hora de Bolivia).  
 **Estado del despliegue:** pendiente de URL pública en Vercel; importar `main` desde el dashboard.
+
+### Changelog v1.4
+- El docente crea rutas completas y las publica a su clase; ya no publica ejercicios sueltos dentro de N0–N6.
+- Las rutas docentes tienen progreso propio y aparecen en “Rutas de mi clase”.
+- Al resolver un ejercicio aparece “Siguiente reto”.
+- Base10 y fracciones admiten arrastre con alternativa de teclado.
+- La demo sigue siendo solo frontend con `localStorage`; backend documentado como futuro.
 
 ### Changelog v1.3
 - Se agrega acceso de educador con correo y clave simulada en `/entrar`.
@@ -164,7 +171,10 @@ Una plataforma dinámica donde:
 * **RF-24: Figuras dinámicas:** El desglose puede usar fracciones, geometría, objetos contables y agrupaciones visuales.
 * **RF-25: Meta diaria:** Mostrar cuántas hojas se resolvieron hoy y una meta simple de 2 hojas.
 * **RF-26: Interactivos de práctica:** Base10, recta numérica y fracciones deben actualizar el campo de respuesta y funcionar con teclado.
-* **RF-27: Ejercicios docentes con nivel:** Los retos creados se asignan a N0–N6 y aparecen como hojas creadas por la guía.
+* **RF-27: Rutas docentes:** El docente crea una ruta con título, nivel, actividades ordenadas y estado borrador/publicada. No inyecta ejercicios sueltos en N0–N6.
+* **RF-28: Publicación de ruta:** Una ruta publicada aparece en “Rutas de mi clase” para estudiantes del mismo navegador.
+* **RF-29: Siguiente reto:** Al resolver, el estudiante avanza a la siguiente actividad de la unidad, nivel o ruta sin volver a capítulos.
+* **RF-30: Arrastre accesible:** Base10 y fracciones permiten arrastre con alternativa de botones/teclado.
 
 ---
 
@@ -232,6 +242,7 @@ Se mantiene el esquema base y se agrega opcionalmente `reto` en pasos clave.
 | `UserProfile` | `id`, `role`, `alias`, `avatar`, `classId`, `xp`, `level`, `streakCurrent`, `streakBest`, `lastActivityDate`, `email?`, `password?` (docente demo) |
 | `Classroom` | `id`, `name`, `code`, `teacherId` |
 | `Unit` | `id`, `title`, `description`, `order`, `exerciseIds`, `accent`, `levelId` |
+| `TeacherRoute` | `id`, `ownerId`, `classId`, `levelId`, `title`, `description`, `exerciseIds`, `status`, `createdAt`, `updatedAt` |
 | `RoadmapLevel` | `id`, `order`, `title`, `baseYear`, `focus`, `canDo`, `checkpoint`, `criticalGate`, `components`, `unitIds` |
 | `ProgressEntry` | `attempts`, `solved`, `lastAnswer`, `updatedAt` |
 | `AnatomyEntry` | `steps`, `completed`, `updatedAt` |
@@ -263,7 +274,8 @@ Se mantiene el esquema base y se agrega opcionalmente `reto` en pasos clave.
 | Ruta | Propósito |
 | :--- | :--- |
 | `/` | Inicio del estudiante |
-| `/hoja-de-ruta` | Camino N0–N6 y nivel actual |
+| `/hoja-de-ruta` | Camino N0–N6, nivel actual y rutas de clase |
+| `/ruta/[id]` | Ruta publicada por un docente |
 | `/unidades` | Capítulos agrupados por nivel |
 | `/unidad/[id]` | Ficha de unidad |
 | `/ejercicio/[id]` | Reto activo |
@@ -323,6 +335,10 @@ Usar React Context + `localStorage`. La UI espera `ready` antes de mostrar datos
 - Acceso de educador con correo y clave simulada: implementado.
 - Plantillas docentes de cinco pasos con explicaciones editables: implementado.
 - Interactivos Base10, recta y fracciones: implementado.
+- Arrastre Base10 y fracciones con alternativa de teclado: implementado.
+- Rutas docentes locales con publicación a clase: implementado.
+- Siguiente reto sin volver a capítulos: implementado.
+- Backend, sincronización y foro compartido: futuro.
 - Meta diaria, racha semanal, resumen de clase y diagnóstico: implementado.
 - Microcopy libre de textos de demo en la UI: implementado.
 - Despliegue Vercel: pendiente.

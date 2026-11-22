@@ -17,14 +17,16 @@ La **hoja de ruta N0–N6** organiza el currículo oficial de primaria en 7 nive
 de dominio. Cada nivel tiene 5 ejercicios: **35 retos** en total.
 
 El estudiante puede construir respuestas con bloques Base10, moverse en la recta
-numérica y pintar fracciones. Los docentes crean retos desde plantillas de cinco
-pasos y pueden ajustar las explicaciones.
+numérica y pintar fracciones. Los docentes crean **rutas de clase** desde
+plantillas de cinco pasos, eligen actividades existentes o nuevas, ordenan la
+secuencia y publican la ruta para su clase.
 
 **Evento:** Abstracthon 2026 · MLSA University Community, Bolivia  
 **Track:** Educación  
-**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.3  
+**SRS:** [`Especificación de Requisitos de Software (SRS).md`](./Especificación%20de%20Requisitos%20de%20Software%20(SRS).md) · versión 1.4  
 **Fuente curricular:** [`hoja-de-ruta-matematica-primaria-bolivia.md`](./hoja-de-ruta-matematica-primaria-bolivia.md)  
-**Demo:** pendiente de URL pública en Vercel
+**Demo pública:** <https://prompt-engineers-psi.vercel.app/>  
+**Estado y futuro:** [`docs/ESTADO-Y-FUTURO.md`](./docs/ESTADO-Y-FUTURO.md)
 
 ## Problema
 
@@ -108,7 +110,7 @@ El resultado de las capturas queda en `test-results/capturas/`.
 | `/panel` | Backstage docente, sin enlace en la navegación del estudiante |
 | `/docente` | Creador de actividades sin código |
 
-`/ruta` redirige a `/hoja-de-ruta` por compatibilidad.
+`/ruta` redirige a `/hoja-de-ruta` por compatibilidad. Las rutas docentes viven en `/ruta/[id]`.
 
 ### Cuenta de demo
 
@@ -135,10 +137,10 @@ src/
 │   ├── companion/            Diagnóstico para acompañante
 │   ├── figures/              Figuras de fracciones, geometría y objetos
 │   ├── layout/               Encabezado
-│   ├── route/                Unidades y detalle de capítulo
+│   ├── route/                Unidades, capítulos y rutas docentes
 │   ├── student/              Reto activo del estudiante
 │   ├── student/interactions/ Bloques Base10, recta y fracciones
-│   └── teacher/              Creador de actividades con plantillas
+│   └── teacher/              Creador de actividades y rutas
 ├── context/AppProvider.tsx   Estado global, sesión demo y persistencia
 ├── data/
 │   ├── demo.ts               Clase, perfiles, unidades y club semilla
@@ -169,6 +171,7 @@ aditivos.
 - `src/types/exercise.ts`: `Exercise`, `DesgloseStep`, `VisualState`,
   `ProgressEntry`.
 - `src/types/roadmap.ts`: `RoadmapLevel`, `RoadmapComponent`, `CriticalGate`.
+- `src/types/teacherRoute.ts`: `TeacherRoute` y estados de publicación.
 - `src/types/demo.ts`: `UserProfile`, `Classroom`, `Unit`, `ClubThread`,
   `ClubReply`, `DemoSession`.
 - `src/context/AppProvider.tsx`: ejercicios, progreso por perfil, sesión de
@@ -178,6 +181,7 @@ aditivos.
 - `src/data/roadmap.ts`: ruta N0–N6 y compuertas críticas.
 - `src/lib/roadmap.ts`: nivel actual, progreso por nivel y meta diaria.
 - `src/lib/exerciseTemplates.ts`: generador de retos docentes en cinco pasos.
+- `src/lib/teacherRoutes.ts`: progreso y siguiente actividad de una ruta docente.
 - `src/components/student/interactions/`: Base10, recta numérica y fracciones.
 - `src/types/exercise.ts`: `levelId`, `interaccion` y `expresion`.
 - `src/lib/demo.ts`: reglas de XP, niveles, racha y avatares.
@@ -267,7 +271,10 @@ El progreso de invitado se guarda aparte y se puede importar al elegir alias.
    `ana@mates.club` / `mates2026` → perfil, XP, chispas y racha.
 9. Construir la respuesta con bloques, recta o fracción; luego comprobar.
 10. `/club` → leer La Fogata; con alias, abrir una duda.
-11. `/panel` → crear un reto con plantilla, revisar estudiantes y moderar.
+11. `/panel` → **Mis rutas** → crear ruta, agregar actividades, publicar.
+12. Iniciar sesión como estudiante en el mismo navegador y abrir
+    **Rutas de mi clase**.
+13. Resolver un reto → **Siguiente reto** → avanzar sin volver a capítulos.
 
 ## Despliegue en Vercel
 

@@ -19,8 +19,7 @@ import { ROADMAP_LEVELS } from "@/data/roadmap";
 import { getUnitProgress } from "@/lib/demo";
 
 export default function UnidadesPage() {
-  const { ready, activeProfile, progress, units, exercises, getExercise } =
-    useApp();
+  const { ready, activeProfile, progress, units, getExercise } = useApp();
 
   if (!ready) {
     return (
@@ -31,10 +30,6 @@ export default function UnidadesPage() {
       </div>
     );
   }
-
-  const extraExercises = exercises.filter(
-    (exercise) => !units.some((unit) => unit.exerciseIds.includes(exercise.id)),
-  );
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
@@ -188,51 +183,6 @@ export default function UnidadesPage() {
         })}
       </div>
 
-      {extraExercises.length > 0 && (
-        <section className="mt-10">
-          <h2 className="font-display text-2xl font-semibold text-ink">
-            Hojas creadas por tu guía
-          </h2>
-          <p className="mt-1 font-hand text-xl font-bold text-ink-soft">
-            retos del docente, con el mismo formato de cinco pasos
-          </p>
-          <div className="mt-4 space-y-6">
-            {ROADMAP_LEVELS.map((level) => {
-              const items = extraExercises.filter(
-                (exercise) => exercise.levelId === level.id,
-              );
-              if (items.length === 0) return null;
-
-              return (
-                <div key={level.id}>
-                  <Sticker tone="paper">
-                    {level.id} · {level.title}
-                  </Sticker>
-                  <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                    {items.map((exercise) => (
-                      <Link
-                        key={exercise.id}
-                        href={`/ejercicio/${exercise.id}`}
-                        className="rounded-xl border-2 border-ink bg-paper p-4 shadow-hard"
-                      >
-                        <p className="text-xs font-black uppercase tracking-wide text-coral-deep">
-                          {exercise.categoria}
-                        </p>
-                        <p className="mt-1 font-display text-lg font-semibold text-ink">
-                          {exercise.titulo}
-                        </p>
-                        <p className="mt-1 line-clamp-2 text-sm font-semibold text-ink-soft">
-                          {exercise.enunciado}
-                        </p>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
     </div>
   );
 }

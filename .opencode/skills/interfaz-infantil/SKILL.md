@@ -119,3 +119,8 @@ en este navegador”, “elige tu alias”.
 
 Usar “Mi perfil”, no “Mi carnet”. El acceso de educador vive en `/entrar` y no
 se enlaza desde la navegación del estudiante.
+
+## Arrastre
+
+El arrastre debe ser una mejora, no la única forma de interactuar. Mantener
+botones y teclado como alternativa en Base10, recta y fracciones.

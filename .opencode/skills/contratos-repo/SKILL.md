@@ -14,6 +14,7 @@ Cambios aditivos y coordinados:
 - `src/types/anatomy.ts`
 - `src/types/cosmetics.ts`
 - `src/types/roadmap.ts`
+- `src/types/teacherRoute.ts`
 - `src/data/exercises.json`
 - `src/data/demo.ts`
 - `src/data/roadmap.ts`
@@ -22,7 +23,9 @@ Cambios aditivos y coordinados:
 - `src/lib/demo.ts`
 - `src/lib/roadmap.ts`
 - `src/lib/exerciseTemplates.ts`
+- `src/lib/teacherRoutes.ts`
 - `src/components/student/interactions/`
+- `src/components/teacher/TeacherRouteBuilder.tsx`
 - `src/components/figures/`
 - `src/app/ejercicio/[id]/page.tsx`
 - `src/app/unidad/[id]/page.tsx`
@@ -63,7 +66,7 @@ decide cuándo abrir el desglose. No otorgar XP a invitados.
 
 ## Rutas
 
-- `/`, `/hoja-de-ruta`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`
+- `/`, `/hoja-de-ruta`, `/ruta/[id]`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`
 - `/club`, `/club/[threadId]`
 - `/entrar`, `/perfil`
 - `/panel`, `/docente`
@@ -81,6 +84,7 @@ usa `usePathname` con `cacheComponents`.
 - `mates:demo:anatomy:v1`
 - `mates:demo:sparks:v1`
 - `mates:demo:cosmetics:v1`
+- `mates:demo:teacher-routes:v1`
 - `mates:demo:club:v1`
 - `mates:custom-exercises:v1`
 - `mates:progress:v1` (legado, migrado a invitado)
@@ -97,5 +101,5 @@ pnpm test:e2e
 ```
 
 Revisar cursos públicos, invitado, alias, perfil, La Fogata, panel backstage,
-hoja de ruta N0–N6, figuras del desglose, plantillas docentes e interactivos
-Base10, recta y fracciones.
+hoja de ruta N0–N6, rutas docentes, figuras del desglose, plantillas docentes e
+interactivos Base10, recta y fracciones.

@@ -42,11 +42,16 @@ nix shell nixpkgs#chromium --command sh -c \
   resolver, no por hacer clic en pasos.
 - Las chispas se canjean por 3 pegatinas cosméticas en `/perfil`.
 - La hoja de ruta N0–N6 usa 7 niveles con 5 ejercicios cada uno (35 retos).
+- El docente crea **rutas de clase** con actividades existentes o nuevas; no
+  publica ejercicios sueltos dentro de N0–N6. Las rutas docentes tienen progreso
+  propio y aparecen en “Rutas de mi clase”.
 - Las figuras dinámicas viven en `src/components/figures/` y se usan desde `StepVisualizer`.
 - Los ejercicios docentes se generan con `src/lib/exerciseTemplates.ts` y
   permiten editar explicaciones sin romper los cinco pasos.
 - La práctica interactiva vive en `src/components/student/interactions/`:
-  Base10, recta numérica y fracciones.
+  Base10, recta numérica y fracciones. Base10 y fracciones admiten arrastre con
+  alternativa de teclado.
+- Al resolver se ofrece “Siguiente reto” según unidad → nivel → siguiente nivel.
 - No hay correos de estudiantes, contraseñas ni backend. Todo es demo local en
   `localStorage`; el progreso de invitado se importa al elegir alias.
 - **El docente es backstage**: no aparece en la navegación del estudiante. Su
@@ -59,13 +64,14 @@ nix shell nixpkgs#chromium --command sh -c \
 
 - Next.js 16 App Router, React 19, TypeScript estricto, Tailwind 4, pnpm.
 - `next.config.ts` tiene `cacheComponents` y `partialPrefetching` activos.
-- Rutas: `/`, `/hoja-de-ruta`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`, `/club`,
+- Rutas: `/`, `/hoja-de-ruta`, `/ruta/[id]`, `/unidades`, `/unidad/[id]`, `/ejercicio/[id]`, `/club`,
   `/club/[threadId]`, `/entrar`, `/perfil`, `/panel`, `/docente`.
 - `/unidad/[id]`, `/club/[threadId]` y `/ejercicio/[id]` usan
   `generateStaticParams` + `<Suspense>`; mantén ambos. El header usa
   `usePathname`, así que una ruta dinámica sin params estáticos rompe el build.
 - `src/components/anatomy/`, `src/components/figures/` y
-  `src/components/student/interactions/` componen la práctica; `club/`, `student/`, `route/`,
+  `src/components/student/interactions/` componen la práctica;
+  `src/components/teacher/TeacherRouteBuilder.tsx` compone las rutas docentes; `club/`, `student/`, `route/`,
   `teacher/` y `companion/` son módulos separados.
 - `AppProvider` combina ejercicios semilla + creados por docentes y persiste
   perfiles, sesión, progreso por perfil, XP, racha y La Fogata.
@@ -84,7 +90,7 @@ Aditivos y coordinados:
 - `src/data/exercises.json`, `src/data/demo.ts`, `src/data/roadmap.ts`
 - `src/context/AppProvider.tsx`
 - `src/lib/constants.ts`, `src/lib/demo.ts`, `src/lib/roadmap.ts`,
-  `src/lib/exerciseTemplates.ts`
+  `src/lib/exerciseTemplates.ts`, `src/lib/teacherRoutes.ts`
 - `src/components/anatomy/`
 
 No renombres campos del SRS (`desglose_pasos`, `color_tag`, `visual_state`,
@@ -121,6 +127,8 @@ mostaza y turquesa; bordes dibujados, sombras duras, mascota Tinta y doodles SVG
   Playwright + Context7. Reinicia opencode tras cambiar config o skills.
 
 ## Flujo
+
+Estado actual, límites y futuro: `docs/ESTADO-Y-FUTURO.md`.
 
 Ramas cortas `feat/<área>` desde `main`; PR a `main`. No subas `node_modules`
 ni artefactos de `.next`/Playwright.

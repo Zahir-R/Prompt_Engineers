@@ -20,6 +20,7 @@ import {
   DEMO_PROGRESS_KEY,
   DEMO_SESSION_KEY,
   DEMO_SPARKS_KEY,
+  DEMO_TEACHER_ROUTES_KEY,
   DEMO_XP_KEY,
   PROGRESS_STORAGE_KEY,
 } from "@/lib/constants";
@@ -30,6 +31,7 @@ import {
   createSeedCosmetics,
   createSeedProgress,
   createSeedSparks,
+  createSeedTeacherRoutes,
   COSMETIC_STICKERS,
   DEMO_UNITS,
 } from "@/data/demo";
@@ -61,6 +63,7 @@ import type {
   CosmeticsByProfile,
   ProfileCosmetics,
 } from "@/types/cosmetics";
+import type { TeacherRoute } from "@/types/teacherRoute";
 import type {
   AvatarId,
   Classroom,
@@ -104,6 +107,7 @@ export interface AppContextValue {
   anatomyByProfile: AnatomyByProfile;
   sparks: number;
   sparksByProfile: Record<string, number>;
+  teacherRoutes: TeacherRoute[];
   cosmetics: ProfileCosmetics;
   cosmeticsByProfile: CosmeticsByProfile;
   ready: boolean;
@@ -122,6 +126,15 @@ export interface AppContextValue {
   getProfileAnatomy: (profileId: string) => Record<string, AnatomyEntry>;
   getAnatomyProgress: (exerciseId: string) => AnatomyEntry | undefined;
   getProfileCosmetics: (profileId: string) => ProfileCosmetics;
+  getTeacherRoute: (id: string) => TeacherRoute | undefined;
+  createTeacherRoute: (input: { title: string; description: string; levelId: TeacherRoute["levelId"]; }) => { ok: boolean; routeId?: string; error?: string };
+  updateTeacherRoute: (id: string, patch: Partial<Pick<TeacherRoute, "title" | "description" | "levelId">>) => void;
+  addExerciseToTeacherRoute: (routeId: string, exerciseId: string) => void;
+  removeExerciseFromTeacherRoute: (routeId: string, exerciseId: string) => void;
+  reorderTeacherRouteExercises: (routeId: string, exerciseIds: string[]) => void;
+  publishTeacherRoute: (routeId: string) => { ok: boolean; error?: string };
+  unpublishTeacherRoute: (routeId: string) => void;
+  deleteTeacherRoute: (routeId: string) => void;
   getUnit: (id: string) => Unit | undefined;
   getUnitForExercise: (exerciseId: string) => Unit | undefined;
   addExercise: (exercise: Exercise) => void;
@@ -224,6 +237,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sparksByProfile, setSparksByProfile] = useState<Record<string, number>>(
     () => readStorage<Record<string, number>>(DEMO_SPARKS_KEY, createSeedSparks()),
   );
+  const [teacherRoutes, setTeacherRoutes] = useState<TeacherRoute[]>(() =>
+    readStorage<TeacherRoute[]>(DEMO_TEACHER_ROUTES_KEY, createSeedTeacherRoutes()),
+  );
   const [cosmeticsByProfile, setCosmeticsByProfile] =
     useState<CosmeticsByProfile>(() =>
       readStorage<CosmeticsByProfile>(DEMO_COSMETICS_KEY, createSeedCosmetics()),
@@ -278,6 +294,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (!ready) return;
     writeStorage(DEMO_COSMETICS_KEY, cosmeticsByProfile);
   }, [cosmeticsByProfile, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
+    writeStorage(DEMO_TEACHER_ROUTES_KEY, teacherRoutes);
+  }, [teacherRoutes, ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -359,6 +380,172 @@ export function AppProvider({ children }: { children: ReactNode }) {
     (profileId: string) =>
       cosmeticsByProfile[profileId] ?? { owned: [], equipped: null },
     [cosmeticsByProfile],
+  );
+
+
+  const getTeacherRoute = useCallback(
+    (id: string) => teacherRoutes.find((route) => route.id === id),
+    [teacherRoutes],
+  );
+
+  const createTeacherRoute = useCallback(
+    (input: {
+      title: string;
+      description: string;
+      levelId: TeacherRoute["levelId"];
+    }) => {
+      if (activeProfile?.role !== "teacher") {
+        return { ok: false, error: "Entra con una cuenta docente." };
+      }
+      const title = input.title.trim();
+      if (title.length < 3) {
+        return { ok: false, error: "Ponle un título a la ruta." };
+      }
+      const now = new Date().toISOString();
+      const route: TeacherRoute = {
+        id: createId("ruta"),
+        ownerId: activeProfile.id,
+        classId: activeProfile.classId,
+        levelId: input.levelId,
+        title,
+        description: input.description.trim(),
+        exerciseIds: [],
+        status: "draft",
+        createdAt: now,
+        updatedAt: now,
+      };
+      setTeacherRoutes((current) => [route, ...current]);
+      return { ok: true, routeId: route.id };
+    },
+    [activeProfile],
+  );
+
+  const updateTeacherRoute = useCallback(
+    (
+      id: string,
+      patch: Partial<Pick<TeacherRoute, "title" | "description" | "levelId">>,
+    ) => {
+      if (activeProfile?.role !== "teacher") return;
+      setTeacherRoutes((current) =>
+        current.map((route) =>
+          route.id === id
+            ? {
+                ...route,
+                ...patch,
+                title: patch.title?.trim() || route.title,
+                description:
+                  patch.description !== undefined
+                    ? patch.description.trim()
+                    : route.description,
+                updatedAt: new Date().toISOString(),
+              }
+            : route,
+        ),
+      );
+    },
+    [activeProfile],
+  );
+
+  const addExerciseToTeacherRoute = useCallback(
+    (routeId: string, exerciseId: string) => {
+      if (activeProfile?.role !== "teacher") return;
+      setTeacherRoutes((current) =>
+        current.map((route) =>
+          route.id === routeId && !route.exerciseIds.includes(exerciseId)
+            ? {
+                ...route,
+                exerciseIds: [...route.exerciseIds, exerciseId],
+                updatedAt: new Date().toISOString(),
+              }
+            : route,
+        ),
+      );
+    },
+    [activeProfile],
+  );
+
+  const removeExerciseFromTeacherRoute = useCallback(
+    (routeId: string, exerciseId: string) => {
+      if (activeProfile?.role !== "teacher") return;
+      setTeacherRoutes((current) =>
+        current.map((route) =>
+          route.id === routeId
+            ? {
+                ...route,
+                exerciseIds: route.exerciseIds.filter((id) => id !== exerciseId),
+                updatedAt: new Date().toISOString(),
+              }
+            : route,
+        ),
+      );
+    },
+    [activeProfile],
+  );
+
+  const reorderTeacherRouteExercises = useCallback(
+    (routeId: string, exerciseIds: string[]) => {
+      if (activeProfile?.role !== "teacher") return;
+      setTeacherRoutes((current) =>
+        current.map((route) => {
+          if (route.id !== routeId) return route;
+          const allowed = new Set(route.exerciseIds);
+          const ordered = exerciseIds.filter((id) => allowed.has(id));
+          const missing = route.exerciseIds.filter((id) => !ordered.includes(id));
+          return {
+            ...route,
+            exerciseIds: [...ordered, ...missing],
+            updatedAt: new Date().toISOString(),
+          };
+        }),
+      );
+    },
+    [activeProfile],
+  );
+
+  const publishTeacherRoute = useCallback(
+    (routeId: string) => {
+      if (activeProfile?.role !== "teacher") {
+        return { ok: false, error: "Entra con una cuenta docente." };
+      }
+      const route = teacherRoutes.find((item) => item.id === routeId);
+      if (!route) {
+        return { ok: false, error: "No encontramos la ruta." };
+      }
+      if (route.exerciseIds.length === 0) {
+        return { ok: false, error: "Agrega al menos una actividad antes de publicar." };
+      }
+      setTeacherRoutes((current) =>
+        current.map((item) =>
+          item.id === routeId
+            ? { ...item, status: "published", updatedAt: new Date().toISOString() }
+            : item,
+        ),
+      );
+      return { ok: true };
+    },
+    [activeProfile, teacherRoutes],
+  );
+
+  const unpublishTeacherRoute = useCallback(
+    (routeId: string) => {
+      if (activeProfile?.role !== "teacher") return;
+      setTeacherRoutes((current) =>
+        current.map((item) =>
+          item.id === routeId
+            ? { ...item, status: "draft", updatedAt: new Date().toISOString() }
+            : item,
+        ),
+      );
+    },
+    [activeProfile],
+  );
+
+  const deleteTeacherRoute = useCallback(
+    (routeId: string) => {
+      if (activeProfile?.role !== "teacher") return;
+      setTeacherRoutes((current) => current.filter((route) => route.id !== routeId));
+    },
+    [activeProfile],
   );
 
   const getUnit = useCallback(
@@ -1042,6 +1229,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setAnatomyByProfile({});
     setSparksByProfile(createSeedSparks());
     setCosmeticsByProfile(createSeedCosmetics());
+    setTeacherRoutes(createSeedTeacherRoutes());
     setXpAwards({});
     setClub(createSeedClub());
     setCustomExercises([]);
@@ -1058,6 +1246,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       sparksByProfile,
       cosmetics,
       cosmeticsByProfile,
+      teacherRoutes,
       ready,
       units: DEMO_UNITS,
       profiles,
@@ -1074,6 +1263,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       getProfileAnatomy,
       getAnatomyProgress,
       getProfileCosmetics,
+      getTeacherRoute,
+      createTeacherRoute,
+      updateTeacherRoute,
+      addExerciseToTeacherRoute,
+      removeExerciseFromTeacherRoute,
+      reorderTeacherRouteExercises,
+      publishTeacherRoute,
+      unpublishTeacherRoute,
+      deleteTeacherRoute,
       getUnit,
       getUnitForExercise,
       addExercise,
@@ -1108,6 +1306,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       sparksByProfile,
       cosmetics,
       cosmeticsByProfile,
+      teacherRoutes,
       ready,
       profiles,
       classrooms,
@@ -1122,6 +1321,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       getProfileAnatomy,
       getAnatomyProgress,
       getProfileCosmetics,
+      getTeacherRoute,
+      createTeacherRoute,
+      updateTeacherRoute,
+      addExerciseToTeacherRoute,
+      removeExerciseFromTeacherRoute,
+      reorderTeacherRouteExercises,
+      publishTeacherRoute,
+      unpublishTeacherRoute,
+      deleteTeacherRoute,
       getUnit,
       getUnitForExercise,
       addExercise,

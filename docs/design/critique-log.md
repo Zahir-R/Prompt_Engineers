@@ -88,3 +88,13 @@ interactivos Base10, recta numérica y fracciones.
 
 Decisión: la interactividad debe hacer pensar y no solo tocar. El input numérico
 sigue siendo la comprobación final y los interactivos funcionan con teclado.
+
+## 2026-11-22 — Rutas docentes, siguiente reto y arrastre
+
+Cambio aplicado: el docente crea rutas de clase con actividades existentes o
+nuevas, publica la ruta a su clase y el estudiante la ve en “Rutas de mi clase”.
+Se agrega “Siguiente reto” al resolver y arrastre real en Base10 y fracciones,
+con botones y teclado como alternativa.
+
+Decisión: los retos docentes no se inyectan dentro de N0–N6; viven en una ruta
+con progreso propio. La publicación sigue siendo local hasta integrar backend.

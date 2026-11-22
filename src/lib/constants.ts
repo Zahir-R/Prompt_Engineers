@@ -10,3 +10,4 @@ export const DEMO_XP_KEY = "mates:demo:xp-awards:v1";
 export const DEMO_ANATOMY_KEY = "mates:demo:anatomy:v1";
 export const DEMO_SPARKS_KEY = "mates:demo:sparks:v1";
 export const DEMO_COSMETICS_KEY = "mates:demo:cosmetics:v1";
+export const DEMO_TEACHER_ROUTES_KEY = "mates:demo:teacher-routes:v1";
